@@ -1,4 +1,5 @@
 venv
+.env.development
 virtualenv
 __pycache__
 *.pyc
