@@ -8,5 +8,5 @@ class HostelService(AbstractDatetimeModel):
     price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_('Цена'))
 
     class Meta:
-        verbose_name = 'Услуга отеля'
-        verbose_name_plural = 'Услуги отеля'
+        verbose_name = _('Услуга отеля')
+        verbose_name_plural = _('Услуги отеля')
