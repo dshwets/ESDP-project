@@ -1,3 +1,21 @@
 from django.db import models
+from common.models import AbstractDatetimeModel
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth import get_user_model
 
-# Create your models here.
+
+class Guest(AbstractDatetimeModel):
+    first_name = models.CharField(max_length=255,verbose_name=_('Имя'))
+    last_name = models.CharField(max_length=255, verbose_name=_('Фамилия'))
+    middle_name = models.CharField(max_length=255,default="", verbose_name=_('Отчество'))
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name=_('Пользователь'))
+    photo = models.ImageField(null=True, blank=True, upload_to='guest_photos', verbose_name=_('Аватара'))
+    birth_date = models.DateField(verbose_name=_("Дата рождения"))
+    birth_country = models.CharField(max_length=255, verbose_name=_('Страна рождения'))
+    passport_id = models.CharField(max_length=255, verbose_name=_('Номер паспорта'))
+    expiry_passport_date = models.DateField(verbose_name=_('Дата окончания срока действия'), null=True)
+    document_maker = models.CharField(max_length=255, verbose_name=_('Страна рождения'), null=True)
+
+    class Meta:
+        verbose_name = _('Гость')
+        verbose_name_plural = _('Гости')
