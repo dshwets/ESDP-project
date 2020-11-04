@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'hostelservices',
     'documents',
-    'hostelguest',
+    'hostelguests',
 ]
 
 MIDDLEWARE = [
