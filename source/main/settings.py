@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'hostelguests',
     'welcomeguests',
     'unwelcomeguests',
+    'aboutguests',
 ]
 
 MIDDLEWARE = [
