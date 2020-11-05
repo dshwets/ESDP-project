@@ -19,6 +19,7 @@ class WelcomeGuest(AbstractDatetimeModel):
     description = models.TextField(
         max_length=2000,
         verbose_name=_('Описание'),
+        blank=True,
     )
 
     class Meta:
