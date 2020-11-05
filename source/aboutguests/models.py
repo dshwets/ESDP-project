@@ -5,13 +5,15 @@ from common.models import AbstractDatetimeModel
 
 class Note(AbstractDatetimeModel):
     note = models.TextField(
-        max_length=2000,
-        verbose_name=_('Заметки о госте'),)
-    guest_id = models.ForeignKey(
+        default='',
+        verbose_name=_('Заметки о госте'),
+    )
+    guest = models.ForeignKey(
         'hostelguests.Guest',
         on_delete=models.CASCADE,
         related_name='notes',
-        verbose_name=_('Гость'))
+        verbose_name=_('Гость'),
+    )
 
     class Meta:
         verbose_name = _('Заметка о госте')
