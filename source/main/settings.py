@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'welcomeguests',
     'unwelcomeguests',
     'aboutguests',
-    'widget_tweaks',
+    'serviceexecutors',
+
 ]
 
 MIDDLEWARE = [
