@@ -25,8 +25,8 @@ class ServiceExecutor(AbstractDatetimeModel):
     )
 
     class Meta:
-        verbose_name = _('Исполнители')
-        verbose_name_plural = _('Исполнитель')
+        verbose_name = _('Исполнитель')
+        verbose_name_plural = _('Исполнители')
 
 
 
