@@ -14,13 +14,13 @@ class JournalService(AbstractDatetimeModel):
         'hostelservices.HostelService',
         on_delete=models.SET_DEFAULT,
         default='',
-        verbose_name=_('Услуга')
+        verbose_name=_('Услуга'),
     )
     executor=models.ForeignKey(
         'serviceexecutors.ServiceExecutor',
         on_delete=models.SET_DEFAULT,
         default='',
-        verbose_name=_('Исполнитель')
+        verbose_name=_('Исполнитель'),
     )
 
     class Meta:
