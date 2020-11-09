@@ -9,7 +9,7 @@ virtualenv -p python3.7 venv
 
 source venv/bin/activate
 
-pip install -r requirements.txt
+ pip install -r requirments/local.txt
 
 cp .env.example .env.development
 ```
@@ -19,10 +19,6 @@ cp .env.example .env.development
 .env.development не находится под версионным
 контролем, его надо заполнить соответствующими
 значениями для указанных в .env.example переменных
-
-Следующая команда выгрузит переменные из файла в окружение
-```
-export $(cat ../.env.development)
 
 cd source
 
