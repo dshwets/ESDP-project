@@ -1,3 +1,4 @@
+# Production dependencies is here
 Django==2.2.13
 django-environ==0.4.5
 django-widget-tweaks==1.4.8
