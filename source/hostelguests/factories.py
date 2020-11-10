@@ -1,0 +1,18 @@
+import factory
+from hostelguests.models import Guest
+from django.utils import timezone
+
+
+class GuestFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Guest
+        django_get_or_create = ('first_name', 'last_name', 'created_by','birth_date','birth_country',
+                                'passport_id', 'expiry_passport_date')
+
+    first_name = factory.Faker('first_name')
+    last_name = factory.Faker('last_name')
+    created_by = None
+    birth_date = timezone.localdate()
+    birth_country = 'Kyrgyzstan'
+    passport_id = '123456789'
+    expiry_passport_date = None
