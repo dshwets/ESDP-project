@@ -8,5 +8,5 @@ class Guest_list_view(LoginRequiredMixin, ListView):
     template_name = 'guests.html'
     model = Guest
     context_object_name = 'guests'
-    paginate_by = 2
-    paginate_orphans = 1
+    paginate_by = 10
+    paginate_orphans = 4
