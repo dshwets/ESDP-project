@@ -11,3 +11,9 @@ class User(AbstractUser, AbstractDatetimeModel):
         verbose_name = _('Пользователь')
         verbose_name_plural = _('Пользователи')
 
+        permissions = [
+            ('can_add_user', _('Может добавлять пользователя')),
+            ('can_change_user', _('Может изменять пользователя')),
+            ('can_delete_user', _('Может удалять пользователя')),
+            ('can_view_user', _('Может просматривать пользователя')),
+        ]
