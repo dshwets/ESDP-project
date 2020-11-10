@@ -1,8 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 
 from hostelguests.models import Guest
 
 
-class Guest_Detail_View(DetailView):
+class GuestDetailView(LoginRequiredMixin, DetailView):
     model = Guest
     template_name = 'view/guest_detail_view.html'
