@@ -12,3 +12,10 @@ class Document(AbstractDatetimeModel):
     class Meta:
         verbose_name = _('Документ')
         verbose_name_plural = _('Документы')
+
+        permissions = [
+            ('can_add_document', _('Может добавлять документ')),
+            ('can_change_document', _('Может изменять документ')),
+            ('can_delete_document', _('Может удалять документ')),
+            ('can_view_document', _('Может просматривать документ')),
+        ]
