@@ -28,7 +28,11 @@ class ServiceExecutor(AbstractDatetimeModel):
         verbose_name = _('Исполнитель')
         verbose_name_plural = _('Исполнители')
 
-
-
+        permissions = [
+            ('can_add_serviceexecutor', _('Может добавлять исполнителя')),
+            ('can_change_serviceexecutor', _('Может изменять исполнителя')),
+            ('can_delete_serviceexecutor', _('Может удалять исполнителя')),
+            ('can_view_serviceexecutor', _('Может просматривать исполнителя')),
+        ]
 
 
