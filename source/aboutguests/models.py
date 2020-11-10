@@ -18,3 +18,10 @@ class Note(AbstractDatetimeModel):
     class Meta:
         verbose_name = _('Заметка о госте')
         verbose_name_plural = _('Заметки о госте')
+
+        permissions = [
+            ('can_add_note', _('Может добавлять заметку о госте')),
+            ('can_change_note', _('Может изменять заметку о госте')),
+            ('can_delete_note', _('Может удалять заметку о госте')),
+            ('can_view_note', _('Может просматривать заметку о госте')),
+        ]
