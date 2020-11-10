@@ -1,3 +1,4 @@
+{% load i18n %}
 <div class="d-flex justify-content-center">
     <div class="pagination mb-2">
         <span class="step-links">
@@ -6,24 +7,24 @@
                 <label for="page">
                     {% if search %}<input type="hidden" name="search" value="{{ search }}">{% endif %}
                     <span class="mx-3">
-                        Page <input type="text" name="page" id="page" value="{{ page_obj.number }}">
-                    of {{ page_obj.paginator.num_pages }}
+                        {% trans 'Страница' %} <input type="text" name="page" id="page" value="{{ page_obj.number }}">
+                    {% trans 'из' %} {{ page_obj.paginator.num_pages }}
                     </span>
                 </label>
             </form>
             <span class="mx-4">
-                <a class="btn btn-primary" href="?{% if query %}{{ query }}&{% endif %}page=1">&laquo; First</a>
+                <a class="btn btn-primary" href="?{% if query %}{{ query }}&{% endif %}page=1">&laquo; {% trans 'Первая' %}</a>
                 {% if page_obj.has_previous %}
-                    <a class="btn btn-primary"  href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">Back</a>
+                    <a class="btn btn-primary"  href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">{% trans 'Назад' %}</a>
                 {% else %}
-                    <span class="btn btn-secondary disabled" aria-disabled="true">Back</span>
+                    <span class="btn btn-secondary disabled" aria-disabled="true">{% trans 'Назад' %}</span>
                 {% endif %}
                 {% if page_obj.has_next %}
-                    <a class="btn btn-primary" href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
+                    <a class="btn btn-primary" href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.next_page_number }}">{% trans 'Далее' %}</a>
                 {% else %}
-                    <span class="btn btn-secondary disabled" aria-disabled="true">Next</span>
+                    <span class="btn btn-secondary disabled" aria-disabled="true">{% trans 'Далее' %}</span>
                 {% endif %}
-                <a class="btn btn-primary" href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                <a class="btn btn-primary" href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.paginator.num_pages }}">{% trans 'Последняя' %} &raquo;</a>
             </span>
             </span>
     </div>

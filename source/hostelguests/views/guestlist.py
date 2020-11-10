@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from hostelguests.models import Guest
 
 
-class Guest_list_view(LoginRequiredMixin, ListView):
+class GuestListView(LoginRequiredMixin, ListView):
     template_name = 'guests.html'
     model = Guest
     context_object_name = 'guests'

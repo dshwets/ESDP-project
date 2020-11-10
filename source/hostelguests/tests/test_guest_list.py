@@ -12,7 +12,7 @@ class NotAuthenticatedGuestListTestCase(TestCase):
         self.assertEqual(type(response), HttpResponseRedirect)
         self.assertEqual(response.url, redirect_url)
 
-    def test_logouted_request(self):
+    def test_guest_list_logouted_request(self):
         response = self.client.get(reverse('hostelguests:guest_list'))
         redirect_url = reverse('accounts:login') + '?next=' + reverse('hostelguests:guest_list')
         self.check_redirect(response, redirect_url)
@@ -34,8 +34,9 @@ class AuthenticatdGuestListTestCase(TestCase):
     def tearDown(self) -> None:
         self.client.logout()
 
-    def test_logined_request(self):
+    def test_guest_list_logined_request(self):
         response = self.client.get(reverse('hostelguests:guest_list'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(type(response), TemplateResponse)
+        self.assertTemplateUsed(response, 'guests.html')
 
