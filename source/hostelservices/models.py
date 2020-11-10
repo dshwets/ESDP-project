@@ -10,3 +10,10 @@ class HostelService(AbstractDatetimeModel):
     class Meta:
         verbose_name = _('Услуга отеля')
         verbose_name_plural = _('Услуги отеля')
+
+        permissions = [
+            ('can_add_hostelservice', _('Может добавлять услугу отеля')),
+            ('can_change_hostelservice', _('Может изменять услугу отеля')),
+            ('can_delete_hostelservice', _('Может удалять услугу отеля')),
+            ('can_view_hostelservice', _('Может просматривать услугу отеля')),
+        ]
