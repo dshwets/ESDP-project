@@ -20,3 +20,10 @@ class Guest(AbstractDatetimeModel):
     class Meta:
         verbose_name = _('Гость')
         verbose_name_plural = _('Гости')
+
+        permissions = [
+            ('can_add_guest', _('Может добавлять гостя')),
+            ('can_change_guest', _('Может изменять гостя')),
+            ('can_delete_guest', _('Может удалять гостя')),
+            ('can_view_guest', _('Может просматривать гостя')),
+        ]
