@@ -5,9 +5,20 @@ from django.contrib.auth import get_user_model
 
 
 class Document(AbstractDatetimeModel):
-    title = models.CharField(max_length=255, blank=True, verbose_name=_('Название'))
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name=_('Пользователь'))
-    data_file = models.FileField(upload_to='docs', verbose_name=_('Документ'))
+    title = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name=_('Название'),
+    )
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        verbose_name=_('Пользователь'),
+    )
+    file = models.FileField(
+        upload_to='docs',
+        verbose_name=_('Документ'),
+    )
 
     class Meta:
         verbose_name = _('Документ')
