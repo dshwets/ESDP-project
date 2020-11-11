@@ -3,7 +3,7 @@ from django.template.response import TemplateResponse
 from django.test import TestCase
 from django.urls import reverse
 
-from accounts import factories
+from accounts.factories import UserFactory
 
 
 class GuestListTestCase(TestCase):
@@ -18,7 +18,7 @@ class GuestListTestCase(TestCase):
         self.check_redirect(response, redirect_url)
 
     def test_guest_list_logined_request(self):
-        user = factories.UserFactory(username='some_admin')
+        user = UserFactory(username='some_admin')
         self.client.login(username='some_admin', password='pass')
         response = self.client.get(reverse('hostelguests:guest_list'))
         self.assertEqual(response.status_code, 200)
