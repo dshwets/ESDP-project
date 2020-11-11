@@ -6,4 +6,4 @@ from hostelguests.models import Guest
 
 class GuestDetailView(LoginRequiredMixin, DetailView):
     model = Guest
-    template_name = 'view/guest_detail_view.html'
+    template_name = 'view/../templates/guest_detail_view.html'
