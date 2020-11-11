@@ -1,0 +1,14 @@
+{% load i18n %}
+<h3 class="mt-5 mb-4">
+    {% trans 'Список Гостей'%}
+    </h3>
+        {% for guest in guests %}
+        <p>
+            {% trans 'ФИО' %}:
+                {{guest.first_name}}{{guest.last_name}}{{guest.middle_name}}
+        </p>
+        <p>
+            {% trans 'Дата рождения' %}: {{ guest.birth_date }}
+        </p>
+        <br><br>
+        {% endfor %}
