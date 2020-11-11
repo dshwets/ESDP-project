@@ -4,7 +4,7 @@ from common.models import AbstractDatetimeModel
 
 
 class Note(AbstractDatetimeModel):
-    note = models.TextField(
+    info_about_guest = models.TextField(
         default='',
         verbose_name=_('Заметки о госте'),
     )
