@@ -6,7 +6,7 @@ from common.models import AbstractDatetimeModel
 class Note(AbstractDatetimeModel):
     description = models.TextField(
         default='',
-        verbose_name=_('Заметки о госте'),
+        verbose_name=_('Описание'),
     )
     guest = models.ForeignKey(
         'hostelguests.Guest',
