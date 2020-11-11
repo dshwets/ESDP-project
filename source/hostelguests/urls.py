@@ -1,7 +1,7 @@
 from django.urls import path
 
 from hostelguests.views.guestlist import GuestListView
-from hostelguests.views.guest_detail_view import GuestDetailView
+from hostelguests.views.guestdetail import GuestDetailView
 
 app_name = 'hostelguests'
 
