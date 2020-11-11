@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}View{% endblock %}
+
+{% block navs %}
+{% endblock %}
+
+{% block content %}
+    <div class="box">
+        <div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{ guest.photo }}" class="card-img" alt="quest_img">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Карточка гостья:</h5>
+        <p class="card-text">ФИО: {{ guest.last_name }} {{ guest.first_name }} {{ middle_name }}</p>
+        <p class="card-text">Дата рождения: {{ guest.birth_date }}</p>
+        <p class="card-text">Страна рождения: {{ guest.birth_country }}</p>
+        <p class="card-text">Id паспорта: {{ guest.passport_id }}</p>
+        <p class="card-text">Дата окончания срока действия паспорта: {{ guest.expiry_passport_date }}</p>
+        <p class="card-text">Орган выдавший паспорт: {{ guest.document_maker }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+{% endblock %}
