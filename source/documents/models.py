@@ -17,7 +17,7 @@ class Document(AbstractDatetimeModel):
     )
     file = models.FileField(
         upload_to='docs',
-        verbose_name=_('Документ'),
+        verbose_name=_('Файл'),
     )
 
     class Meta:
