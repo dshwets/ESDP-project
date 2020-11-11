@@ -7,5 +7,5 @@ app_name = 'hostelguests'
 
 urlpatterns = [
     path('', GuestListView.as_view(), name='guest_list'),
-    path('/<int:pk>/detail', GuestDetailView.as_view(), name='detail_view'),
+    path('<int:pk>/detail', GuestDetailView.as_view(), name='detail_view'),
 ]
