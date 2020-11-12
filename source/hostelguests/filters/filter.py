@@ -7,7 +7,7 @@ from hostelguests.models import Guest
 
 class GuestSearch(django_filters.FilterSet):
     search = django_filters.CharFilter(
-        method='my_filter',
+        method='names_filter',
         label='',
         widget=forms.TextInput(
             attrs={
