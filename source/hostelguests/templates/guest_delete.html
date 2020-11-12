@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Удалить гостя' %}
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <h2 class="my-3">{% trans 'Вы уверены, что хотите удалить гостя ' %}{{ guest.last_name }}, {{ guest.first_name }}{% if guest.middle_name %} {{ guest.middle_name }}{% endif %}?</h2>
+        <input class="btn btn-danger" type="submit" value="{% trans 'Да' %}">
+        <a class="btn btn-primary" href="{% url 'hostelguests:guest_list' %}">{% trans 'Нет' %}</a>
+    </form>
+{% endblock %}
