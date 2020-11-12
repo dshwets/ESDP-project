@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}View{% endblock %}
+{% block title %}{% trans 'Детальный просмотр' %}
+{% endblock %}
 
 {% block navs %}
 {% endblock %}
@@ -15,13 +16,13 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">Карточка гостья:</h5>
-        <p class="card-text">ФИО: {{ guest.last_name }} {{ guest.first_name }} {{ middle_name }}</p>
-        <p class="card-text">Дата рождения: {{ guest.birth_date }}</p>
-        <p class="card-text">Страна рождения: {{ guest.birth_country }}</p>
-        <p class="card-text">Id паспорта: {{ guest.passport_id }}</p>
-        <p class="card-text">Дата окончания срока действия паспорта: {{ guest.expiry_passport_date }}</p>
-        <p class="card-text">Орган выдавший паспорт: {{ guest.document_maker }}</p>
+        <h5 class="card-title">{% trans 'Карточка гостья: ' %}</h5>
+        <p class="card-text">{% trans 'ФИО: ' %}{{ guest.last_name }} {{ guest.first_name }} {{ middle_name }}</p>
+        <p class="card-text">{% trans 'Дата рождения: ' %} {{ guest.birth_date }}</p>
+        <p class="card-text">{% trans 'Страна рождения: ' %} {{ guest.birth_country }}</p>
+        <p class="card-text">{% trans 'Id паспорта: ' %} {{ guest.passport_id }}</p>
+        <p class="card-text">{% trans 'Дата окончания срока действия паспорта: ' %} {{ guest.expiry_passport_date }}</p>
+        <p class="card-text">{% trans 'Орган выдавший паспорт: ' %}{{ guest.document_maker }}</p>
       </div>
     </div>
   </div>
