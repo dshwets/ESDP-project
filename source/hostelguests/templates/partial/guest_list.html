@@ -3,12 +3,10 @@
     {% trans 'Список Гостей'%}
     </h3>
         {% for guest in guests %}
-        <p>
-            {% trans 'ФИО' %}:
-                {{guest.first_name}}{{guest.last_name}}{{guest.middle_name}}
-        </p>
-        <p>
-            {% trans 'Дата рождения' %}: {{ guest.birth_date }}
-        </p>
-        <br><br>
+            <div class="card my-2">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans 'ФИО' %}: {{guest.first_name}} {{guest.last_name}} {{guest.middle_name}}</h5>
+                    <p class="card-text">{% trans 'Дата рождения' %}: {{ guest.birth_date }}</p>
+                </div>
+            </div>
         {% endfor %}
