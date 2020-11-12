@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% load i18n %}
 {% block title %}
 {% trans 'Cписок гостей' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %}
 {% block menu %}
 {% endblock %}
