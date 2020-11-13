@@ -2,7 +2,6 @@ import factory
 from factory.fuzzy import FuzzyText
 
 from aboutguests.models import Note
-from django.utils import timezone
 
 from hostelguests.factories import GuestFactory
 
