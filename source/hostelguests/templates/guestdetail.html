@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load i18n %}
-
+{% load staticfiles %}
 {% block title %}{% trans 'Детальный просмотр' %}
 {% endblock %}
-
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
 {% block navs %}
 {% endblock %}
 
@@ -32,5 +34,33 @@
                 {% trans 'Добавить заметку'%}
             </button>
         </a>
+    </div>
+         <hr>
+        <h3>Заметки о госте</h3>
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+        {% for note in notes %}
+            <div class="box">
+                <h4>
+{#                    <a href="{% url 'accounts:detail' comment.author_id %}">{{ comment.author }}</a>#}
+                    <p>Дата создания заметки: {{ note.created_at }}</p>
+                </h4>
+                <div class="pre">{{ note.description }}</div>
+{#                {% if perms.webapp.change_comment or comment.author == request.user %}#}
+{#                    <p><a href="{% url 'webapp:comment_update' comment.pk %}">Update</a></p>#}
+{#                {% endif %}#}
+{#                {% if perms.webapp.delete_comment or comment.author == request.user %}#}
+{#                    <p><a href="{% url 'webapp:comment_delete' comment.pk %}">Delete</a></p>#}
+{#                {% endif %}#}
+
+            </div>
+            <div>
+        {% empty %}
+            <p>Нет заметок</p>
+        {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
     </div>
 {% endblock %}
