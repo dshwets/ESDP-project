@@ -26,6 +26,11 @@
       </div>
     </div>
   </div>
-</div>
+        </div>
+        <a href="{% url 'hostelguests:aboutguests:note_create' pk=guest.pk%}">
+            <button type="button" class="btn btn-info">
+                {% trans 'Добавить заметку'%}
+            </button>
+        </a>
     </div>
 {% endblock %}
