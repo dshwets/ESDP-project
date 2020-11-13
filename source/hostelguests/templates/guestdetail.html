@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% load i18n %}
 {% load staticfiles %}
 {% block title %}{% trans 'Детальный просмотр' %}
@@ -14,7 +15,11 @@
         <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
     <div class="col-md-4">
-      <img src="{{ guest.photo }}" class="card-img" alt="quest_img">
+        {% if guest.photo %}
+      <img src="{{ guest.photo.url }}" class="card-img" alt="quest_img">
+        {% else %}
+        <img src="{% static 'img/image-not-found.png' %}" class="card-img" alt="quest_img">
+        {% endif %}
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -28,12 +33,7 @@
       </div>
     </div>
   </div>
-        </div>
-        <a href="{% url 'hostelguests:aboutguests:note_create' pk=guest.pk%}">
-            <button type="button" class="btn btn-info">
-                {% trans 'Добавить заметку'%}
-            </button>
-        </a>
+</div>
     </div>
          <hr>
         <h3>Заметки о госте</h3>

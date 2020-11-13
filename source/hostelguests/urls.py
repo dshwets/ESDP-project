@@ -3,6 +3,7 @@ from django.conf.urls.static import static
 from hostelguests.views.guest_create import GuestCreateView
 from django.urls import path, include
 
+from hostelguests.views.guest_update import GuestUpdateView
 from hostelguests.views.guestlist import GuestListView
 from hostelguests.views.guestdetail import GuestDetailView
 from hostelguests.views.guest_delete import GuestDeleteView
@@ -20,6 +21,7 @@ urlpatterns = [
                                         [
                                             path('detail/', GuestDetailView.as_view(), name='detail_view'),
                                             path('delete/', GuestDeleteView.as_view(), name='guest_delete'),
+                                            path('update/', GuestUpdateView.as_view(), name='guest_update'),
                                             path('note/', include(('aboutguests.urls', 'aboutguests'), namespace="note"))
                                         ],
                                     ),
