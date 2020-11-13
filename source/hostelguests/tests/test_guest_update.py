@@ -56,10 +56,10 @@ class GuestUpdateTestCase(TestCase):
             'first_name': 'Testname',
             'last_name': 'Test',
             'middle_name': 'TestMiddle',
-            'birth_date': '2000-10-10',
+            'birth_date': '20.01.1980',
             'birth_country': 'TestCountry',
             'passport_id': 'PassporId123',
-            'expiry_passport_date': '2025-10-10',
+            'expiry_passport_date': '10.05.2020',
             'document_maker': 'testMaker',
             'photo': self.create_test_image()
         }
@@ -73,10 +73,10 @@ class GuestUpdateTestCase(TestCase):
             'first_name': 'Testname',
             'last_name': 'Test',
             'middle_name': 'TestMiddle',
-            'birth_date': '2000-10-10',
+            'birth_date': '20.01.1980',
             'birth_country': 'TestCountry',
             'passport_id': 'PassportId123',
-            'expiry_passport_date': '2025-10-10',
+            'expiry_passport_date': '10.05.2020',
             'document_maker': 'testMaker',
             'photo': self.create_test_image()
         }
