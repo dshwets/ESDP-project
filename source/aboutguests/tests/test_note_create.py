@@ -1,4 +1,3 @@
-from io import BytesIO
 from django.contrib.auth.models import Permission
 from django.test import TestCase
 from django.urls import reverse
@@ -8,10 +7,9 @@ from aboutguests.factories import NoteFactory
 from aboutguests.models import Note
 from accounts.factories import UserFactory
 from hostelguests.factories import GuestFactory
-from hostelguests.models import Guest
 
 
-class GuestCreateTestCase(TestCase):
+class NoteCreateTestCase(TestCase):
     def setUp(self) -> None:
         self.note = NoteFactory(guest=GuestFactory())
         self.user = UserFactory(username='some_admin')
@@ -52,17 +50,17 @@ class GuestCreateTestCase(TestCase):
 
     def test_authorized_with_permission_post_create_note(self):
         url = reverse('hostelguests:note:note_create', kwargs={'pk':self.note.guest.pk})
-        data = {
+        sucess_data = {
             'description': self.note.description,
             'guest': self.note.guest
         }
         self.user.user_permissions.add(self.permission)
         self.client.login(username='some_admin', password='pass')
-        response = self.client.post(url, data)
+        sucess_response = self.client.post(url, sucess_data)
         note = Note.objects.last()
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(type(response), HttpResponseRedirect)
+        self.assertEqual(sucess_response.status_code, 302)
+        self.assertEqual(type(sucess_response), HttpResponseRedirect)
         redirect_url = reverse('hostelguests:detail_view', kwargs={'pk':self.note.guest.pk})
-        self.assertEqual(response.url, redirect_url)
-        self.assertEqual(note.description, data['description'])
-        self.assertEqual(note.guest, data['guest'])
+        self.assertEqual(sucess_response.url, redirect_url)
+        self.assertEqual(note.description, sucess_data['description'])
+        self.assertEqual(note.guest, sucess_data['guest'])
