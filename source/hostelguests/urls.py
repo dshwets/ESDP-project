@@ -21,7 +21,7 @@ urlpatterns = [
                                         [
                                             path('detail/', GuestDetailView.as_view(), name='detail_view'),
                                             path('delete/', GuestDeleteView.as_view(), name='guest_delete'),
-                                            path('delete/', GuestUpdateView.as_view(), name='guest_update'),
+                                            path('update/', GuestUpdateView.as_view(), name='guest_update'),
                                             path('note/', include(('aboutguests.urls', 'aboutguests'), namespace="note"))
                                         ],
                                     ),
