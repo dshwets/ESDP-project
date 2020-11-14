@@ -43,7 +43,7 @@
          <p class="p-3">
             <a href="/">{% trans 'Назад ' %}</a>
          {% if perms.aboutguests.can_add_note %}
-        <a href="{% url 'hostelguests:aboutguests:note_create' pk=guest.pk%}">
+        <a href="{% url 'aboutguests:note_create' guest_pk=guest.pk%}">
         <button type="button" class="btn btn-primary float-right">
             {% trans 'Добавить заметку'%}
         </button>
@@ -62,7 +62,7 @@
 {#            TODO позже отображение заметок будет изменяться, необходимо будет добавить кем было сделана заметка и т.п#}
                     <p>{% trans 'Дата создания заметки: ' %} {{ note.created_at }}</p>
                 <div class="pre">{{ note.description }}</div>
-                <a href="{% url 'hostelguests:note_delete' note.pk %}" class="mt-2 badge badge-pill badge-danger">Удалить заметку</a>
+                <a href="{% url 'aboutguests:note_delete' note.pk %}" class="mt-2 badge badge-pill badge-danger">Удалить заметку</a>
             </div>
             <div>
         {% empty %}
