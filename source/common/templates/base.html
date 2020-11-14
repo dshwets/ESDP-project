@@ -22,26 +22,23 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                 {% block navs %}{% endblock %}
+                     {% if perms.hostelguests.can_add_guest %}
+                        <li class="nav-item active ml-3">
+                    <a class="nav-link" href="{% url 'hostelguests:guest_create' %}">{% trans 'Добавить гостя'%}</a>
+                    </li>
+                    {% endif %}
                     {% if request.user.is_authenticated %}
+                        <li class="nav-item active ml-3"><a class="nav-link" href="{% url 'hostelguests:guest_list' %}">{% trans 'Список гостей'%}</a></li>
                         <li class="nav-item active">
                             <a class="nav-link" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">{% trans 'Выйти'%}<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item active ml-3"><a class="nav-link" href="{% url 'hostelguests:guest_list' %}">{% trans 'Список гостей'%}</a></li>
                     {% else %}
                         <li class="nav-item active ml-3">
                             <a class="nav-link" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">{% trans 'Войти'%}<span class="sr-only">(current)</span></a>
                         <li class="menu-right"></li>
                             <a class="nav-link" href="{% url 'accounts:register' %}?next={{ request.get_full_path }}">{%trans 'Регистрация' %}</a></li>
                     {% endif %}
-                    {% if perms.hostelguests.can_add_guest %}
-                        <li class="nav-item active ml-3">
-                    <a class="nav-link" href="{% url 'hostelguests:guest_create' %}">{% trans 'Добавить гостя'%}</a>
-                    </li>
-                    {% endif %}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'hostelguests:guest_list' %}">{% trans "Список гостей"%}
-                                <span class="sr-only">(current)</span></a>
-                        </li>
+
                 </ul>
             </div>
         </div>
