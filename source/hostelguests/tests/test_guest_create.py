@@ -48,7 +48,6 @@ class GuestCreateTestCase(TestCase):
         print(file)
         return ImageFile(file)
 
-
     def test_authorized_without_permission_post_create_add(self):
         url = reverse('hostelguests:guest_create')
         data = {
@@ -72,10 +71,10 @@ class GuestCreateTestCase(TestCase):
             'first_name': 'Testname',
             'last_name': 'Test',
             'middle_name': 'TestMiddle',
-            'birth_date': '2000-10-10',
+            'birth_date': '20.01.1980',
             'birth_country': 'TestCountry',
             'passport_id': 'PassportId123',
-            'expiry_passport_date': '2025-10-10',
+            'expiry_passport_date': '10.05.2020',
             'document_maker': 'testMaker',
             'photo': self.create_test_image()
         }
@@ -85,7 +84,7 @@ class GuestCreateTestCase(TestCase):
         guest = Guest.objects.order_by('pk').last()
         self.assertEqual(response.status_code, 302)
         self.assertEqual(type(response), HttpResponseRedirect)
-        redirect_url = reverse('hostelguests:guest_list')
+        redirect_url = reverse('hostelguests:detail_view', kwargs={'pk': guest.pk})
         self.assertEqual(response.url, redirect_url)
         self.assertEqual(guest.first_name, data['first_name'])
         self.assertEqual(guest.last_name, data['last_name'])
