@@ -7,6 +7,7 @@ from hostelguests.views.guest_update import GuestUpdateView
 from hostelguests.views.guestlist import GuestListView
 from hostelguests.views.guestdetail import GuestDetailView
 from hostelguests.views.guest_delete import GuestDeleteView
+from aboutguests.views.note_delete import NoteDeleteView
 
 app_name = 'hostelguests'
 
@@ -28,5 +29,10 @@ urlpatterns = [
                                     )
                            ],
                        ),
-                       ),
+                  ),
+                  path('note/', include([
+                      path('<int:pk>/', include([
+                          path('delete/', NoteDeleteView.as_view(), name='note_delete'),
+                      ]))
+                  ])),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
