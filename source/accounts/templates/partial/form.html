@@ -1,5 +1,5 @@
 {% load widget_tweaks %}
-
+{% load staticfiles %}
 {% if not fields_only %}
     <form action="{{ action_url }}" method="{{ form_method }}" enctype="{{ enctype }}">
         {% csrf_token %}

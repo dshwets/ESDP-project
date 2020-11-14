@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load i18n %}
-{% load staticfiles %}
 {% block title %}{% trans 'Детальный просмотр' %}
 {% endblock %}
 {% block styles %}
@@ -17,7 +16,7 @@
         {% if guest.photo %}
     <img src="{{ guest.photo.url }}" width="160" height="200" alt="guest_img" align="left" vspace="5" hspace="10">
         {% else %}
-        <img src="{% static 'img/image-not-found.png' %}" class="card-img" alt="quest_img">
+        <img src="{% static 'img/image-not-found.png' %}" width="160" height="200" alt="guest_img" align="left" vspace="5" hspace="10" alt="quest_img">
         {% endif %}
     </div>
     <div class="ml-5">
@@ -30,6 +29,11 @@
          {% if perms.hostelguests.can_change_guest %}
         <a href="{% url 'hostelguests:guest_update' guest.pk %}">
         <button type="button" class="btn btn-info"> {% trans 'Изменить'%}</button></a>
+            {% endif %}
+
+     {% if perms.hostelguests.can_delete_guest %}
+        <a href="{% url 'hostelguests:guest_delete' guest.pk %}">
+        <button type="button" class="btn btn-danger ml-3"> {% trans 'Удалить'%}</button></a>
             {% endif %}
       </div>
 
