@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse
 from django.views.generic import CreateView
 
 from hostelguests.forms import GuestForm
@@ -11,5 +11,6 @@ class GuestCreateView(PermissionRequiredMixin,CreateView):
     form_class = GuestForm
     model = Guest
     permission_required = 'hostelguests.can_add_guest'
-    #TODO after create DetailGuestView need to chage url
-    success_url = reverse_lazy('hostelguests:guest_list')
+
+    def get_success_url(self):
+        return reverse('hostelguests:detail_view', kwargs={'pk': self.object.pk})

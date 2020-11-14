@@ -153,3 +153,5 @@ LANGUAGES = (
       ('ru', _('Русский')),
       ('en', _('Английский')),
 )
+
+DATE_INPUT_FORMATS = ['%d.%m.%Y']
