@@ -8,7 +8,7 @@ class GuestDetailView(PermissionRequiredMixin, DetailView):
     model = Guest
     template_name = 'guestdetail.html'
     permission_required = 'hostelguests.can_view_guest'
-    paginate_comments_by = 2
+    paginate_comments_by = 5
     paginate_notes_orphans = 0
 
     def get_context_data(self, **kwargs):
@@ -20,7 +20,7 @@ class GuestDetailView(PermissionRequiredMixin, DetailView):
         return context
 
     def paginate_notes(self, guest):
-        notes = guest.notes.all()
+        notes = guest.notes.all().order_by('-created_at')
         if notes.count() > 0:
             paginator = Paginator(notes, self.paginate_comments_by, orphans=self.paginate_notes_orphans)
             page_number = self.request.GET.get('page', 1)
