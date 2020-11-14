@@ -22,11 +22,10 @@ urlpatterns = [
                                             path('detail/', GuestDetailView.as_view(), name='detail_view'),
                                             path('delete/', GuestDeleteView.as_view(), name='guest_delete'),
                                             path('update/', GuestUpdateView.as_view(), name='guest_update'),
-                                            path('note/', include(('aboutguests.urls', 'aboutguests'), namespace="note"))
                                         ],
                                     ),
                                     )
                            ],
                        ),
-                       ),
+                  ),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
