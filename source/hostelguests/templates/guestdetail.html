@@ -62,6 +62,7 @@
 {#            TODO позже отображение заметок будет изменяться, необходимо будет добавить кем было сделана заметка и т.п#}
                     <p>{% trans 'Дата создания заметки: ' %} {{ note.created_at }}</p>
                 <div class="pre">{{ note.description }}</div>
+                <a href="{% url 'hostelguests:note_delete' note.pk %}" class="mt-2 badge badge-pill badge-danger">Удалить заметку</a>
             </div>
             <div>
         {% empty %}
