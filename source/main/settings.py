@@ -155,3 +155,6 @@ LANGUAGES = (
 )
 
 DATE_INPUT_FORMATS = ['%d.%m.%Y']
+
+LOGIN_REDIRECT_URL = 'hostelguests:guest_list'
+LOGOUT_REDIRECT_URL = 'hostelguests:guest_list'
