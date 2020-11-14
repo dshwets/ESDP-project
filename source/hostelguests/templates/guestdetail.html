@@ -27,20 +27,28 @@
         <p class="card-text"><b>{% trans 'Id паспорта: ' %}</b>{{ guest.passport_id }}</p>
         <p class="card-text"><b>{% trans 'Дата окончания срока действия паспорта: ' %}</b> {{ guest.expiry_passport_date }}</p>
         <p class="card-text"><b>{% trans 'Орган выдавший паспорт: ' %}</b>{{ guest.document_maker }}</p>
+         {% if perms.hostelguests.can_change_guest %}
+        <a href="{% url 'hostelguests:guest_update' guest.pk %}">
+        <button type="button" class="btn btn-info"> {% trans 'Изменить'%}</button></a>
+            {% endif %}
       </div>
+
     </div>
+
   </div>
          <p class="p-3">
-            <a href="/">Return to home page</a>
+            <a href="/">{% trans 'Назад ' %}</a>
+         {% if perms.aboutguests.can_add_note %}
         <a href="{% url 'hostelguests:aboutguests:note_create' pk=guest.pk%}">
         <button type="button" class="btn btn-primary float-right">
             {% trans 'Добавить заметку'%}
         </button>
     </a>
+         {% endif %}
      </p>
              <hr>
     <div class="mt-4 mb-4">
-    <h4 align="center"><b>Заметки о госте</b></h4>
+    <h4 align="center"><b>{% trans 'Заметки о госте ' %}</b></h4>
     </div>
         {% if is_paginated %}
             {% include 'partial/pagination.html' %}
@@ -48,12 +56,12 @@
         {% for note in notes %}
             <div class="box">
 {#            TODO позже отображение заметок будет изменяться, необходимо будет добавить кем было сделана заметка и т.п#}
-                    <p>Дата создания заметки: {{ note.created_at }}</p>
+                    <p>{% trans 'Дата создания заметки: ' %} {{ note.created_at }}</p>
                 <div class="pre">{{ note.description }}</div>
             </div>
             <div>
         {% empty %}
-            <p>Нет заметок</p>
+            <p>{% trans 'Нет заметок ' %}</p>
         {% endfor %}
         {% if is_paginated %}
             {% include 'partial/pagination.html' %}
