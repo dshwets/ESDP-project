@@ -67,9 +67,11 @@
                         {% trans 'Изменить' %}
                     </a>
                 {% endif %}
-                <a href="{% url 'aboutguests:note_delete' note.pk %}" class="mt-2 badge badge-pill badge-danger">
-                    {% trans 'Удалить заметку' %}
-                </a>
+                {% if perms.aboutguests.can_delete_note %}
+                    <a href="{% url 'aboutguests:note_delete' note.pk %}" class="mt-2 badge badge-pill badge-danger">
+                        {% trans 'Удалить заметку' %}
+                    </a>
+                {% endif %}
 
             </div>
             <div>
