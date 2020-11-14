@@ -5,12 +5,12 @@
 {% endif %}
 
     {% for error in form.non_field_errors %}
-        <p class="form-error">{{ error }}</p>
+        <p class="font-weight-bold text-danger form-error">{{ error }}</p>
     {% endfor %}
     {% for field in form %}
             <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
             {% for error in field.errors %}
-                <p class="form-error">{{ error }}</p>
+                <p class="font-weight-bold text-danger form-error">{{ error }}</p>
             {% endfor %}
             <p>{{ field|add_class:'form-control' }}</p>
     {% endfor %}
