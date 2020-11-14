@@ -14,7 +14,7 @@ class NoteCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'aboutguests.can_add_note'
 
     def form_valid(self, form):
-        guest = get_object_or_404(Guest, pk=self.kwargs.get('pk'))
+        guest = get_object_or_404(Guest, pk=self.kwargs.get('guest_pk'))
         note = form.save(commit=False)
         note.guest = guest
         note.save()
