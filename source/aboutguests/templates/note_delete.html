@@ -8,7 +8,7 @@
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        <h2 class="my-3">{% trans 'Вы уверены, что хотите удалить заметку #' %}{{ note.pk }}?</h2>
+        <h4 class="my-3">{% trans 'Вы уверены, что хотите удалить заметку #' %}{{ note.pk }}?</h4>
         <input class="btn btn-danger" type="submit" value="{% trans 'Да' %}">
         <a class="btn btn-primary" href="{% url 'hostelguests:detail_view' note.guest.pk %}">{% trans 'Нет' %}</a>
     </form>
