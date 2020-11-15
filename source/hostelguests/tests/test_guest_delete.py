@@ -12,8 +12,7 @@ class GuestDeleteTestCase(TestCase):
         self.permission = Permission.objects.get(codename='can_delete_guest')
 
     def tearDown(self) -> None:
-        self.guest.delete()
-        self.user.delete()
+        self.client.logout()
 
     def assert_response_status(self, url, method, code):
         if method == "get":
