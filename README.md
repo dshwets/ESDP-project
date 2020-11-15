@@ -1,8 +1,6 @@
 ```
 git clone https://gitlab.com/ihinion/applehostel.git
 
-cd applehostel
-
 git checkout development
 
 virtualenv -p python3 venv
