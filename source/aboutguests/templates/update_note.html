@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} {% trans 'Изменение заметки' %}{% endblock %}
+
+{% block content %}
+    <h4 class="mb-4 mt-5" align="center"><b>{% trans 'Изменение заметки' %}</b></h4>
+
+    {% url 'webapp:comment_update' comment.pk as action_url %}
+    {% trans 'Сохранить' as button_text %}
+    {% include 'partial/form.html' with form_method='post' action_url=action_url  button_text=button_text %}
+{% endblock %}

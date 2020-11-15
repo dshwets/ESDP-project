@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}{% trans 'Добавление гостя' %}{% endblock %}
+
+{% block content %}
+    <h3 class="mb-4 mt-5" align="center"><b>{% trans 'Добавление гостя' %}</b></h3>
+   {% trans 'Добавить' as button_text %}
+    {% include 'partial/form.html' with form_method='post' action_url=action_url  button_text=button_text %}
+{% endblock %}
