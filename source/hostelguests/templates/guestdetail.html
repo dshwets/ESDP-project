@@ -57,11 +57,12 @@
         {% if is_paginated %}
             {% include 'partial/pagination.html' %}
         {% endif %}
+    <div>
         {% for note in notes %}
             <div class="box">
 {#            TODO позже отображение заметок будет изменяться, необходимо будет добавить кем было сделана заметка и т.п#}
                     <p>{% trans 'Дата создания заметки: ' %} {{ note.created_at }}</p>
-                <div class="pre">{{ note.description }}</div>
+                <div class="pre" style="word-wrap:break-word">{{ note.description }}</div>
                 {% if perms.aboutguests.can_change_note %}
                     <a href="{% url 'aboutguests:note_update' pk=note.pk %}" class="mt-2 badge badge-pill badge-info">
                         {% trans 'Изменить' %}
