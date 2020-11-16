@@ -6,7 +6,7 @@ from hostelguests.forms import GuestForm
 from hostelguests.models import Guest
 
 
-class GuestCreateView(PermissionRequiredMixin,CreateView):
+class GuestCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'guest_create.html'
     form_class = GuestForm
     model = Guest
