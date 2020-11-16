@@ -5,6 +5,7 @@ from hostelguests.models import Guest
 
 from main.settings import DATE_INPUT_FORMATS
 
+
 class GuestForm(forms.ModelForm):
     birth_date = forms.DateField(
         input_formats=DATE_INPUT_FORMATS,
@@ -15,7 +16,6 @@ class GuestForm(forms.ModelForm):
         required=False,
         label=_('Дата окончания срока действия')
     )
-
 
     class Meta:
         model = Guest
