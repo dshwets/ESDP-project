@@ -1,9 +1,9 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from common.models import AbstractDatetimeModel
+from common.models import AbstractCreatedByModel
 
 
-class Note(AbstractDatetimeModel):
+class Note(AbstractCreatedByModel):
     description = models.TextField(
         default='',
         verbose_name=_('Описание'),
