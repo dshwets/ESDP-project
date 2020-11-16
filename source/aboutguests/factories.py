@@ -1,4 +1,5 @@
 import factory
+from factory import SubFactory
 from factory.fuzzy import FuzzyText
 
 from aboutguests.models import Note
@@ -11,4 +12,4 @@ class NoteFactory(factory.django.DjangoModelFactory):
         model = Note
 
     description = FuzzyText(length=50)
-    guest = GuestFactory()
+    guest = SubFactory(GuestFactory)
