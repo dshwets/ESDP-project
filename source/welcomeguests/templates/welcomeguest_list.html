@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Желаные гости ' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+{% include 'partial/pagination.html' %}
+
+    {% load i18n %}
+<h3 class="mb-5 mt-4" align="center">
+   <b>{% trans 'Белый Список гостей' %}</b>
+</h3>
+{% for guest in welcome_guests %}
+    <div class="card my-2">
+        <div class="card-body">
+            {% if perms.hostelguests.can_change_guest %}
+                <h5 class="card-title">{% trans 'ФИО' %}:<a href="{% url 'hostelguests:detail_view' guest.guest.pk %}"> {{ guest.guest.first_name }} {{ guest.guest.last_name }} {{ guest.guest.middle_name }}</a></h5>
+            {% else %}
+                <h5 class="card-title">{% trans 'ФИО' %}: {{ guest.guest.first_name }} {{ guest.guest.last_name }} {{ guest.guest.middle_name }}</h5>
+
+            {% endif %}
+             {% if perms.hostelguests.can_delete_guest %}
+                <a href="#">
+                <button type="button" class="btn btn-danger ml-3"> {% trans 'Удалить'%}</button></a>
+            {% endif %}
+
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
+</body>
+</html>
