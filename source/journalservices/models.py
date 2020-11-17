@@ -8,6 +8,7 @@ class JournalService(AbstractDatetimeModel):
     guest = models.ForeignKey(
         'hostelguests.Guest',
         on_delete=models.CASCADE,
+        related_name='journals',
         verbose_name=_('Гость'),
     )
     hostel_service = models.ForeignKey(
