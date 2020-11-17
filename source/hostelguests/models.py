@@ -1,3 +1,4 @@
+from auditlog.registry import auditlog
 from django.db import models
 from common.models import AbstractCreatedByModel
 from django.utils.translation import gettext_lazy as _
@@ -57,3 +58,6 @@ class Guest(AbstractCreatedByModel):
             ('can_delete_guest', _('Может удалять гостя')),
             ('can_view_guest', _('Может просматривать гостя')),
         ]
+
+
+auditlog.register(Guest)

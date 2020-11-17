@@ -1,3 +1,4 @@
+from auditlog.registry import auditlog
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from common.models import AbstractDatetimeModel
@@ -17,3 +18,6 @@ class HostelService(AbstractDatetimeModel):
             ('can_delete_hostelservice', _('Может удалять услугу отеля')),
             ('can_view_hostelservice', _('Может просматривать услугу отеля')),
         ]
+
+
+auditlog.register(HostelService)
