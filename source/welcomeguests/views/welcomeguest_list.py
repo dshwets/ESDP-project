@@ -5,7 +5,7 @@ from welcomeguests.models import WelcomeGuest
 
 
 class WelcomeGuestListView(LoginRequiredMixin, ListView):
-    template_name = '#'
+    template_name = 'welcomeguest_list.html'
     model = WelcomeGuest
     context_object_name = 'welcome_guests'
     paginate_by = 10
