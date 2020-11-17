@@ -1,3 +1,4 @@
+from auditlog.registry import auditlog
 from django.db import models
 from common.models import AbstractDatetimeModel
 from django.utils.translation import gettext_lazy as _
@@ -32,3 +33,6 @@ class WelcomeGuest(AbstractDatetimeModel):
             ('can_delete_welcomeguest', _('Может удалять желанного гостя')),
             ('can_view_welcomeguest', _('Может просматривать желанного гостя')),
         ]
+
+
+auditlog.register(WelcomeGuest)
