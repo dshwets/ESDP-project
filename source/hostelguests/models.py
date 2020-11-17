@@ -1,10 +1,9 @@
 from django.db import models
-from common.models import AbstractDatetimeModel
+from common.models import AbstractCreatedByModel
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import get_user_model
 
 
-class Guest(AbstractDatetimeModel):
+class Guest(AbstractCreatedByModel):
     first_name = models.CharField(
         max_length=255,
         verbose_name=_('Имя')
@@ -18,12 +17,6 @@ class Guest(AbstractDatetimeModel):
         default="",
         blank=True,
         verbose_name=_('Отчество'),
-    )
-    created_by = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.SET_NULL,
-        null=True,
-        verbose_name=_('Кем создано'),
     )
     photo = models.ImageField(
         null=True,
