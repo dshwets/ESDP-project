@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 
 class UnwelcomeGuest(AbstractDatetimeModel):
-    guest = models.ForeignKey(
+    guest = models.OneToOneField(
         'hostelguests.Guest',
         on_delete=models.CASCADE,
         verbose_name=_('Гость'),
