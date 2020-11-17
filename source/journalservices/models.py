@@ -5,16 +5,21 @@ from common.models import AbstractDatetimeModel
 
 
 class JournalService(AbstractDatetimeModel):
-    guest = models.ManyToManyField(
+    guest = models.ForeignKey(
         'hostelguests.Guest',
+        on_delete=models.CASCADE,
         verbose_name=_('Гость'),
     )
-    hostel_service=models.ManyToManyField(
+    hostel_service = models.ForeignKey(
         'hostelservices.HostelService',
+        on_delete=models.SET_DEFAULT,
+        default='',
         verbose_name=_('Услуга'),
     )
-    executor=models.ManyToManyField(
+    executor = models.ForeignKey(
         'serviceexecutors.ServiceExecutor',
+        on_delete=models.SET_DEFAULT,
+        default='',
         verbose_name=_('Исполнитель'),
     )
 
