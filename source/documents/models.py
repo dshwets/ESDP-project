@@ -1,3 +1,4 @@
+from auditlog.registry import auditlog
 from django.db import models
 from common.models import AbstractDatetimeModel
 from django.utils.translation import gettext_lazy as _
@@ -30,3 +31,6 @@ class Document(AbstractDatetimeModel):
             ('can_delete_document', _('Может удалять документ')),
             ('can_view_document', _('Может просматривать документ')),
         ]
+
+
+auditlog.register(Document)
