@@ -7,5 +7,5 @@ from welcomeguests.views.welcomeguest_list import WelcomeGuestListView
 app_name = 'welcomeguests'
 
 urlpatterns = [
-    path('welcomeguest/', WelcomeGuestListView.as_view(), name='guest_list'),
+    path('welcomeguest/', WelcomeGuestListView.as_view(), name='welcome_guest_list'),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
