@@ -21,4 +21,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('', include('hostelguests.urls')),
     path('', include('aboutguests.urls')),
+    path('', include('unwelcomeguests.urls'))
 ]
