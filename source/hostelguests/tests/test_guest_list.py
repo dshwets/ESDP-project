@@ -3,6 +3,7 @@ from django.template.response import TemplateResponse
 from django.test import TestCase
 from django.urls import reverse
 
+from hostelguests.models import Guest
 from accounts.factories import UserFactory
 from hostelguests.factories import GuestFactory
 
@@ -22,6 +23,7 @@ class GuestListTestCase(TestCase):
         user = UserFactory(username='some_admin')
         self.client.login(username='some_admin', password='pass')
         GuestFactory(first_name='AB', last_name = 'C')
+
         response = self.client.get(reverse('hostelguests:guest_list'))
         response_empty_search = self.client.get(reverse('hostelguests:guest_list') + '?search=')
         response_succes_search = self.client.get(reverse('hostelguests:guest_list') + '?search=a')
@@ -35,6 +37,11 @@ class GuestListTestCase(TestCase):
 
         self.assertNotEqual(response.context_data['guests'], response_failed_search.context_data['guests'])
         self.assertNotEqual(response.context_data['guests'].count(), response_failed_search.context_data['guests'].count())
+
+        GuestFactory(first_name='EF', last_name='A')
+
+        response_ordered_by_name = self.client.get(reverse('hostelguests:guest_list') + '?ordering:by_name')
+        self.assertEqual(response_ordered_by_name.context_data['guests'][0], Guest.objects.last())
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(type(response), TemplateResponse)
