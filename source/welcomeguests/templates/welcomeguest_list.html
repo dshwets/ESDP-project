@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Белый список' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+{% for welcomeguest in welcomeguests %}
+        <div class="box">
+            <h3><a href="{% url "webapp:product_view" product.pk %}">{{ product.name }}</a></h3>
+            <p>Категория: {{ welcomeguest.guest }}</p>
+            <p>Осталось: {{ welcomeguest.description }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
