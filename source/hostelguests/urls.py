@@ -7,6 +7,7 @@ from hostelguests.views.guest_update import GuestUpdateView
 from hostelguests.views.guestlist import GuestListView
 from hostelguests.views.guestdetail import GuestDetailView
 from hostelguests.views.guest_delete import GuestDeleteView
+from welcomeguests.views.welcomeguest_create import WelcomeGuestCreateView
 
 app_name = 'hostelguests'
 
@@ -22,6 +23,8 @@ urlpatterns = [
                                             path('detail/', GuestDetailView.as_view(), name='detail_view'),
                                             path('delete/', GuestDeleteView.as_view(), name='guest_delete'),
                                             path('update/', GuestUpdateView.as_view(), name='guest_update'),
+                                            path('welcomeguests/add', WelcomeGuestCreateView.as_view(),
+                                                 name='welcomeguest_create'),
                                         ],
                                     ),
                                     )

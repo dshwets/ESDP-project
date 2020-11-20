@@ -97,7 +97,7 @@ class GuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         response = self.client.post(url, data)
         field = 'first_name'
-        self.assertFormError(response, 'form', field, u'Обязательное поле.')
+        self.assertFormError(response, 'form', field, 'Обязательное поле.')
 
     def test_authorized_with_permission_post_create_guest_with_empty_last_name(self):
         url = reverse('hostelguests:guest_create')
@@ -107,7 +107,7 @@ class GuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         response = self.client.post(url, data)
         field = 'last_name'
-        self.assertFormError(response, 'form', field, u'Обязательное поле.')
+        self.assertFormError(response, 'form', field, 'Обязательное поле.')
 
     def test_authorized_with_permission_post_create_guest_with_empty_birth_date(self):
         url = reverse('hostelguests:guest_create')
@@ -117,7 +117,7 @@ class GuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         response = self.client.post(url, data)
         field = 'birth_date'
-        self.assertFormError(response, 'form', field, u'Обязательное поле.')
+        self.assertFormError(response, 'form', field, 'Обязательное поле.')
 
     def test_authorized_with_permission_post_create_guest_with_empty_country(self):
         url = reverse('hostelguests:guest_create')
@@ -127,7 +127,7 @@ class GuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         response = self.client.post(url, data)
         field = 'birth_country'
-        self.assertFormError(response, 'form', field, u'Обязательное поле.')
+        self.assertFormError(response, 'form', field, 'Обязательное поле.')
 
     def test_authorized_with_permission_post_create_guest_with_empty_passport_id(self):
         url = reverse('hostelguests:guest_create')
@@ -137,7 +137,7 @@ class GuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         response = self.client.post(url, data)
         field = 'passport_id'
-        self.assertFormError(response, 'form', field, u'Обязательное поле.')
+        self.assertFormError(response, 'form', field, 'Обязательное поле.')
 
     def test_authorized_with_permission_post_create_guest_with_invalid_birth_date(self):
         url = reverse('hostelguests:guest_create')
@@ -147,7 +147,7 @@ class GuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         response = self.client.post(url, data)
         field = 'birth_date'
-        self.assertFormError(response, 'form', field, u'Введите правильную дату.')
+        self.assertFormError(response, 'form', field, 'Введите правильную дату.')
 
     def test_authorized_with_permission_post_create_guest_with_invalid_expiry_passport_date(self):
         url = reverse('hostelguests:guest_create')
@@ -157,7 +157,7 @@ class GuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         response = self.client.post(url, data)
         field = 'expiry_passport_date'
-        self.assertFormError(response, 'form', field, u'Введите правильную дату.')
+        self.assertFormError(response, 'form', field, 'Введите правильную дату.')
 
     def test_authorized_with_permission_post_create_guest_with_long_first_name(self):
         url = reverse('hostelguests:guest_create')
@@ -167,7 +167,7 @@ class GuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         response = self.client.post(url, data)
         field = 'first_name'
-        self.assertFormError(response, 'form', field, u'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).')
+        self.assertFormError(response, 'form', field, 'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).')
 
     def test_authorized_with_permission_post_create_guest_with_long_last_name(self):
         url = reverse('hostelguests:guest_create')
@@ -178,7 +178,7 @@ class GuestCreateTestCase(TestCase):
         response = self.client.post(url, data)
         field = 'last_name'
         self.assertFormError(
-            response, 'form', field, u'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).'
+            response, 'form', field, 'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).'
         )
 
     def test_authorized_with_permission_post_create_guest_with_long_country(self):
@@ -190,7 +190,7 @@ class GuestCreateTestCase(TestCase):
         response = self.client.post(url, data)
         field = 'birth_country'
         self.assertFormError(
-            response, 'form', field, u'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).'
+            response, 'form', field, 'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).'
         )
 
     def test_authorized_with_permission_post_create_guest_with_long_document_maker(self):
@@ -202,5 +202,5 @@ class GuestCreateTestCase(TestCase):
         response = self.client.post(url, data)
         field = 'document_maker'
         self.assertFormError(
-            response, 'form', field,u'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).'
+            response, 'form', field,'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).'
         )

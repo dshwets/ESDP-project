@@ -27,5 +27,7 @@ class WelcomeGuest(AbstractCreatedByModel):
             ('can_view_welcomeguest', _('Может просматривать желанного гостя')),
         ]
 
+    def __str__(self):
+        return "{}. {}".format(self.guest.first_name, self.guest.last_name)
 
 auditlog.register(WelcomeGuest)
