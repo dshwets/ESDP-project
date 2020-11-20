@@ -18,6 +18,7 @@ class GuestForm(forms.ModelForm):
     )
     hidden_base64 = forms.CharField(
         widget=forms.HiddenInput(),
+        required=False,
     )
 
     class Meta:
