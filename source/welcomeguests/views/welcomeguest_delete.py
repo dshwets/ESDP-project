@@ -5,7 +5,7 @@ from django.views.generic import DeleteView
 from welcomeguests.models import WelcomeGuest
 
 
-class UnwelcomeGuestDeleteView(PermissionRequiredMixin, DeleteView):
+class WelcomeGuestDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'welcomeguest_delete.html'
     model = WelcomeGuest
     permission_required = 'welcomeguests.can_delete_welcomeguest'
