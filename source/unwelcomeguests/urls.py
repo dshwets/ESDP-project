@@ -6,4 +6,5 @@ app_name = 'unwelcomeguests'
 
 urlpatterns = [
     path('unwelcomeguests/<int:pk>/delete/', UnwelcomeGuestDeleteView.as_view(), name='unwelcomeguest_delete'),
+
 ]

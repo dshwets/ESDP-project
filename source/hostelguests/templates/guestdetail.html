@@ -39,10 +39,19 @@
 {% if perms.welcomeguests.can_add_welcomeguest %}
 {% if guest.welcomeguest %}
     <a>
-        <button type="button" class="btn btn-outline-success ml-3">{% trans 'Почетный гость'%}</button></a>
+        <button type="button" class="btn btn-outline-success ml-3" disabled>{% trans 'Почетный гость'%}</button></a>
     {% else %}
     <a href="{% url 'hostelguests:welcomeguest_create' guest.pk %}">
         <button type="button" class="btn btn-success ml-3"> {% trans 'Отметить как почетного гостя'%}</button></a>
+{% endif %}
+    {% endif %}
+{% if perms.unwelcomeguests.can_add_unwelcomeguest %}
+{% if guest.unwelcomeguest %}
+    <a>
+        <button type="button" class="btn btn-secondary ml-3" disabled>{% trans 'Гость в черном списке'%}</button></a>
+    {% else %}
+    <a href="{% url 'hostelguests:unwelcomeguest_create' guest.pk %}">
+        <button type="button" class="btn btn-secondary ml-3"> {% trans 'Добавить в черный список'%}</button></a>
 {% endif %}
     {% endif %}
       </div>
