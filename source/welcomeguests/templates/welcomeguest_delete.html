@@ -17,6 +17,6 @@
                 {% endif %}?
         </h3>
         <input class="btn btn-danger" type="submit" value="{% trans 'Да' %}">
-        <a class="btn btn-primary" href="{% url 'hostelguests:detail_view' %}">{% trans 'Нет' %}</a>
+        <a class="btn btn-primary" href="{% url 'hostelguests:guest_list'  %}">{% trans 'Нет' %}</a>
     </form>
 {% endblock %}

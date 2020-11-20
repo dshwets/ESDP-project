@@ -9,4 +9,4 @@ class WelcomeGuestDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'welcomeguest_delete.html'
     model = WelcomeGuest
     permission_required = 'welcomeguests.can_delete_welcomeguest'
-    success_url = reverse_lazy('hostelguests:detail_view')
+    success_url = reverse_lazy('hostelguests:guest_list')

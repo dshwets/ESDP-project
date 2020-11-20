@@ -23,3 +23,30 @@ class WelcomeGuestDeleteTestCase(TestCase):
         elif method == "post":
             response = self.client.post(url)
             self.assertEqual(response.status_code, code)
+
+    def test_welcomeguest_delete_unauthorized_get_request(self):
+        self.assert_response_status(reverse('welcomeguests:welcomeguest_delete', args=(self.welcomeguest.id,)), 'get', 302)
+
+    def test_welcomeguest_delete_unauthorized_post_request(self):
+        self.assert_response_status(reverse('welcomeguests:welcomeguest_delete', args=(self.welcomeguest.id,)), 'post', 302)
+
+    def test_welcomeguest_delete_authorized_request_no_perm(self):
+        self.client.login(username='some_admin', password='pass')
+        self.assert_response_status(reverse('welcomeguests:welcomeguest_delete', args=(self.welcomeguest.id,)), 'get', 403)
+
+    def test_welcomeguest_delete_authorized_post_request_has_perm_guest_not_found(self):
+        self.user.user_permissions.add(self.permission)
+        self.client.login(username='some_admin', password='pass')
+        guest_wrong_id = self.welcomeguest.id+10
+        self.assert_response_status(reverse('welcomeguests:welcomeguest_delete', args=(guest_wrong_id,)), 'get', 404)
+
+    def test_welcomeguest_delete_authorized_get_request_has_perm(self):
+        self.user.user_permissions.add(self.permission)
+        self.client.login(username='some_admin', password='pass')
+        self.assertTemplateUsed('welcomeguest_delete.html')
+        self.assert_response_status(reverse('welcomeguests:welcomeguest_delete', args=(self.welcomeguest.id,)), 'get', 200)
+
+    def test_welcomeguest_delete_authorized_post_request_has_perm(self):
+        self.user.user_permissions.add(self.permission)
+        self.client.login(username='some_admin', password='pass')
+        self.assert_response_status(reverse('welcomeguests:welcomeguest_delete', args=(self.welcomeguest.id,)), 'post', 302)
