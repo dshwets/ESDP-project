@@ -36,13 +36,15 @@
         <button type="button" class="btn btn-danger ml-3"> {% trans 'Удалить'%}</button></a>
             {% endif %}
 
+{% if perms.welcomeguests.can_add_welcomeguest %}
 {% if guest.welcomeguest %}
     <a>
-        <button type="button" class="btn btn-outline-primary ml-3">{% trans 'Почетный гость'%}</button></a>
+        <button type="button" class="btn btn-outline-success ml-3">{% trans 'Почетный гость'%}</button></a>
     {% else %}
     <a href="{% url 'hostelguests:welcomeguest_create' guest.pk %}">
-        <button type="button" class="btn btn-info ml-3"> {% trans 'Отметить как почетного гостя'%}</button></a>
+        <button type="button" class="btn btn-success ml-3"> {% trans 'Отметить как почетного гостя'%}</button></a>
 {% endif %}
+    {% endif %}
       </div>
 
     </div>
