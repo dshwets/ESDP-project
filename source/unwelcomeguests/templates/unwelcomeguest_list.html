@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Черный список' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+{% include 'partial/pagination.html' %}
+    {% load i18n %}
+<h3 class="mb-5 mt-4" align="center">
+   <b>{% trans 'Черный список гостей' %}</b>
+</h3>
+{% for unwelcomeguest in unwelcome_guests %}
+    <div class="card my-2">
+        <div class="card-body">
+                <h5 class="card-title">{% trans 'ФИО' %}:<a href="{% url 'hostelguests:detail_view' unwelcomeguest.guest.pk %}"> {{ unwelcomeguest.guest.first_name }} {{ unwelcomeguest.guest.last_name }} {{ unwelcomeguest.guest.middle_name }} </a></h5>
+                <p>{{unwelcomeguest.description }}</p>
+            {% if perms.unwelcomeguests.can_delete_unwelcomeguest %}
+                <a href="{% url 'unwelcomeguests:unwelcomeguest_delete' unwelcomeguest.pk %}">
+                <button type="button" class="btn btn-danger ml-3"> {% trans 'Удалить из черного списка'%}</button></a>
+            {% endif %}
+          </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

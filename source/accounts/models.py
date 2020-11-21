@@ -1,3 +1,4 @@
+from auditlog.registry import auditlog
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -17,3 +18,6 @@ class User(AbstractUser, AbstractDatetimeModel):
             ('can_delete_user', _('Может удалять пользователя')),
             ('can_view_user', _('Может просматривать пользователя')),
         ]
+
+
+auditlog.register(User)

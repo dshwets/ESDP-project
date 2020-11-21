@@ -1,20 +1,14 @@
+from auditlog.registry import auditlog
 from django.db import models
-from common.models import AbstractDatetimeModel
+from common.models import AbstractCreatedByModel
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import get_user_model
 
 
-class WelcomeGuest(AbstractDatetimeModel):
-    guest = models.ForeignKey(
+class WelcomeGuest(AbstractCreatedByModel):
+    guest = models.OneToOneField(
         'hostelguests.Guest',
         on_delete=models.CASCADE,
         verbose_name=_('Гость'),
-    )
-    created_by = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.SET_NULL,
-        null=True,
-        verbose_name=_('Кем создано'),
     )
     description = models.TextField(
         max_length=2000,
@@ -32,3 +26,8 @@ class WelcomeGuest(AbstractDatetimeModel):
             ('can_delete_welcomeguest', _('Может удалять желанного гостя')),
             ('can_view_welcomeguest', _('Может просматривать желанного гостя')),
         ]
+
+    def __str__(self):
+        return "{}. {}".format(self.guest.first_name, self.guest.last_name)
+
+auditlog.register(WelcomeGuest)

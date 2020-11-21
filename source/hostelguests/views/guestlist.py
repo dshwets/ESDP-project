@@ -11,5 +11,17 @@ class GuestListView(LoginRequiredMixin, FilterView):
     model = Guest
     filterset_class = GuestSearch
     context_object_name = 'guests'
+    ordering = '-id'
     paginate_by = 10
     paginate_orphans = 4
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        request_path = str(self.request).split('?')
+        try:
+            if 'ordering' in request_path[1]:
+                queryset = queryset.order_by('last_name', 'first_name')
+            return queryset
+        except IndexError:
+            return queryset
+

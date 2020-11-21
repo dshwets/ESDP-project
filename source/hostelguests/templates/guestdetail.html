@@ -14,7 +14,7 @@
   <div class="row no-gutters">
     <div>
         {% if guest.photo %}
-    <img src="{{ guest.photo.url }}" width="160" height="200" alt="guest_img" align="left" vspace="5" hspace="10">
+    <img src="{{ guest.photo.url }}" width="auto" height="200" alt="guest_img" align="left" vspace="5" hspace="10">
         {% else %}
         <img src="{% static 'img/image-not-found.png' %}" width="160" height="200" alt="guest_img" align="left" vspace="5" hspace="10" alt="quest_img">
         {% endif %}
@@ -35,6 +35,25 @@
         <a href="{% url 'hostelguests:guest_delete' guest.pk %}">
         <button type="button" class="btn btn-danger ml-3"> {% trans 'Удалить'%}</button></a>
             {% endif %}
+
+{% if perms.welcomeguests.can_add_welcomeguest %}
+{% if guest.welcomeguest %}
+    <a>
+        <button type="button" class="btn btn-outline-success ml-3" disabled>{% trans 'Почетный гость'%}</button></a>
+    {% else %}
+    <a href="{% url 'hostelguests:welcomeguest_create' guest.pk %}">
+        <button type="button" class="btn btn-success ml-3"> {% trans 'Отметить как почетного гостя'%}</button></a>
+{% endif %}
+    {% endif %}
+{% if perms.unwelcomeguests.can_add_unwelcomeguest %}
+{% if guest.unwelcomeguest %}
+    <a>
+        <button type="button" class="btn btn-secondary ml-3" disabled>{% trans 'Гость в черном списке'%}</button></a>
+    {% else %}
+    <a href="{% url 'hostelguests:unwelcomeguest_create' guest.pk %}">
+        <button type="button" class="btn btn-secondary ml-3"> {% trans 'Добавить в черный список'%}</button></a>
+{% endif %}
+    {% endif %}
       </div>
 
     </div>

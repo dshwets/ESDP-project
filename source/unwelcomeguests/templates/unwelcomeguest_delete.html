@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Удалить гостя из черного списка' %}
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <h3 class="my-5">
+            {% trans 'Вы уверены, что хотите удалить гостя из черного списка ' %}
+                {{ unwelcomeguest.guest.last_name }},
+                {{ unwelcomeguest.guest.first_name }}
+                {% if guest.middle_name %}
+                    {{ guest.middle_name }}
+                {% endif %}?
+        </h3>
+        <input class="btn btn-danger" type="submit" value="{% trans 'Да' %}">
+{#    TODO изменить переадрессацию "Нет" на черный список, вместо спика гостей#}
+        <a class="btn btn-primary" href="{% url 'hostelguests:guest_list' %}">{% trans 'Нет' %}</a>
+    </form>
+{% endblock %}
