@@ -6,6 +6,7 @@ from django.urls import reverse
 from accounts.factories import UserFactory
 from aboutguests.factories import GuestFactory
 from welcomeguests.factories import WelcomeGuestFactory
+from welcomeguests.models import WelcomeGuest
 
 
 class WelcomeGuestCreateTestCase(TestCase):
@@ -55,6 +56,7 @@ class WelcomeGuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         self.assert_response_status(reverse('hostelguests:welcomeguest_create', args=(self.guest.pk,)), 'post', 302)
 
+
     def assert_response_status(self, url, method, code):
         if method == "get":
             response = self.client.get(url)
@@ -62,4 +64,3 @@ class WelcomeGuestCreateTestCase(TestCase):
         elif method == "post":
             response = self.client.post(url)
             self.assertEqual(response.status_code, code)
-
