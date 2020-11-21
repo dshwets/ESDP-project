@@ -7,7 +7,10 @@
     {% for error in form.non_field_errors %}
         <p class="font-weight-bold text-danger form-error">{{ error }}</p>
     {% endfor %}
-    {% for field in form %}
+    {% for field in form.hidden_fields %}
+            {{ field|add_class:'form-control' }}
+    {% endfor %}
+    {% for field in form.visible_fields %}
             <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
             {% for error in field.errors %}
                 <p class="font-weight-bold text-danger form-error">{{ error }}</p>

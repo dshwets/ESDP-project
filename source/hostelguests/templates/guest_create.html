@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load i18n %}
+{% block styles %}
+   <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+{% endblock %}
 {% block title %}{% trans 'Добавление гостя' %}{% endblock %}
 
 {% block content %}
     <h3 class="mb-4 mt-5" align="center"><b>{% trans 'Добавление гостя' %}</b></h3>
-   {% trans 'Добавить' as button_text %}
-    {% include 'partial/form.html' with form_method='post' action_url=action_url  button_text=button_text %}
+    <video id="webcam" autoplay playsinline width="640" height="480"></video>
+    <canvas id="canvas" class="d-none"></canvas>
+    <p>
+    <a href="#" id='make_photo' class="mt-2 badge badge-pill badge-info">
+            {% trans 'Сделать фото' %}
+    </a>
+    </p>
+    {% trans 'Добавить' as button_text %}
+    {% include 'partial/form.html' with form_method='post' action_url=action_url button_text=button_text enctype="multipart/form-data"  %}
+{% endblock %}
+{% block scripts %}
+    <script type="application/javascript" src="{% static "js/cam.js" %}"></script>
 {% endblock %}
