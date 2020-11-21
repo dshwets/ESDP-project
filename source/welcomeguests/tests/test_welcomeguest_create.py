@@ -6,7 +6,6 @@ from django.urls import reverse
 from accounts.factories import UserFactory
 from aboutguests.factories import GuestFactory
 from welcomeguests.factories import WelcomeGuestFactory
-from welcomeguests.models import WelcomeGuest
 
 
 class WelcomeGuestCreateTestCase(TestCase):
