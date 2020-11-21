@@ -19,5 +19,6 @@ class WelcomeGuestCreateView(PermissionRequiredMixin, CreateView):
         guest = get_object_or_404(Guest, pk=self.kwargs.get('pk'))
         welcomeguest = form.save(commit=False)
         welcomeguest.guest = guest
+        welcomeguest.created_by_id = self.request.user.pk
         welcomeguest.save()
         return HttpResponseRedirect(reverse('hostelguests:detail_view', kwargs={'pk': guest.pk}))

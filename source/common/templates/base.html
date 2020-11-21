@@ -12,7 +12,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-4">
-        <div class="container">
+        <div class="container" style="display: flex flex-direction:column">
             <a class="navbar-brand font-weight-bold" href="{% url 'hostelguests:guest_list' %}">Apple Hostel</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,12 @@
                     {% endif %}
                     {% if request.user.is_authenticated %}
                         <li class="nav-item active ml-3"><a class="nav-link" href="{% url 'hostelguests:guest_list' %}">{% trans 'Список гостей'%}</a></li>
+                        <li class="nav-item active ml-3">
+                    <a class="nav-link" href="{% url 'unwelcomeguests:unwelcome_guest_list' %}">{% trans 'Черный список гостей'%}</a>
+                    </li>
+                    <li class="nav-item active ml-3">
+                    <a class="nav-link" href="{% url 'welcomeguests:welcome_guest_list' %}">{% trans 'Список почетных гостей'%}</a>
+                    </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">{% trans 'Выйти'%}<span class="sr-only">(current)</span></a>
                         </li>
@@ -45,9 +51,13 @@
 <div class="container">
     {% block content %}{% endblock %}
     </div>
+    <div style="margin-top: 100px; margin-bottom: 100px">
+
+    </div>
       <div class="footer">
 
-            <p style="background-color:#6c757d; height: 62px; margin-top: 50px; color: white;  padding-top: 20px;"  align="center">Copiright © All rights reserved 2020</p>
+            <p style="background-color:#6c757d; height: 53px;  color: white;  padding-top: 20px; position: fixed; flex: 0 0 50px;margin-top: auto;margin-bottom: 0; bottom: 0;
+  width: 100%;"  align="center">Copiright © All rights reserved 2020</p>
 
     </div>
 
