@@ -28,3 +28,7 @@ cp .env.example .env.development
 Для запуска всех тестов команда:
 
 ```./manage.py test```
+
+Команда для запуска приемочных тестов:
+
+```./manage.py behave```
