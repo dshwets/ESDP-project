@@ -8,3 +8,4 @@ class ServiceExecutorFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
+    middle_name = factory.Faker('first_name')
