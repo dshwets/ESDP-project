@@ -1,18 +1,18 @@
-from behave import when, then, given
+from behave import when, then, given, step
 
 
-@given('I open Homepage')
+@step('I open Homepage')
 def step_impl(context):
     context.browser.get("http:localhost:8000")
 
 
-@when('Enter username "{user}" and password "{password}"')
+@step('Enter username "{user}" and password "{password}"')
 def step_impl(context, user,password):
     context.browser.find_element_by_id("id_username").send_keys(user)
     context.browser.find_element_by_id("id_password").send_keys(password)
 
 
-@when('Click on login button')
+@step('Click on login button')
 def step_impl(context):
     context.browser.find_element_by_xpath("/html/body/div[1]/form/input[2]").click()
 
