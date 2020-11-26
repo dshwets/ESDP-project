@@ -12,9 +12,6 @@
                     <a class="nav-link" href="{% url 'serviceexecutors:serviceexecutor_create' %}">{% trans 'Добавить исполнителя'%}</a>
                     </li>
 {% endblock %}
-{% block menu %}
-
-{% endblock %}
 {% block content %}
 <h3 class="mb-5 mt-5" align="center">
    <b>{% trans 'Исполнитель услуг' %}</b>
@@ -25,5 +22,4 @@
                 <p>{% trans 'Дата добавления' %}: {{ serviceexecutor.created_at}}</p>
           </div>
     </div>
-
 {% endblock %}
