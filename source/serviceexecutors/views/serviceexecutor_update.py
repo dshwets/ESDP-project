@@ -10,7 +10,7 @@ class ServiceExecutorUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'serviceexecutor_update.html'
     form_class = ServiceExecutorForm
     model = ServiceExecutor
-    permission_required = 'serviceexecutor.can_change_serviceexecutor'
+    permission_required = 'serviceexecutors.can_change_serviceexecutor'
 
     def get_success_url(self):
         # TODO поменять url на страницу детального просмотра исполнителя
