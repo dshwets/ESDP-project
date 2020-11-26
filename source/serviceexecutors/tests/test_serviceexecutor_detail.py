@@ -22,9 +22,9 @@ class ServiceExecutorDetailViewTestCase(TestCase):
         self.assertEqual(response.url, redirect_url)
 
     def test_unauthorized_get_serviceexecutor_detail(self):
-        rever = reverse('serviceexecutors:serviceexecutor_view', kwargs={'pk': self.serviceexecutor.pk})
-        response = self.client.get(rever)
-        redirect_url = reverse('accounts:login') + '?next=' + rever
+        url = reverse('serviceexecutors:serviceexecutor_view', kwargs={'pk': self.serviceexecutor.pk})
+        response = self.client.get(url)
+        redirect_url = reverse('accounts:login') + '?next=' + url
         self.check_redirect(response, redirect_url)
 
     def test_authorized_with_permission_get_serviceexecutor_detail(self):

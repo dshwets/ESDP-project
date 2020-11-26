@@ -1,4 +1,4 @@
-from behave import when, then, given, step
+from behave import then
 
 
 @then('Opens create service executor page')
