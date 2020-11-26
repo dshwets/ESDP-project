@@ -1,4 +1,4 @@
-from behave import when, then, given, step
+from behave import then, step
 from accounts.models import User
 
 

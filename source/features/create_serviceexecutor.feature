@@ -8,4 +8,4 @@ Feature: Creating new service executor
     Then Opens create service executor page
     Then I enter name "test" and last name "test" and middle name "test"
     And I press submit button
-    Then Opens main page
+    Then Opens serviceexecutor detail page with "{text}"

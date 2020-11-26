@@ -1,4 +1,5 @@
-from behave import when, then, given, step
+from behave import then
+
 
 @then('Opens create service executor page')
 def step_impl(context):
@@ -17,6 +18,8 @@ def step_impl(context):
     context.browser.find_element_by_xpath("//input[@value='Добавить']").click()
 
 
-@then('Opens main page')
-def step_impl(context):
-    assert context.browser.current_url == context.get_url('/')
+@then('Opens serviceexecutor detail page with "{text}"')
+def step_impl(context, text):
+    element = context.browser.find_element_by_xpath("/html/body/div[1]/h3/b")
+    text = "Исполнитель услуг"
+    assert element.text == text

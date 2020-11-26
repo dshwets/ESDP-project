@@ -13,4 +13,4 @@ class ServiceExecutorCreateView(PermissionRequiredMixin, CreateView):
 
     def get_success_url(self):
         #TODO поменять url на страницу детального просмотра исполнителя
-        return reverse('hostelguests:guest_list')
+        return reverse('serviceexecutors:serviceexecutor_view', kwargs={'pk': self.object.pk})
