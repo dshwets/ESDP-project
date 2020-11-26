@@ -11,3 +11,7 @@ def browser_chrome(context):
 
 def before_all(context):
     use_fixture(browser_chrome, context)
+
+
+def after_all(context):
+    context.browser.quit()
