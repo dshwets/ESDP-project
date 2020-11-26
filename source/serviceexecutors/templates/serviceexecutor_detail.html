@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Исполнитель услуг' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block navs %}
+     <li class="nav-item active ml-3">
+                    <a class="nav-link" href="{% url 'serviceexecutors:serviceexecutor_create' %}">{% trans 'Добавить исполнителя'%}</a>
+                    </li>
+{% endblock %}
+{% block menu %}
+
+{% endblock %}
+{% block content %}
+<h3 class="mb-5 mt-5" align="center">
+   <b>{% trans 'Исполнитель услуг' %}</b>
+</h3>
+    <div class="card my-2">
+        <div class="card-body">
+                <h5 class="card-title">{% trans 'ФИО' %}: {{ serviceexecutor.name }} {{ serviceexecutor.last_name }} {{ serviceexecutor.middle_name }} </h5>
+                <p>{% trans 'Дата добавления' %}: {{ serviceexecutor.created_at}}</p>
+          </div>
+    </div>
+
+{% endblock %}
