@@ -18,8 +18,13 @@
 </h3>
     <div class="card my-2">
         <div class="card-body">
-                <h5 class="card-title">{{ serviceexecutor.name }} {{ serviceexecutor.last_name }} {{ serviceexecutor.middle_name }} </h5>
-                <p>{% trans 'Дата добавления' %}: {{ serviceexecutor.created_at}}</p>
-          </div>
+            <h5 class="card-title">{{ serviceexecutor.name }} {{ serviceexecutor.last_name }} {{ serviceexecutor.middle_name }} </h5>
+            <p>{% trans 'Дата добавления' %}: {{ serviceexecutor.created_at}}</p>
+            {% if perms.aboutguests.can_change_note %}
+                <a href="{% url 'serviceexecutors:serviceexecutor_delete' serviceexecutor.pk %}" class="mt-2 badge badge-pill badge-danger" id="delete-button">
+                    {% trans 'Удалить' %}
+                </a>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
