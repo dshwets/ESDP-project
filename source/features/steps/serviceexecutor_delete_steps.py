@@ -26,6 +26,6 @@ def step_impl(context):
     context.browser.find_element_by_xpath("//input[@value='Да' and @type='submit']").click()
 
 
-@then('Then I get to Homepage')
+@then('Then I get to serviceexecutor page')
 def step_impl(context):
-    assert context.browser.current_url == (context.get_url('/') or context.get_url(''))
+    assert context.browser.current_url == (context.get_url('serviceexecutors:serviceexecutors_list'))

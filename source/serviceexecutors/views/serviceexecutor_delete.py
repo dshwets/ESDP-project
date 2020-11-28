@@ -10,5 +10,4 @@ class ServiceExecutorDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'serviceexecutors.can_delete_serviceexecutor'
 
     def get_success_url(self):
-        #TODO поменять редирект на список исполнителей
-        return reverse('hostelguests:guest_list')
+        return reverse('serviceexecutors:serviceexecutors_list')
