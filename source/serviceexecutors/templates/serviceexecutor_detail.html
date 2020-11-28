@@ -27,4 +27,37 @@
             {% endif %}
         </div>
     </div>
+    <hr>
+    <div class="mt-4 mb-4">
+    <h4 align="center"><b>{% trans 'Документы ' %}</b></h4>
+    </div>
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+    <div>
+        {% for document in documents %}
+            <div class="box">
+                <p>{% trans 'Дата создания документа: ' %} {{ document.created_at }}</p>
+                <div class="pre" style="word-wrap:break-word">{% trans 'Описание документа: ' %} {{ document.title }}</div>
+                <div class="pre" style="word-wrap:break-word">{% trans 'Документ: ' %}<a href=" {{ document.file.url }}">{{ document.file }}</a></div>
+                {% if perms.documents.can_change_document %}
+                    <a href="#" class="mt-2 badge badge-pill badge-info">
+                        {% trans 'Изменить' %}
+                    </a>
+                {% endif %}
+                {% if perms.documents.can_delete_document %}
+                    <a href="{#  #}" class="mt-2 badge badge-pill badge-danger">
+                        {% trans 'Удалить заметку' %}
+                    </a>
+                {% endif %}
+
+            </div>
+            <div>
+        {% empty %}
+            <p>{% trans 'Нет документов ' %}</p>
+        {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+    </div>
 {% endblock %}
