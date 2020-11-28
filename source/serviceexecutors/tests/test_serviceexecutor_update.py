@@ -58,7 +58,7 @@ class ServiceExecutorUpdateTestCase(TestCase):
         self.assertEqual(executor.last_name, data['last_name'])
         self.assertEqual(executor.middle_name, data['middle_name'])
         self.assertEqual(type(response), HttpResponseRedirect)
-        redirect_url = reverse('hostelguests:guest_list')
+        redirect_url = reverse('serviceexecutors:serviceexecutor_view')
         self.assertEqual(response.url, redirect_url)
 
     def test_authorized_with_permission_post_update_serviceexecutor_with_empty_name(self):

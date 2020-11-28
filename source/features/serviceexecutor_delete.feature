@@ -9,4 +9,4 @@ Feature: Deleting a service executor
     Then Open service executor detail page
     Then I press delete button
     And I press confirm delete button
-    Then Then I get to Homepage
+    Then Then I get to serviceexecutor page
