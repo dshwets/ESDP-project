@@ -12,5 +12,4 @@ class ServiceExecutorCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'serviceexecutors.can_add_serviceexecutor'
 
     def get_success_url(self):
-        #TODO поменять url на страницу детального просмотра исполнителя
         return reverse('serviceexecutors:serviceexecutor_view', kwargs={'pk': self.object.pk})
