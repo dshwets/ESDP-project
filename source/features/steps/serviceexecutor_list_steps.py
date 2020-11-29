@@ -7,16 +7,18 @@ from serviceexecutors.factories import ServiceExecutorFactory
 def step_impl(context):
     serviceexecutor = ServiceExecutorFactory()
     serviceexecutor_url = reverse('serviceexecutors:serviceexecutors_list')
-    context.service_executor = serviceexecutor
     context.browser.get(context.get_url(serviceexecutor_url))
 
 
-@step('Displays serviceexecutor list page with "{title}"')
-def step_impl(context, title):
+@step('Displays serviceexecutor list page with "{title}" and "{text_name}')
+def step_impl(context, title, text_name):
     element = context.browser.find_element_by_xpath("//div[1]/h3/b")
     title = "Список исполнителей услуг"
-    service_executor = context.service_executor
+    serviceexecuter_element = context.browser.find_element_by_xpath("//div[1]/h5")
+    text_name = serviceexecuter_element.text
     assert element.text == title
-    assert service_executor.name == service_executor.name
+    assert text_name is not None
+
+
 
 

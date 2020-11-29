@@ -1,6 +1,0 @@
-# Test dependencies is here
--r base.txt
-django-auditlog==0.4.7
-django-jsonfield==1.4.1
-
-
