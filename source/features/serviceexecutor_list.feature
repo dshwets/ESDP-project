@@ -7,4 +7,4 @@ Feature: View service executor list page
     Then I enter username "admin" and password "admin"
     And I click on login button
     Then Opens service executor list page
-    And Displays serviceexecutor list page with "{title}"
+    And Displays serviceexecutor list page with "{title}" and "{text_name}"
