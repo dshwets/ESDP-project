@@ -1,7 +1,5 @@
 # Test dependencies is here
 -r base.txt
-django-auditlog==0.4.7
-django-jsonfield==1.4.1
 selenium==3.141.0
 behave-django==1.4.0
 factory-boy==3.1.0
