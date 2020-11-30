@@ -5,7 +5,6 @@ from django.test import TestCase
 from django.urls import reverse
 from accounts.factories import UserFactory
 from documents.factories import DocumentFactory
-from documents.factories_test import DocumentFactoryTest
 from documents.models import Document
 from serviceexecutors.factories import ServiceExecutorFactory
 
@@ -17,7 +16,6 @@ class DocumentUpdateTestCase(TestCase):
         self.permission = Permission.objects.get(codename='can_change_document')
         self.url = reverse('documents:document_update', kwargs={'pk': self.document.pk})
         self.serviceexecutor = ServiceExecutorFactory()
-        self.documenttest = DocumentFactoryTest()
 
     def tearDown(self) -> None:
         self.client.logout()
@@ -27,7 +25,6 @@ class DocumentUpdateTestCase(TestCase):
         fake_file.name = 'myfile.xml'
         data = {
             'title': 'TestTitle',
-            'user': self.user.pk,
             'service_executor': self.serviceexecutor.pk
         }
         return data
@@ -63,12 +60,9 @@ class DocumentUpdateTestCase(TestCase):
         document = Document.objects.get(pk=self.document.pk)
         self.assertEqual(document.title, data['title'])
         self.assertEqual(document.service_executor.pk, data['service_executor'])
-        self.assertEqual(document.user.pk, data['user'])
-        # self.assertEqual(document.file.name, data['file'])
         self.assertEqual(type(response), HttpResponseRedirect)
         redirect_url = reverse('serviceexecutors:serviceexecutor_view', kwargs={'pk': self.serviceexecutor.pk})
         self.assertEqual(response.url, redirect_url)
-
 
     def assert_response_status(self, url, method, code):
         if method == "get":
