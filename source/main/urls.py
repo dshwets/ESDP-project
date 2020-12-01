@@ -25,4 +25,5 @@ urlpatterns = [
     path('', include('aboutguests.urls')),
     path('', include('welcomeguests.urls')),
     path('', include('unwelcomeguests.urls')),
+    path('', include('serviceexecutors.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

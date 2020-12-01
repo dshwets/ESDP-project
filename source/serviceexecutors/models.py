@@ -18,12 +18,6 @@ class ServiceExecutor(AbstractDatetimeModel):
         verbose_name=_('Отчество'),
         default='',
     )
-    document = models.ForeignKey(
-        'documents.Document',
-        on_delete=models.SET_NULL,
-        null=True,
-        verbose_name=_('Документ'),
-    )
 
     class Meta:
         verbose_name = _('Исполнитель')

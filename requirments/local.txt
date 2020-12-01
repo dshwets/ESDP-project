@@ -1,3 +1,0 @@
-#Local development dependecies is here
--r base.txt
--r test.txt

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Исполнитель услуг' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block navs %}
+     <li class="nav-item active ml-3">
+                    <a class="nav-link" href="{% url 'serviceexecutors:serviceexecutor_create' %}">{% trans 'Добавить исполнителя'%}</a>
+                    </li>
+{% endblock %}
+{% block content %}
+<h3 class="mb-5 mt-5" align="center">
+   <b>{% trans 'Исполнитель услуг' %}</b>
+</h3>
+    <div class="card my-2">
+        <div class="card-body">
+            <h5 class="card-title">{{ serviceexecutor.name }} {{ serviceexecutor.last_name }} {{ serviceexecutor.middle_name }} </h5>
+            <p>{% trans 'Дата добавления' %}: {{ serviceexecutor.created_at}}</p>
+            {% if perms.aboutguests.can_change_note %}
+                <a href="{% url 'serviceexecutors:serviceexecutor_delete' serviceexecutor.pk %}" class="mt-2 badge badge-pill badge-danger" id="delete-button">
+                    {% trans 'Удалить' %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    <div class="mt-4 mb-4">
+    <h4 align="center"><b>{% trans 'Документы ' %}</b></h4>
+    </div>
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+    <div>
+        {% for document in documents %}
+            <div class="box">
+                <p>{% trans 'Дата создания документа: ' %} {{ document.created_at }}</p>
+                <div class="pre" style="word-wrap:break-word">{% trans 'Описание документа: ' %} {{ document.title }}</div>
+                <div class="pre" style="word-wrap:break-word">{% trans 'Документ: ' %}<a href=" {{ document.file.url }}">{{ document.file }}</a></div>
+                {% if perms.documents.can_change_document %}
+                    <a href="#" class="mt-2 badge badge-pill badge-info">
+                        {% trans 'Изменить' %}
+                    </a>
+                {% endif %}
+                {% if perms.documents.can_delete_document %}
+                    <a href="{#  #}" class="mt-2 badge badge-pill badge-danger">
+                        {% trans 'Удалить заметку' %}
+                    </a>
+                {% endif %}
+
+            </div>
+            <div>
+        {% empty %}
+            <p>{% trans 'Нет документов ' %}</p>
+        {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+    </div>
+{% endblock %}

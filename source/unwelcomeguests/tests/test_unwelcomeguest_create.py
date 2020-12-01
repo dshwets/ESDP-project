@@ -19,10 +19,10 @@ class UnWelcomeGuestCreateTestCase(TestCase):
         self.client.logout()
 
     def test_unauthorized_get_create_unwelcomeguest(self):
-        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.unwelcomeguest.pk}), 'get', 302)
+        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.guest.pk}), 'get', 302)
 
     def test_unauthorized_post_create_unwelcomeguest(self):
-        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.unwelcomeguest.pk}), 'post',
+        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.guest.pk}), 'post',
                                     302)
 
     def check_redirect(self, response, redirect_url):
@@ -32,10 +32,10 @@ class UnWelcomeGuestCreateTestCase(TestCase):
 
     def test_authorized_without_permission_get_create_unwelcomeguest(self):
         self.client.login(username='some_admin', password='pass')
-        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.unwelcomeguest.pk}), 'get', 403)
+        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.guest.pk}), 'get', 403)
 
     def test_authorized_without_permission_post_create_unwelcomeguest(self):
-        url = reverse('hostelguests:welcomeguest_create', kwargs={'pk': self.unwelcomeguest.pk})
+        url = reverse('hostelguests:welcomeguest_create', kwargs={'pk': self.guest.pk})
         data = {
             'description': self.unwelcomeguest.description,
             'guest': self.unwelcomeguest.guest
@@ -48,12 +48,12 @@ class UnWelcomeGuestCreateTestCase(TestCase):
         self.user.user_permissions.add(self.permission)
         self.client.login(username='some_admin', password='pass')
         self.assertTemplateUsed('unwelcomeguest_create.html')
-        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.unwelcomeguest.pk}), 'get', 200)
+        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.guest.pk}), 'get', 200)
 
-    def testauthorized_post_request_has_perm_create_unwelcomeguest(self):
+    def test_authorized_post_request_has_perm_create_unwelcomeguest(self):
         self.user.user_permissions.add(self.permission)
         self.client.login(username='some_admin', password='pass')
-        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.unwelcomeguest.pk}), 'post', 302)
+        self.assert_response_status(reverse('hostelguests:unwelcomeguest_create', kwargs={'pk': self.guest.pk}), 'post', 302)
 
     def assert_response_status(self, url, method, code):
         if method == "get":

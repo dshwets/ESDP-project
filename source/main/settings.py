@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'serviceexecutors',
     'journalservices',
+    'behave_django',
 ]
 
 MIDDLEWARE = [

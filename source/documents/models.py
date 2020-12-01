@@ -20,6 +20,15 @@ class Document(AbstractDatetimeModel):
         upload_to='docs',
         verbose_name=_('Файл'),
     )
+    service_executor = models.ForeignKey(
+        'serviceexecutors.ServiceExecutor',
+        related_name='documents',
+        null=True,
+        blank=True,
+        default=None,
+        on_delete=models.SET_NULL,
+        verbose_name=_('Исполнитель'),
+    )
 
     class Meta:
         verbose_name = _('Документ')
