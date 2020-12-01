@@ -46,9 +46,13 @@
                     </a>
                 {% endif %}
                 {% if perms.documents.can_delete_document %}
-                    <a href="{#  #}" class="mt-2 badge badge-pill badge-danger">
-                        {% trans 'Удалить заметку' %}
-                    </a>
+                    <form method="POST" action="{% url 'documents:document_delete' document.pk %}">
+                    {% csrf_token %}<input class="mt-2 btn badge-pill badge-danger" type="submit" value="{% trans 'Удалить документ' %}">
+                        </form>
+{#                    class="mt-2 badge badge-pill badge-danger"#}
+{#                    <a href="{% url 'documents:document_delete' document.pk %}" class="mt-2 badge badge-pill badge-danger">#}
+{#                        {% trans 'Удалить документ' %}#}
+{#                    </a>#}
                 {% endif %}
 
             </div>
