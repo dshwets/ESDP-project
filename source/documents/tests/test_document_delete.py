@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 from accounts.factories import UserFactory
 from documents.factories import DocumentFactory
+from documents.models import Document
 from serviceexecutors.factories import ServiceExecutorFactory
 
 
@@ -39,6 +40,8 @@ class GuestDeleteTestCase(TestCase):
         self.user.user_permissions.add(self.permission)
         self.client.login(username='some_admin', password='pass')
         self.assert_response_status(self.url, 'post', 302)
+        document = Document.objects.get(pk=self.document.pk)
+        self.assertEqual(document.service_executor, None)
 
     def test_document_delete_authorized_post_request_has_perm_guest_not_found(self):
         self.user.user_permissions.add(self.permission)
