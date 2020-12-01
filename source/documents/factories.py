@@ -10,7 +10,6 @@ class DocumentFactory(factory.django.DjangoModelFactory):
         model = Document
 
     title = FuzzyText(length=50)
-    user = SubFactory(UserFactory)
-    file =  factory.django.FileField(filename='the_file.doc')
+    file = factory.django.FileField(filename='the_file.doc')
     service_executor = SubFactory(ServiceExecutorFactory)
 

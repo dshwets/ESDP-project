@@ -41,7 +41,7 @@
                 <div class="pre" style="word-wrap:break-word">{% trans 'Описание документа: ' %} {{ document.title }}</div>
                 <div class="pre" style="word-wrap:break-word">{% trans 'Документ: ' %}<a href=" {{ document.file.url }}">{{ document.file }}</a></div>
                 {% if perms.documents.can_change_document %}
-                    <a href="#" class="mt-2 badge badge-pill badge-info">
+                    <a href="{% url 'documents:document_update' document.pk %}" class="mt-2 badge badge-pill badge-info">
                         {% trans 'Изменить' %}
                     </a>
                 {% endif %}

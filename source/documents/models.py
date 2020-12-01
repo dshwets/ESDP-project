@@ -11,11 +11,7 @@ class Document(AbstractDatetimeModel):
         blank=True,
         verbose_name=_('Название'),
     )
-    user = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE,
-        verbose_name=_('Пользователь'),
-    )
+
     file = models.FileField(
         upload_to='docs',
         verbose_name=_('Файл'),
