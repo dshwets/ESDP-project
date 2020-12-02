@@ -35,7 +35,13 @@ class SellingPrice(AbstractCreatedByModel):
 
 
 class PurchasePrice(AbstractCreatedByModel):
-    purchase_price = models.DecimalField(max_digits=9, decimal_places=2, null=True, verbose_name=_('Цена продажи'))
+    purchase_price = models.DecimalField(
+        max_digits=9,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name=_('Цена продажи')
+    )
 
     class Meta:
         verbose_name = _('Цена покупки')
