@@ -9,3 +9,4 @@ Feature: Delete document from the service executor
     Then Opens document in service executor view page
     Then I press delete button on the document
     Then Opens service executor view page
+    And And I see that there is no document

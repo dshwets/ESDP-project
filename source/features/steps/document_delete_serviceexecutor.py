@@ -1,13 +1,12 @@
-from behave import then
-import time
+from behave import *
 
 @then('I press delete button on the document')
 def step_impl(context):
-    time.sleep(5)
     btn = context.browser.find_element_by_xpath("//input[@value='Удалить документ']")
+    context.browser.execute_script("return arguments[0].scrollIntoView(true);", btn)
     btn.click()
 
-#
-# @then('Then I get to serviceexecutor page')
-# def step_impl(context):
-#     assert context.browser.current_url == (context.get_url('serviceexecutors:serviceexecutors_list'))
+@then('And I see that there is no document')
+def step_impl(context):
+    no_doc = context.browser.find_elements_by_xpath("//*[contains(text(), 'Нет документов')]")[0].text
+    assert no_doc == f'Нет документов'
