@@ -5,8 +5,7 @@ from common.models import AbstractDatetimeModel, AbstractCreatedByModel
 
 
 class HostelService(AbstractDatetimeModel):
-    name = models.CharField(max_length=255, verbose_name=_('Наименование услуги'))
-    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_('Цена'))
+    service_name = models.CharField(max_length=255, verbose_name=_('Наименование услуги'))
 
     class Meta:
         verbose_name = _('Услуга отеля')
