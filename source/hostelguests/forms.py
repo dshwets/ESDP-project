@@ -35,3 +35,6 @@ class GuestForm(forms.ModelForm):
             'expiry_passport_date',
             'document_maker',
         ]
+        labels = {
+            'birth_country': _('Страна рождения'),
+        }
