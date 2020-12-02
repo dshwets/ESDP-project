@@ -1,6 +1,7 @@
 from auditlog.registry import auditlog
 from django.db import models
 from common.models import AbstractCreatedByModel
+from django_countries.fields import CountryField
 from django.utils.translation import gettext_lazy as _
 
 
@@ -28,10 +29,7 @@ class Guest(AbstractCreatedByModel):
     birth_date = models.DateField(
         verbose_name=_("Дата рождения")
     )
-    birth_country = models.CharField(
-        max_length=255,
-        verbose_name=_('Страна рождения')
-    )
+    birth_country = CountryField(blank_label=_('Страна рождения'))
     passport_id = models.CharField(
         max_length=255,
         verbose_name=_('Номер паспорта')
