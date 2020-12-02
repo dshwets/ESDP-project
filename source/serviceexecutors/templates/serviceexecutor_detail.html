@@ -40,16 +40,19 @@
                 <p>{% trans 'Дата создания документа: ' %} {{ document.created_at }}</p>
                 <div class="pre" style="word-wrap:break-word">{% trans 'Описание документа: ' %} {{ document.title }}</div>
                 <div class="pre" style="word-wrap:break-word">{% trans 'Документ: ' %}<a href=" {{ document.file.url }}">{{ document.file }}</a></div>
+                <div class="btn-group" role="group">
+                <form method="POST" action="{% url 'documents:document_delete' document.pk %}">
                 {% if perms.documents.can_change_document %}
-                    <a href="{% url 'documents:document_update' document.pk %}" class="mt-2 badge badge-pill badge-info">
+                    <a href="{% url 'documents:document_update' document.pk %}" class="mt-2 btn btn-secondary btn-sm"
+                    role="button">
                         {% trans 'Изменить' %}
                     </a>
                 {% endif %}
                 {% if perms.documents.can_delete_document %}
-                    <form method="POST" action="{% url 'documents:document_delete' document.pk %}">
-                    {% csrf_token %}<input class="mt-2 btn btn-sm badge-pill badge-danger" type="submit" value="{% trans 'Удалить документ' %}">
+                    {% csrf_token %}<input class="mt-2 ml-4 btn btn-danger btn-sm" type="submit" value="{% trans 'Удалить документ' %}">
                         </form>
                 {% endif %}
+                </div>
             </div>
             <div>
         {% empty %}
