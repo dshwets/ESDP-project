@@ -15,11 +15,23 @@ class JournalService(AbstractDatetimeModel):
         null=True,
         verbose_name=_('Услуга'),
     )
-    executor = models.ForeignKey(
+    service_executor = models.ForeignKey(
         'serviceexecutors.ServiceExecutor',
         on_delete=models.SET_NULL,
         null=True,
         verbose_name=_('Исполнитель'),
+    )
+    purchase_price = models.ForeignKey(
+        'hostelservices.PurchasePrice',
+        default=0,
+        on_delete=models.PROTECT,
+        verbose_name=_('Цена покупки')
+    )
+    selling_price = models.ForeignKey(
+        'hostelservices.SellingPrice',
+        default=0,
+        on_delete=models.PROTECT,
+        verbose_name=_('Цена продажи')
     )
 
     class Meta:
