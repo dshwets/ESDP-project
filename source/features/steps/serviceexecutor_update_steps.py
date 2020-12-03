@@ -18,6 +18,7 @@ def step_impl(context, name, last_name, middle_name):
 
 @then('И нажимаю на кнопку сохранить')
 def step_impl(context):
-    context.browser.find_element_by_xpath("//input[@value='Сохранить']").click()
-
+    btn = context.browser.find_element_by_xpath("//input[@value='Сохранить']")
+    context.browser.execute_script("return arguments[0].scrollIntoView(true);", btn)
+    btn.click()
 
