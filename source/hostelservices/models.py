@@ -20,7 +20,18 @@ class HostelService(AbstractDatetimeModel):
 
 
 class SellingPrice(AbstractCreatedByModel):
-    selling_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name=_('Цена продажи'))
+    selling_price = models.DecimalField(
+        max_digits=9,
+        decimal_places=2,
+        verbose_name=_('Цена продажи')
+    )
+    hostel_service = models.ForeignKey(
+        'hostelservices.HostelService',
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='selling_price',
+        verbose_name=_('Услуга отеля'),
+    )
 
     class Meta:
         verbose_name = _('Цена продажи')
@@ -42,7 +53,13 @@ class PurchasePrice(AbstractCreatedByModel):
         blank=True,
         verbose_name=_('Цена продажи')
     )
-
+    hostel_service = models.ForeignKey(
+        'hostelservices.HostelService',
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='purchase_price',
+        verbose_name=_('Услуга отеля'),
+    )
     class Meta:
         verbose_name = _('Цена покупки')
         verbose_name_plural = _('Цены покупки')
