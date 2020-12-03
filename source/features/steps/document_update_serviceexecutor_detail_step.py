@@ -1,5 +1,4 @@
 import os
-
 from behave import then, step
 from documents.models import Document
 
@@ -14,7 +13,7 @@ def step_impl(context):
     title = 'TestTestTiltle'
     context.browser.find_element_by_name('title').send_keys(title)
     elm = context.browser.find_element_by_xpath("//input[@type='file']")
-    elm.send_keys(os.getcwd() + "/source/hostelguests/static/img/image-not-found.png")
+    elm.send_keys(os.path.abspath('hostelguests') + "/static/img/image-not-found.png")
 
 @then('I press confirm save button')
 def step_impl(context):

@@ -22,7 +22,7 @@
     <div class="ml-5">
         <p class="card-text"><b>{% trans 'ФИО: ' %}</b>{{ guest.last_name }} {{ guest.first_name }} {{ middle_name }}</p>
         <p class="card-text"><b>{% trans 'Дата рождения: ' %}</b> {{ guest.birth_date }}</p>
-        <p class="card-text"><b>{% trans 'Страна рождения: ' %}</b>{{ guest.birth_country }}</p>
+        <p class="card-text"><b>{% trans 'Страна рождения: ' %}</b>{{ guest.birth_country.name }}</p>
         <p class="card-text"><b>{% trans 'Id паспорта: ' %}</b>{{ guest.passport_id }}</p>
         <p class="card-text"><b>{% trans 'Дата окончания срока действия паспорта: ' %}</b> {{ guest.expiry_passport_date }}</p>
         <p class="card-text"><b>{% trans 'Орган выдавший паспорт: ' %}</b>{{ guest.document_maker }}</p>
