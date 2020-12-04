@@ -5,6 +5,7 @@ Feature: Creating new document in service executor
     When I open Homepage
     Then I enter username "admin" and password "admin"
     And I click on login button
-    Then Opens documents add page
+    Then Opens document in service executor view page
+    And I click on login Добавить Документ
     Then And Changes document title and file
     And I press confirm add button

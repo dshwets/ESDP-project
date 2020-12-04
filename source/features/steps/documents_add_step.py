@@ -1,22 +1,19 @@
 import os
 
 from behave import then
-from django.urls import reverse
-
-from serviceexecutors.factories import ServiceExecutorFactory
 
 
-@then('Opens documents add page')
+
+@then('I click on login Добавить Документ')
 def step_impl(context):
-    context.browser.get(context.get_url("/serviceexecutors/1/documents_add/"))
+    context.browser.find_element_by_id("id_add_document").click()
 
 @then('And Changes document title and file')
-def step_impl(context,):
+def step_impl(context):
     title = 'TestTestTiltle'
-    print(title)
-    context.browser.find_element_by_name('title').send_keys(title)
     elm = context.browser.find_element_by_xpath("//input[@type='file']")
-    elm.send_keys(os.path.abspath('hostelguest') + "/static/img/image-not-found.pn")
+    elm.send_keys(os.path.abspath('hostelguests') + "/static/img/image-not-found.png")
+
 
 @then('I press confirm add button')
 def step_impl(context):
