@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 
 
 class DocumentExecutorCreateView(PermissionRequiredMixin, CreateView):
-    template_name = ''
+    template_name = 'document_add.html'
     form_class = DocumentForm
     model = Document
     permission_required = 'documents.can_add_document'
