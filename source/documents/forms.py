@@ -7,4 +7,4 @@ class DocumentForm(forms.ModelForm):
 
     class Meta:
         model = Document
-        exclude = []
+        exclude = ['service_executor']
