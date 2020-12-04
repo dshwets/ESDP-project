@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+    {% trans 'Услуга' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block dropdown_service %}
+{% endblock %}
+{% block content %}
+    <h3 class="mb-5 mt-5" align="center">
+        <b>{% trans 'Услуга' %}</b>
+    </h3>
+    <div class="card my-2">
+        <div class="card-body">
+            <h5 class="card-title">{% trans 'Дата Наименование услуги' %}: {{ hostelservice.service_name }}  </h5>
+            <p>{% trans 'цена покупки' %}:{{ selling_price.selling_price }}</p>
+            <p>{% trans 'цена покупки' %}:{{ purchase_price.purchase_price }}</p>
+        </div>
+    </div>
+    <div>
+</div>
+{% endblock %}
