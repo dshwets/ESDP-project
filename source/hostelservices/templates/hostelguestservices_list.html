@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Cписок гостей' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+<h3 class="mb-5 mt-4" align="center">
+   <b>{% trans 'Список услуг' %}</b>
+</h3>
+{% for service  in hostel_services %}
+    <div class="card my-2">
+        <div class="card-body">
+            <h5 class="card-title">{% trans 'Услуга:' %}: {{ service.service_name }}</h5>
+            <p class="card-text">{% trans 'Была добавленна' %}: {{ service.created_at }}</p>
+        </div>
+    </div>
+{% endfor %}
+{% include 'partial/pagination.html' %}
+{% endblock %}

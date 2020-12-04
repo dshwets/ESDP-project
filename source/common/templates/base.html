@@ -57,6 +57,10 @@
                             <a class="dropdown-item" href="{% url 'serviceexecutors:serviceexecutors_list' %}">
                                 {% trans 'Список поставщиков' %}</a>
                         {% endif %}
+                        {% if request.user.is_authenticated %}
+                            <a class="dropdown-item" href="{% url 'hostelservices:hostelservices_list' %}">
+                                {% trans 'Список Услуг' %}</a>
+                        {% endif %}
                             {% block dropdown_service %}{% endblock %}
                 </div>
                 </div>
