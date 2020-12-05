@@ -6,4 +6,4 @@ Feature: View service executor page
     Then I enter username "admin" and password "admin"
     And I click on login button
     Then Opens hostel service view page
-    And  Displays hostel service "{title}"
+    And  Displays hostel service "{name}"
