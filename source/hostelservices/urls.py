@@ -1,11 +1,4 @@
 from django.urls import path
-from hostelservices.views.hostelservice_list import HostelServiceListView
-from hostelservices.views.hostelservice_delete import HostelServiceDeleteView
-from hostelservices.views.hostelservice_detail import HostelServiceDetailView
-
-from hostelservices.views.hostelguestservice_list import HostelServiceListView
-from hostelservices.views.hostelservice_update import HostelServiceUpdateView
-
 from hostelservices.views.hostelservice_delete import HostelServiceDeleteView
 from hostelservices.views.hostelservice_detail import HostelServiceDetailView
 from hostelservices.views.hostelservice_list import HostelServiceListView
