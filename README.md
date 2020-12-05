@@ -7,7 +7,7 @@ virtualenv -p python3 venv
 
 source venv/bin/activate
 
-pip install -r requirments/local.txt
+pip install -r requirements/local.txt
 
 cp .env.example .env.development
 ```
