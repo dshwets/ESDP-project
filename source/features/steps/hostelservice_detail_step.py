@@ -1,9 +1,7 @@
-import time
-
 from behave import then
 from django.urls import reverse
 from hostelservices.factories import HostelServiceFactory, PurchasePriceFactory, SellingPriceFactory
-from hostelservices.models import HostelService
+
 
 
 @then('Opens hostel service view page')
