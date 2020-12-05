@@ -16,7 +16,8 @@
 {% for service  in hostel_services %}
     <div class="card my-2">
         <div class="card-body">
-            <h5 class="card-title">{% trans 'Услуга:' %}: {{ service.service_name }}</h5>
+            <h5 class="card-title">{% trans 'Услуга:' %}:<a href="{% url 'hostelservices:hostelservices_detail' service.pk %}"> {{ service.service_name }} </a></h5>
+
             <p class="card-text">{% trans 'Была добавлена' %}: {{ service.created_at }}</p>
             {% if perms.hostelservices.can_delete_hostelservice %}
                 <a href="{% url 'hostelservices:hostelservice_delete' service.pk %}" class="btn btn-danger btn-sm">{% trans 'Удалить'%}</a>
