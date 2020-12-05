@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Удалить услугу' %}
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <h3 class="my-5">{% trans 'Вы уверены, что хотите удалить услугу ' %}{{ hostelservice.service_name }}?</h3>
+        <input class="btn btn-danger" type="submit" value="{% trans 'Да' %}" id="confirm-delete-btn">
+        <a class="btn btn-primary" href="{% url 'hostelservices:hostelservices_list' %}">{% trans 'Нет' %}</a>
+    </form>
+{% endblock %}
