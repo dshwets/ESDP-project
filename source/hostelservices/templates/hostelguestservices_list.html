@@ -18,10 +18,12 @@
         <div class="card-body">
             <h5 class="card-title">{% trans 'Услуга:' %}: {{ service.service_name }}</h5>
             <p class="card-text">{% trans 'Была добавленна' %}: {{ service.created_at }}</p>
+            {% if perms.hostelservices.can_change_hostelservice %}
             <a href="{% url 'hostelservices:hostelservices_update' service.pk %}"
                    class="mt-2 badge badge-pill badge-danger" id="update-button">
                     {% trans 'Редактировать' %}
                 </a>
+            {% endif %}
         </div>
     </div>
 {% endfor %}
