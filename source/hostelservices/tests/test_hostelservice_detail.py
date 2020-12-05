@@ -37,12 +37,12 @@ class HostelServiceDetailViewTestCase(TestCase):
 
     def test_authorized_without_permission_get_hostelservices_detail(self):
         self.client.login(username='some_admin', password='pass')
-        response = self.client.get(reverse('hostelguests:detail_view', args=(self.service.pk,)), follow=True)
+        response = self.client.get(reverse('hostelservices:hostelservices_detail', args=(self.service.pk,)), follow=True)
         self.assertEqual(response.status_code, 403)
 
     def test_authorized_with_permission_get_hostelservices_detail(self):
         self.client.login(username='some_admin', password='pass')
         self.user.user_permissions.add(self.permission)
-        response = self.client.get(reverse('hostelguests:detail_view', args=(self.service.pk,)), follow=True)
+        response = self.client.get(reverse('hostelservices:hostelservices_detail', args=(self.service.pk,)), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'hostelservice_detail.html')

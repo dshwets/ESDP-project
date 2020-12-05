@@ -6,7 +6,7 @@ from hostelservices.models import HostelService
 class HostelServiceDetailView(PermissionRequiredMixin,DetailView):
     template_name = 'hostelservice_detail.html'
     model = HostelService
-    permission_required = 'hostelservice.can_view_hostelservice'
+    permission_required = 'hostelservices.can_view_hostelservice'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
