@@ -15,7 +15,7 @@ class SellingPriceFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = SellingPrice
 
-    selling_price = FuzzyText(length=50)
+    selling_price = 500
     hostel_service = SubFactory(HostelServiceFactory)
 
 
@@ -23,5 +23,5 @@ class PurchasePriceFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = PurchasePrice
 
-    purchase_price = FuzzyText(length=50)
+    purchase_price = 400
     hostel_service = SubFactory(HostelServiceFactory)
