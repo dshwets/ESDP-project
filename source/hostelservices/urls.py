@@ -1,6 +1,6 @@
 from django.urls import path
 
-from hostelservices.views.hostelguestservice_list import HostelServiceListView
+from hostelservices.views.hostelservice_list import HostelServiceListView
 from hostelservices.views.hostelservice_delete import HostelServiceDeleteView
 
 app_name = 'hostelservices'
