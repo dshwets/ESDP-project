@@ -55,7 +55,7 @@ class GuestCreateTestCase(TestCase):
             'last_name': 'Test',
             'middle_name': 'TestMiddle',
             'birth_date': '20.01.1980',
-            'birth_country': 'TestCountry',
+            'birth_country': 'KG',
             'passport_id': 'PassportId123',
             'expiry_passport_date': '10.05.2020',
             'document_maker': 'testMaker',
@@ -177,18 +177,6 @@ class GuestCreateTestCase(TestCase):
         self.client.login(username='some_admin', password='pass')
         response = self.client.post(url, data)
         field = 'last_name'
-        self.assertFormError(
-            response, 'form', field, 'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).'
-        )
-
-    def test_authorized_with_permission_post_create_guest_with_long_country(self):
-        url = reverse('hostelguests:guest_create')
-        data = self.common_data()
-        data['birth_country'] = LONG_TEXT
-        self.user.user_permissions.add(self.permission)
-        self.client.login(username='some_admin', password='pass')
-        response = self.client.post(url, data)
-        field = 'birth_country'
         self.assertFormError(
             response, 'form', field, 'Убедитесь, что это значение содержит не более 255 символов (сейчас 256).'
         )

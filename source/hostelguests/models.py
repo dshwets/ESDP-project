@@ -1,17 +1,18 @@
 from auditlog.registry import auditlog
 from django.db import models
 from common.models import AbstractCreatedByModel
+from django_countries.fields import CountryField
 from django.utils.translation import gettext_lazy as _
 
 
 class Guest(AbstractCreatedByModel):
     first_name = models.CharField(
         max_length=255,
-        verbose_name=_('Имя')
+        verbose_name=_('Имя'),
     )
     last_name = models.CharField(
         max_length=255,
-        verbose_name=_('Фамилия')
+        verbose_name=_('Фамилия'),
     )
     middle_name = models.CharField(
         max_length=255,
@@ -23,29 +24,28 @@ class Guest(AbstractCreatedByModel):
         null=True,
         blank=True,
         upload_to='guest_photos',
-        verbose_name=_('Фото')
+        verbose_name=_('Фото'),
     )
     birth_date = models.DateField(
-        verbose_name=_("Дата рождения")
+        verbose_name=_("Дата рождения"),
     )
-    birth_country = models.CharField(
-        max_length=255,
-        verbose_name=_('Страна рождения')
+    birth_country = CountryField(
+        blank_label=_('Страна рождения'),
     )
     passport_id = models.CharField(
         max_length=255,
-        verbose_name=_('Номер паспорта')
+        verbose_name=_('Номер паспорта'),
     )
     expiry_passport_date = models.DateField(
         verbose_name=_('Дата окончания срока действия'),
         null=True,
-        blank=True
+        blank=True,
     )
     document_maker = models.CharField(
         max_length=255,
         verbose_name=_('Орган выдавший документ'),
         default="",
-        blank=True
+        blank=True,
     )
 
     class Meta:

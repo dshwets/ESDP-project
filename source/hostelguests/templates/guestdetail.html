@@ -19,10 +19,10 @@
         <img src="{% static 'img/image-not-found.png' %}" width="160" height="200" alt="guest_img" align="left" vspace="5" hspace="10" alt="quest_img">
         {% endif %}
     </div>
-    <div class="ml-5">
-        <p class="card-text"><b>{% trans 'ФИО: ' %}</b>{{ guest.last_name }} {{ guest.first_name }} {{ middle_name }}</p>
+    <div class="ml-5 mr-5 w-75 p-3" style="word-wrap:break-word;">
+        <p class="card-text" ><b>{% trans 'ФИО: ' %}</b>{{ guest.last_name }} {{ guest.first_name }} {{ middle_name }}</p>
         <p class="card-text"><b>{% trans 'Дата рождения: ' %}</b> {{ guest.birth_date }}</p>
-        <p class="card-text"><b>{% trans 'Страна рождения: ' %}</b>{{ guest.birth_country }}</p>
+        <p class="card-text"><b>{% trans 'Страна рождения: ' %}</b>{{ guest.birth_country.name }}</p>
         <p class="card-text"><b>{% trans 'Id паспорта: ' %}</b>{{ guest.passport_id }}</p>
         <p class="card-text"><b>{% trans 'Дата окончания срока действия паспорта: ' %}</b> {{ guest.expiry_passport_date }}</p>
         <p class="card-text"><b>{% trans 'Орган выдавший паспорт: ' %}</b>{{ guest.document_maker }}</p>

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Добавить документ' %}{% endblock %}
+{% block content %}
+    <h1>{% trans 'Добавить документ' %}</h1>
+    {% trans 'Добавить' as button_text %}
+    {% include 'partial/form.html' with form_method='post' button_text='Сохранить' enctype="multipart/form-data" %}
+{% endblock %}
