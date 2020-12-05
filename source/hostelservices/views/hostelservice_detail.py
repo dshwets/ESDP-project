@@ -1,7 +1,5 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.core.paginator import Paginator
 from django.views.generic import DetailView
-
 from hostelservices.models import HostelService
 
 
