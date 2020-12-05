@@ -15,8 +15,8 @@
     </h3>
     <div class="card my-2">
         <div class="card-body">
-            <h5 class="card-title" id="service_name">{% trans 'Дата Наименование услуги' %}: {{ hostelservice.service_name }}  </h5>
-            <p>{% trans 'цена продпжи' %}:{{ selling_price.selling_price }}</p>
+            <h5 class="card-title" id="service_name">{% trans 'Наименование услуги' %}: {{ hostelservice.service_name }}  </h5>
+            <p>{% trans 'цена продажи' %}:{{ selling_price.selling_price }}</p>
             {% if perms.purchase_price.can_view_purchase_price %}
             <p>{% trans 'цена покупки' %}:{{ purchase_price.purchase_price }}</p>
             {% endif %}
