@@ -8,7 +8,6 @@ from hostelservices.models import HostelService
 
 @then('Opens hostel service view page')
 def step_impl(context):
-    time.sleep(5)
     service = HostelServiceFactory()
     purchase_price = PurchasePriceFactory(
         hostel_service=service,
@@ -25,7 +24,6 @@ def step_impl(context):
 
 @then('Displays hostel service "{name}"')
 def step_impl(context, name):
-    time.sleep(5)
     element = context.browser.find_element_by_xpath("//div[1]/h3/b")
     title = "Услуга"
     hostelsrvice_element = context.browser.find_element_by_xpath("//div[1]/h5")
