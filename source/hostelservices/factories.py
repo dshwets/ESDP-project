@@ -1,6 +1,6 @@
 import factory
 from factory import SubFactory
-from factory.fuzzy import FuzzyText
+from factory.fuzzy import FuzzyText, FuzzyDecimal
 from hostelservices.models import HostelService, PurchasePrice, SellingPrice
 
 
@@ -15,7 +15,7 @@ class SellingPriceFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = SellingPrice
 
-    selling_price = FuzzyText(length=50)
+    selling_price = FuzzyDecimal(0, 500)
     hostel_service = SubFactory(HostelServiceFactory)
 
 
@@ -23,5 +23,5 @@ class PurchasePriceFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = PurchasePrice
 
-    purchase_price = FuzzyText(length=50)
+    purchase_price = FuzzyDecimal(0, 400)
     hostel_service = SubFactory(HostelServiceFactory)
