@@ -3,16 +3,16 @@ from django.utils.translation import gettext_lazy as _
 
 from hostelguests.models import Guest
 
-from main.settings import DATE_INPUT_FORMATS
+from django.conf import settings
 
 
 class GuestForm(forms.ModelForm):
     birth_date = forms.DateField(
-        input_formats=DATE_INPUT_FORMATS,
+        input_formats=settings.DATE_INPUT_FORMATS,
         label=_('Дата рождения')
     )
     expiry_passport_date = forms.DateField(
-        input_formats=DATE_INPUT_FORMATS,
+        input_formats=settings.DATE_INPUT_FORMATS,
         required=False,
         label=_('Дата окончания срока действия')
     )
