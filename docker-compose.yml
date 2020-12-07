@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: apple_db
+    restart: always
+    image: postgres:11
+    env_file:
+      - .env
+  app_migration:
+    build: .
+    env_file:
+      - .env
+    restart: on-failure
+    container_name: apple_db_migration
+    #TODO Изменить на UWSGI внутри докер файла
+    command: python manage.py migrate
+
+    depends_on:
+      - db
+
+  web:
+    build: .
+    restart: always
+    env_file:
+      - .env
+    container_name: apple_app
+    #TODO Изменить на UWSGI внутри докер файла
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "80:8000"
+    depends_on:
+      - db
+      - app_migration
