@@ -1,5 +1,5 @@
 from .common import *
 
-DEBUG=True
+DEBUG = True
 
-INSTALLED_APPS += 'django_behave',
+INSTALLED_APPS += ('behave_django',)
