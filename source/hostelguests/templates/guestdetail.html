@@ -92,12 +92,11 @@
                         {% trans 'Удалить заметку' %}
                     </a>
                 {% endif %}
-
             </div>
-            <div>
         {% empty %}
             <p>{% trans 'Нет заметок ' %}</p>
         {% endfor %}
+
         {% if is_paginated %}
             {% include 'partial/pagination.html' %}
         {% endif %}
