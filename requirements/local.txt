@@ -1,4 +1,3 @@
 #Local development dependecies is here
 -r test.txt
-django-auditlog==0.4.7
 django-jsonfield==1.4.1
