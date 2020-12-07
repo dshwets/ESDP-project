@@ -16,22 +16,19 @@ import environ
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 env = environ.Env()
-# print(os.path.dirname(os.path.join(BASE_DIR, '.env.development'))
-environ.Env.read_env(
-    os.path.join(BASE_DIR, '../.env.development')
-    )
-# print(os.path.dirname(os.path.abspath('.env.development'))+'/../.env.develpment')
-
+if os.path.isfile(os.path.join(BASE_DIR, '../../.env.development')):
+    environ.Env.read_env(os.path.join(BASE_DIR, '../../.env.development'))
+APP_ENV = env('APP_ENV')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'pz(!9fp#3kpe^-!l6z*j#r!ymsqfk^lv7-p*=^$kl_!rbl5d_$'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [env('ALLOWED_HOSTS')]
 
 
 # Application definition
@@ -56,7 +53,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'serviceexecutors',
     'journalservices',
-    'behave_django',
     'django_countries',
     'betterforms'
 ]
@@ -150,7 +146,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../../uploads')
 MEDIA_URL = '/media/'
 _ = lambda s: s
 
