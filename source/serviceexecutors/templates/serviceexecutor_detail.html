@@ -34,48 +34,53 @@
         </div>
     </div>
     <hr>
-        <a href="{% url 'documents:doc_add' serviceexecutor.pk %}"
-           id="id_add_document"
-        class="mt-2 btn btn-secondary btn-sm"
-        role="button">
-            {% trans 'Добавить документ' %}
-        </a>
+    <a href="{% url 'documents:doc_add' serviceexecutor.pk %}"
+       id="id_add_document"
+    class="mt-2 btn btn-secondary btn-sm"
+    role="button">
+        {% trans 'Добавить документ' %}
+    </a>
     <hr>
     <div class="mt-4 mb-4">
         <h4 align="center"><b>{% trans 'Документы ' %}</b></h4>
     </div>
+
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
-    <div>
+
     {% for document in documents %}
         <div class="box">
             <p>{% trans 'Дата создания документа: ' %} {{ document.created_at }}</p>
-            <div class="pre" style="word-wrap:break-word">{% trans 'Описание документа: ' %} {{ document.title }}</div>
-            <div class="pre" style="word-wrap:break-word">{% trans 'Документ: ' %}<a
-                    href=" {{ document.file.url }}">{{ document.file }}</a></div>
+            <div class="pre" style="word-wrap:break-word">
+                {% trans 'Описание документа: ' %} {{ document.title }}
+            </div>
+            <div class="pre" style="word-wrap:break-word">
+                {% trans 'Документ: ' %}
+                <a href=" {{ document.file.url }}">{{ document.file }}</a>
+            </div>
             <div class="btn-group" role="group">
                 <form method="POST" action="{% url 'documents:document_delete' document.pk %}">
-                    {% if perms.documents.can_change_document %}
-                        <a href="{% url 'documents:document_update' document.pk %}"
-                           class="mt-2 btn btn-secondary btn-sm"
-                           role="button">
-                            {% trans 'Изменить' %}
-                        </a>
-                    {% endif %}
-                    {% if perms.documents.can_delete_document %}
-                        {% csrf_token %}<input class="mt-2 ml-4 btn btn-danger btn-sm" type="submit"
-                                               value="{% trans 'Удалить документ' %}">
-                        </form>
-                    {% endif %}
+                {% if perms.documents.can_change_document %}
+                    <a href="{% url 'documents:document_update' document.pk %}"
+                       class="mt-2 btn btn-secondary btn-sm"
+                       role="button">
+                        {% trans 'Изменить' %}
+                    </a>
+                {% endif %}
+                {% if perms.documents.can_delete_document %}
+                    {% csrf_token %}<input class="mt-2 ml-4 btn btn-danger btn-sm" type="submit"
+                                           value="{% trans 'Удалить документ' %}">
+                    </form>
+                {% endif %}
             </div>
         </div>
-        <div>
-    {% empty %}
-        <p>{% trans 'Нет документов ' %}</p>
-    {% endfor %}
-{% if is_paginated %}
-    {% include 'partial/pagination.html' %}
-{% endif %}
-</div>
+
+        {% empty %}
+            <p>{% trans 'Нет документов ' %}</p>
+        {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+
 {% endblock %}
