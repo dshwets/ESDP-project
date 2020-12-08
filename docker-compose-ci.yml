@@ -7,17 +7,6 @@ services:
     image: postgres:11
     env_file:
       - .env.test
-  app_migration:
-    build: .
-    env_file:
-      - .env.test
-    restart: on-failure
-    container_name: apple_db_migration
-    #TODO Изменить на UWSGI внутри докер файла
-    command: python manage.py migrate
-
-    depends_on:
-      - db
 
   app_test:
     build:
@@ -33,5 +22,5 @@ services:
       - "80:8000"
     depends_on:
       - db
-      - app_migration
+
 

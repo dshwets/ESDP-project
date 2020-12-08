@@ -12,5 +12,4 @@ tests:
   stage: test
   script:
     - docker-compose -f docker-compose-ci.yml up -d db
-    - docker-compose -f docker-compose-ci.yml up app_migration
     - docker-compose -f docker-compose-ci.yml up app_test
