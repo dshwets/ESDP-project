@@ -1,10 +1,13 @@
 stages:
   - test
 
+services:
+  - docker:dind
+
 tests:
   image: docker/compose:latest
   stage: test
   script:
-    - sudo docker-compose -f docker-compose-ci.yml up -d db
-    - sudo docker-compose -f docker-compose-ci.yml app_migration
-    - sudo docker-compose -f docker-compose-ci.yml app_test
+    - docker-compose -f docker-compose-ci.yml up -d db
+    - docker-compose -f docker-compose-ci.yml app_migration
+    - docker-compose -f docker-compose-ci.yml app_test
