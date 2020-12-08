@@ -10,6 +10,8 @@ services:
 tests:
   image: docker/compose:latest
   stage: test
+  volumes:
+    -/var/run/docker.sock:/var/run/docker.sock, /cache
   script:
     - docker-compose -f docker-compose-ci.yml up -d db
     - docker-compose -f docker-compose-ci.yml app_migration
