@@ -12,7 +12,7 @@ services:
     build:
       context: .
       args:
-        REQUIREMENTS_FILE: local
+        REQUIREMENTS_FILE: test
     env_file:
       - .env.test
     container_name: apple_test
