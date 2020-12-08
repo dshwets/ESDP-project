@@ -1,0 +1,10 @@
+stages:
+  - test
+
+tests:
+  image: docker/compose:latest
+  stage: test
+  script:
+    - docker-compose -f docker-compose-ci.yml up -d db
+    - docker-compose -f docker-compose-ci.yml app_migration
+    - docker-compose -f docker-compose-ci.yml app_test
