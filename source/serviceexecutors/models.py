@@ -18,6 +18,14 @@ class ServiceExecutor(AbstractDatetimeModel):
         verbose_name=_('Отчество'),
         default='',
     )
+    hostel_service = models.ForeignKey(
+        'hostelservices.HostelService',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='service_executors',
+        verbose_name=_('Услуга'),
+    )
 
     class Meta:
         verbose_name = _('Исполнитель')
