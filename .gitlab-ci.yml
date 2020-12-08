@@ -1,0 +1,15 @@
+variables:
+  DOCKER_TLS_CERTDIR: ""
+
+stages:
+  - test
+
+services:
+  - docker:dind
+
+tests:
+  image: docker/compose:latest
+  stage: test
+  script:
+    - docker-compose -f docker-compose-ci.yml up -d db
+    - docker-compose -f docker-compose-ci.yml up app_test
