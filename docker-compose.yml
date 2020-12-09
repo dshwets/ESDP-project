@@ -9,23 +9,22 @@ services:
       - .env
     volumes:
     - /app/postgres:/var/lib/postgresql/data
+
   app_migration:
-    build: .
-    env_file:
-      - .env
+    image: applehostel_web:${TAG}
     restart: on-failure
     container_name: apple_db_migration
     #TODO Изменить на UWSGI внутри докер файла
     command: python manage.py migrate
-
     depends_on:
       - db
-
-  web:
-    build: .
-    restart: always
     env_file:
       - .env
+
+  web:
+    image: applehostel/main_app:${TAG}
+    build: .
+    restart: always
     container_name: apple_app
     #TODO Изменить на UWSGI внутри докер файла
     command: python manage.py runserver 0.0.0.0:8000
@@ -34,3 +33,5 @@ services:
     depends_on:
       - db
       - app_migration
+    env_file:
+      - .env
