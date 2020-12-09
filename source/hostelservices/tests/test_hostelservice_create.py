@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.urls import reverse
 from accounts.factories import UserFactory
 from hostelservices.factories import HostelServiceFactory, PurchasePriceFactory, SellingPriceFactory
-from hostelservices.models import HostelService, SellingPrice, PurchasePrice
 
 
 class HostelServiceCreateTestCase(TestCase):
