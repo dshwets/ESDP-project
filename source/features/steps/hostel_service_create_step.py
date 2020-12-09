@@ -7,7 +7,7 @@ def step_impl(context):
     context.browser.get(context.get_url("/hostelservices/add"))
 
 
-@then('Changes service_name selling_price and purchase_price')
+@then('Changes service_name selling and purchase')
 def step_impl(context):
     time.sleep(3)
     context.browser.find_element_by_id("id_service_name-service_name").send_keys("Тестовое имя")
