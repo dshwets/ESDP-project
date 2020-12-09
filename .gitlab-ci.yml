@@ -3,6 +3,7 @@ variables:
 
 stages:
   - test
+  - build_and_push
 
 services:
   - docker:dind
@@ -13,3 +14,17 @@ tests:
   script:
     - docker-compose -f docker-compose-ci.yml up -d db
     - docker-compose -f docker-compose-ci.yml up app_test
+
+build_and_push:
+  image: docker/compose:latest
+  stage: build_and_push
+  variables:
+    TAG: $CI_COMMIT_SHA
+  script:
+    - docker-compose build web
+    - docker login -u $DOCKER_REGISTRY_LOGIN -p $DOCKER_REGISTRY_PASSWORD
+    - docker-compose push
+  only:
+    - development
+    - master
+    - feature/99_update_ci_to_dockerhub
