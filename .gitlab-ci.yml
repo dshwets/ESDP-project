@@ -1,6 +1,3 @@
-variables:
-  DOCKER_TLS_CERTDIR: ""
-
 stages:
   - test
   - build_and_push
@@ -21,10 +18,9 @@ build_and_push:
   variables:
     TAG: $CI_COMMIT_SHA
   script:
-    - docker-compose build web
+    - docker-compose build
     - docker login -u $DOCKER_REGISTRY_LOGIN -p $DOCKER_REGISTRY_PASSWORD
     - docker-compose push
   only:
     - development
     - master
-    - feature/99_update_ci_to_dockerhub
