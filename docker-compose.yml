@@ -11,7 +11,7 @@ services:
     - /app/postgres:/var/lib/postgresql/data
 
   app_migration:
-    image: applehostel_web:${TAG}
+    image: applehostel/main_app:${TAG}
     restart: on-failure
     container_name: apple_db_migration
     #TODO Изменить на UWSGI внутри докер файла

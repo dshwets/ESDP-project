@@ -11,6 +11,7 @@ tests:
   script:
     - docker-compose -f docker-compose-ci.yml up -d db
     - docker-compose -f docker-compose-ci.yml up app_test
+    - docker-compose -f docker-compose-ci.yml down
 
 build_and_push:
   image: docker/compose:latest
@@ -24,3 +25,4 @@ build_and_push:
   only:
     - development
     - master
+    - feature/99_update_ci_to_dockerhub
