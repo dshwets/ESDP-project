@@ -25,4 +25,3 @@ build_and_push:
   only:
     - development
     - master
-    - feature/99_update_ci_to_dockerhub
