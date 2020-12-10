@@ -59,7 +59,11 @@
                         {% endif %}
                         {% if request.user.is_authenticated %}
                             <a class="dropdown-item" href="{% url 'hostelservices:hostelservices_list' %}">
-                                {% trans 'Список Услуг' %}</a>
+                                {% trans 'Список услуг' %}</a>
+                        {% endif %}
+                        {% if perms.serviceexecutors.can_add_serviceexecutor %}
+                            <a class="dropdown-item" href="{% url 'hostelservices:hostelservices_add' %}">
+                            {% trans 'Добавить услугу' %}</a>
                         {% endif %}
                             {% block dropdown_service %}{% endblock %}
                 </div>
