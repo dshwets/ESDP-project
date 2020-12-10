@@ -20,6 +20,18 @@
             {% if perms.purchase_price.can_view_purchase_price %}
                 <p>{% trans 'цена покупки' %}:{{ purchase_price.purchase_price }}</p>
             {% endif %}
+                {% if perms.hostelservices.can_change_hostelservice %}
+                    <a href="{% url 'hostelservices:hostelservices_update' hostelservice.pk %}"
+                       class="mt-2 btn btn-info btn-sm" id="update-button">
+                        {% trans 'Редактировать' %}
+                    </a>
+                {% endif %}
+                {% if perms.hostelservices.can_delete_hostelservice %}
+                    <a href="{% url 'hostelservices:hostelservice_delete' hostelservice.pk %}"
+                           class="mt-2 btn btn-danger btn-sm" id="delete-button">
+                        {% trans 'Удалить' %}
+                    </a>
+                {% endif %}
         </div>
     </div>
     <div>

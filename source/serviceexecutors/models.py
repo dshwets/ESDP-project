@@ -16,6 +16,7 @@ class ServiceExecutor(AbstractDatetimeModel):
     middle_name = models.CharField(
         max_length=255,
         verbose_name=_('Отчество'),
+        blank=True,
         default='',
     )
     hostel_service = models.ForeignKey(

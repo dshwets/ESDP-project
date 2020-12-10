@@ -2,24 +2,14 @@
 {% load staticfiles %}
 {% load i18n %}
 {% block title %}
-    {% trans 'Поставщик услуг' %}
+    {% trans 'Поставщик' %}
 {% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %}
-{% block dropdown_service %}
-    {% if perms.serviceexecutors.can_delete_serviceexecutor %}
-        <a class="dropdown-item" href="{% url 'serviceexecutors:serviceexecutor_delete' serviceexecutor.pk %}">
-            {% trans 'Удалить поставщика' %}</a>
-    {% endif %}
-    {% if perms.serviceexecutors.can_change_serviceexecutor %}
-        <a class="dropdown-item" href="{% url 'serviceexecutors:serviceexecutor_update' serviceexecutor.pk %}">
-            {% trans 'Редактировать поставщика' %}</a>
-    {% endif %}
-{% endblock %}
 {% block content %}
     <h3 class="mb-5 mt-5" align="center">
-        <b>{% trans 'Исполнитель услуг' %}</b>
+        <b>{% trans 'Поставщик' %}</b>
     </h3>
     <div class="card my-2">
         <div class="card-body">

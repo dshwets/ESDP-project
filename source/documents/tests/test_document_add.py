@@ -29,7 +29,6 @@ class GuestCreateTestCase(TestCase):
             self.assertEqual(response.status_code, code)
         elif method == "post":
             response = self.client.post(url)
-            print(response)
             self.assertEqual(response.status_code, code)
 
     def common_data(self):

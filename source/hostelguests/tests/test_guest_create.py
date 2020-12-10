@@ -46,7 +46,6 @@ class GuestCreateTestCase(TestCase):
         image.save(file, format='PNG')
         file.name = 'test.png'
         file.seek(0)
-        print(file)
         return ImageFile(file)
 
     def common_data(self):
