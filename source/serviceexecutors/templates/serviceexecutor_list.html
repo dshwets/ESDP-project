@@ -14,12 +14,12 @@
 
     {% load i18n %}
 <h3 class="mb-5 mt-4" align="center">
-   <b>{% trans 'Список исполнителей услуг' %}</b>
+   <b>{% trans 'Список поставщиков услуг' %}</b>
 </h3>
 {% for service_executor in service_executors %}
     <div class="card my-2">
         <div class="card-body">
-            <h5 class="card-title">{% trans 'ФИО' %}:<a href="{% url 'serviceexecutors:serviceexecutor_view' service_executor.pk %}"> {{ service_executor.name }} {{ service_executor.last_name }} {{ service_executor.middle_name }}</a></h5>
+            <h5 class="card-title">{% trans 'ФИО' %}: {{ service_executor.name }} {{ service_executor.last_name }} {% if service_executor.middle_name %}{{ service_executor.middle_name }}{% endif %}</h5>
             {% if service_executor.hostel_service %}
                 <p class="card-text">Услуга: {{ service_executor.hostel_service.service_name }}</p>
             {% endif %}
