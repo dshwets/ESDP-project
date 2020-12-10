@@ -1,6 +1,5 @@
 import factory
 from factory import SubFactory
-from factory.fuzzy import FuzzyText
 
 from hostelguests.factories import GuestFactory
 from hostelservices.factories import HostelServiceFactory, PurchasePriceFactory, SellingPriceFactory
@@ -8,7 +7,7 @@ from journalservices.models import JournalService
 from serviceexecutors.factories import ServiceExecutorFactory
 
 
-class UnwelcomeGuestFactory(factory.django.DjangoModelFactory):
+class JournalServiceFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = JournalService
 
