@@ -43,7 +43,7 @@ class NoteDeleteTestCase(TestCase):
         self.user.user_permissions.add(self.permission)
         self.client.login(username='some_admin', password='pass')
         url = reverse('serviceexecutors:serviceexecutor_delete', args=(self.serviceexecutor.pk,))
-        redirect_url = reverse('hostelguests:guest_list')
+        redirect_url = reverse('serviceexecutors:serviceexecutors_list')
         response = self.client.post(url)
         self.assertRedirects(response=response, expected_url=redirect_url, status_code=302,
                              target_status_code=200, msg_prefix='', fetch_redirect_response=True)
