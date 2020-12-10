@@ -13,7 +13,7 @@ def step_impl(context):
 def step_impl(context, title, text_name):
     element = context.browser.find_element_by_xpath("//div[1]/h3/b")
     title = "Журнал услуг"
-    journal_element = context.browser.find_element_by_xpath("//div[1]/h5")
+    journal_element = context.browser.find_element_by_id("id_journal_name")
     text_name = journal_element.text
     assert element.text == title
     assert text_name is not None
