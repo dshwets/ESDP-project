@@ -13,8 +13,8 @@ def step_impl(context):
 @step('Displays serviceexecutor list page with "{title}" and "{text_name}')
 def step_impl(context, title, text_name):
     element = context.browser.find_element_by_xpath("//div[1]/h3/b")
-    title = "Список исполнителей услуг"
-    serviceexecuter_element = context.browser.find_element_by_xpath("//div[1]/h5")
+    title = "Список поставщиков услуг"
+    serviceexecuter_element = context.browser.find_element_by_xpath("/html/body/div[1]/h3/b")
     text_name = serviceexecuter_element.text
     assert element.text == title
     assert text_name is not None
