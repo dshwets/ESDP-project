@@ -18,6 +18,9 @@ class HostelService(AbstractDatetimeModel):
             ('can_view_hostelservice', _('Может просматривать услугу отеля')),
         ]
 
+    def __str__(self):
+        return f'{self.service_name}'
+
 
 class SellingPrice(AbstractCreatedByModel):
     selling_price = models.DecimalField(
