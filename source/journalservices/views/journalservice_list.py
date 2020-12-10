@@ -6,6 +6,6 @@ from journalservices.models import JournalService
 class JournalServicesListView(LoginRequiredMixin, ListView):
     template_name = 'journalservices_list.html'
     queryset = JournalService.objects.order_by('-created_at')
-    context_object_name = 'journalservices'
+    context_object_name = 'journals'
     paginate_by = 30
     paginate_orphans = 4
