@@ -58,11 +58,11 @@ class ServiceExecutorUpdateTestCase(TestCase):
         self.assertEqual(executor.last_name, data['last_name'])
         self.assertEqual(executor.middle_name, data['middle_name'])
         self.assertEqual(type(response), HttpResponseRedirect)
-        redirect_url = reverse('serviceexecutors:serviceexecutor_view')
+        redirect_url = reverse('serviceexecutors:serviceexecutor_view', args=(self.serviceexecutor.pk,))
         self.assertEqual(response.url, redirect_url)
 
     def test_authorized_with_permission_post_update_serviceexecutor_with_empty_name(self):
-        data = data = {
+        data = {
             'name': '',
             'last_name': self.serviceexecutor.last_name,
             'middle_name': self.serviceexecutor.middle_name,
@@ -74,7 +74,7 @@ class ServiceExecutorUpdateTestCase(TestCase):
         self.assertFormError(response, 'form', field, 'Обязательное поле.')
 
     def test_authorized_with_permission_post_update_serviceexecutor_with_empty_last_name(self):
-        data = data = {
+        data = {
             'name': self.serviceexecutor.name,
             'last_name': '',
             'middle_name': self.serviceexecutor.middle_name,

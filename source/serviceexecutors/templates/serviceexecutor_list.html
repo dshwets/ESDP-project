@@ -19,12 +19,16 @@
 {% for service_executor in service_executors %}
     <div class="card my-2">
         <div class="card-body">
-                <h5 class="card-title">{% trans 'ФИО' %}:<a href="{% url 'serviceexecutors:serviceexecutor_view' service_executor.pk %}"> {{ service_executor.name }} {{ service_executor.last_name }} {{ service_executor.middle_name }}</a></h5>
-            {% if perms.serviceexecutors.can_delete_serviceexecutor %}
-                <a href="{% url 'serviceexecutors:serviceexecutor_delete' service_executor.pk %}">
-                <button type="button" class="btn btn-danger ml-3"> {% trans 'Удалить из cписка исполнителей услуг'%}</button></a>
+            <h5 class="card-title">{% trans 'ФИО' %}:<a href="{% url 'serviceexecutors:serviceexecutor_view' service_executor.pk %}"> {{ service_executor.name }} {{ service_executor.last_name }} {{ service_executor.middle_name }}</a></h5>
+            {% if service_executor.hostel_service %}
+                <p class="card-text">Услуга: {{ service_executor.hostel_service.service_name }}</p>
             {% endif %}
-
+            {% if perms.seriveexecutors.can_view_serviceexecutor %}
+                <a href="{% url 'serviceexecutors:serviceexecutor_view' service_executor.pk %}"
+                   class="btn btn-primary btn-sm" id="view-button">
+                   {% trans 'Просмотр' %}
+                </a>
+            {% endif %}
         </div>
     </div>
 {% endfor %}
