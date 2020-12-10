@@ -10,26 +10,38 @@
 {% block menu %}
 {% endblock %}
 {% block content %}
-<h3 class="mb-5 mt-4" align="center">
-   <b>{% trans 'Список услуг' %}</b>
-</h3>
+    <h3 class="mb-5 mt-4" align="center">
+       <b>{% trans 'Список услуг' %}</b>
+    </h3>
     <a href="{% url 'hostelservices:hostelservices_add' %}"
-                   class="mt-2 badge badge-pill badge-danger" id="create-button">
-                    {% trans 'Добавить услугу' %}
-                </a>
-{% for service  in hostel_services %}
-    <div class="card my-2">
-        <div class="card-body">
-            <h5 class="card-title">{% trans 'Услуга:' %}: {{ service.service_name }}</h5>
-            <p class="card-text">{% trans 'Была добавленна' %}: {{ service.created_at }}</p>
-            {% if perms.hostelservices.can_change_hostelservice %}
-            <a href="{% url 'hostelservices:hostelservices_update' service.pk %}"
-                   class="mt-2 badge badge-pill badge-danger" id="update-button">
-                    {% trans 'Редактировать' %}
-                </a>
-            {% endif %}
+       class="my-2 btn btn-success" id="create-button">
+        {% trans 'Добавить услугу' %}
+    </a>
+    {% for service  in hostel_services %}
+        <div class="card my-2">
+            <div class="card-body">
+                <h5 class="card-title">{% trans 'Услуга:' %}: {{ service.service_name }}</h5>
+                <p class="card-text">{% trans 'Была добавлена' %}: {{ service.created_at }}</p>
+                {% if perms.hostelservices.can_view_hostelservice %}
+                    <a href="{% url 'hostelservices:hostelservices_detail' service.pk %}"
+                       class="mt-2 btn btn-primary btn-sm" id="view-button">
+                        {% trans 'Просмотр' %}
+                    </a>
+                {% endif %}
+                {% if perms.hostelservices.can_change_hostelservice %}
+                    <a href="{% url 'hostelservices:hostelservices_update' service.pk %}"
+                       class="mt-2 btn btn-info btn-sm" id="update-button">
+                        {% trans 'Редактировать' %}
+                    </a>
+                {% endif %}
+                {% if perms.hostelservices.can_delete_hostelservice %}
+                    <a href="{% url 'hostelservices:hostelservice_delete' service.pk %}"
+                           class="mt-2 btn btn-danger btn-sm" id="delete-button">
+                        {% trans 'Удалить' %}
+                    </a>
+                {% endif %}
+            </div>
         </div>
-    </div>
-{% endfor %}
-{% include 'partial/pagination.html' %}
+    {% endfor %}
+    {% include 'partial/pagination.html' %}
 {% endblock %}
