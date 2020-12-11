@@ -9,4 +9,6 @@ class UnwelcomeGuestListView(LoginRequiredMixin, ListView):
     context_object_name = 'unwelcome_guests'
     paginate_by = 10
     paginate_orphans = 4
+    ordering = ['-id']
+
 

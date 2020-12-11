@@ -19,75 +19,79 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                {% block navs %}{% endblock %}
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Гость
-                    </button>
-                    <div class="dropdown-menu">
-                        {% if perms.hostelguests.can_add_guest %}
-                            <a class="dropdown-item" href="{% url 'hostelguests:guest_create' %}">
-                                {% trans 'Добавить гостя' %}</a>
-                        {% endif %}
-                        {% if request.user.is_authenticated %}
-                            <a class="dropdown-item" href="{% url 'hostelguests:guest_list' %}">
-                            {% trans 'Список гостей' %}</a>
-                            <a class="dropdown-item" href="{% url 'unwelcomeguests:unwelcome_guest_list' %}">
-                            {% trans 'Черный список гостей' %}</a>
-                            <a class="dropdown-item" href="{% url 'welcomeguests:welcome_guest_list' %}">
-                            {% trans 'Список почетных гостей' %}</a>
-                        {% endif %}
-                            {% block dropdown_guest %}{% endblock %}
-                </div>
-                </div>
-                <div class="btn-group ml-2">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Услуги
-                    </button>
-                    <div class="dropdown-menu">
-                        {% if perms.serviceexecutors.can_add_serviceexecutor %}
-                            <a class="dropdown-item" href="{% url 'serviceexecutors:serviceexecutor_create' %}">
-                                {% trans 'Добавить поставщика' %}</a>
-                        {% endif %}
-                        {% if perms.serviceexecutors.can_view_serviceexecutor %}
-                            <a class="dropdown-item" href="{% url 'serviceexecutors:serviceexecutors_list' %}">
-                                {% trans 'Список поставщиков' %}</a>
-                        {% endif %}
-                        {% if request.user.is_authenticated %}
-                            <a class="dropdown-item" href="{% url 'hostelservices:hostelservices_list' %}">
-                                {% trans 'Список услуг' %}</a>
-                        {% endif %}
-                        {% if perms.serviceexecutors.can_add_serviceexecutor %}
-                            <a class="dropdown-item" href="{% url 'hostelservices:hostelservices_add' %}">
-                            {% trans 'Добавить услугу' %}</a>
-                        {% endif %}
-                            {% block dropdown_service %}{% endblock %}
-                </div>
-                </div>
-                {% if request.user.is_authenticated %}
-                    <li class="nav-item active">
-                        <a class="nav-link"
-                           href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">{% trans 'Выйти' %}<span
-                                class="sr-only">(current)</span></a>
-                    </li>
-                {% else %}
-                    <li class="nav-item active ml-3">
-                        <a class="nav-link"
-                           href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">{% trans 'Войти' %}<span
-                                class="sr-only">(current)</span></a>
-                    <li class="menu-right"></li>
-                    <a class="nav-link"
-                       href="{% url 'accounts:register' %}?next={{ request.get_full_path }}">{% trans 'Регистрация' %}</a>
-                    </li>
-                {% endif %}
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
 
-            </ul>
-        </div>
-    </div>
+                    {% if request.user.is_authenticated %}
+                    {% block navs %}{% endblock %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            {% trans "Гости" %}
+                        </button>
+                        <div class="dropdown-menu">
+                            {% if perms.hostelguests.can_add_guest %}
+                                <a class="dropdown-item" href="{% url 'hostelguests:guest_create' %}">
+                                    {% trans 'Добавить гостя' %}</a>
+                            {% endif %}
+                            {% if request.user.is_authenticated %}
+                                <a class="dropdown-item" href="{% url 'hostelguests:guest_list' %}">
+                                {% trans 'Список гостей' %}</a>
+                                <a class="dropdown-item" href="{% url 'unwelcomeguests:unwelcome_guest_list' %}">
+                                {% trans 'Черный список гостей' %}</a>
+                                <a class="dropdown-item" href="{% url 'welcomeguests:welcome_guest_list' %}">
+                                {% trans 'Список почетных гостей' %}</a>
+                            {% endif %}
+                                {% block dropdown_guest %}{% endblock %}
+                    </div>
+                    </div>
+                    <div class="btn-group ml-2">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Услуги
+                        </button>
+                        <div class="dropdown-menu">
+                            {% if perms.serviceexecutors.can_add_serviceexecutor %}
+                                <a class="dropdown-item" href="{% url 'serviceexecutors:serviceexecutor_create' %}">
+                                    {% trans 'Добавить поставщика' %}</a>
+                            {% endif %}
+                            {% if perms.serviceexecutors.can_view_serviceexecutor %}
+                                <a class="dropdown-item" href="{% url 'serviceexecutors:serviceexecutors_list' %}">
+                                    {% trans 'Список поставщиков' %}</a>
+                            {% endif %}
+                            {% if request.user.is_authenticated %}
+                                <a class="dropdown-item" href="{% url 'hostelservices:hostelservices_list' %}">
+                                    {% trans 'Список услуг' %}</a>
+                            {% endif %}
+                            {% if perms.serviceexecutors.can_add_serviceexecutor %}
+                                <a class="dropdown-item" href="{% url 'hostelservices:hostelservices_add' %}">
+                                {% trans 'Добавить услугу' %}</a>
+                            {% endif %}
+                                {% block dropdown_service %}{% endblock %}
+                    </div>
+                    </div>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item active">
+                            <a class="nav-link"
+                               href="{% url 'accounts:logout' %}">{% trans 'Выйти' %}<span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item {% block login_is_active %}{% endblock %}  ml-3">
+                            <a class="nav-link"
+                               href="{% url 'accounts:login' %}">{% trans 'Войти' %}<span
+                                    class="sr-only">(current)</span></a>
+                        <li class="menu-right"></li>
+                        <a class="nav-link {% block registry_is_active %}{% endblock %}"
+                           href="{% url 'accounts:register' %}">{% trans 'Регистрация' %}</a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+            </div>
+
 </nav>
 
 <div class="container">

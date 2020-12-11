@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.urls import reverse
 from accounts.factories import UserFactory
 from hostelservices.factories import HostelServiceFactory, PurchasePriceFactory, SellingPriceFactory
+from hostelservices.models import HostelService
 
 
 class HostelServiceCreateTestCase(TestCase):
@@ -63,7 +64,7 @@ class HostelServiceCreateTestCase(TestCase):
         response = self.client.post(self.url, data)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(type(response), HttpResponseRedirect)
-        redirect_url = reverse('hostelservices:hostelservices_list')
+        redirect_url = reverse('hostelservices:hostelservices_detail', kwargs={'pk':HostelService.objects.last().pk})
         self.assertEqual(response.url, redirect_url)
 
     def test_authorized_with_permission_post_create_hostelservice_with_empty_service_nama(self):

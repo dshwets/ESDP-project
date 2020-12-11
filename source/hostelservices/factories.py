@@ -25,3 +25,9 @@ class PurchasePriceFactory(factory.django.DjangoModelFactory):
 
     purchase_price = FuzzyDecimal(0, 400)
     hostel_service = SubFactory(HostelServiceFactory)
+
+
+def correct_service_factory():
+    hostel_service = HostelServiceFactory()
+    SellingPriceFactory(hostel_service=hostel_service)
+    PurchasePriceFactory(hostel_service=hostel_service)

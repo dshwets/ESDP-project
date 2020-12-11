@@ -10,6 +10,6 @@ class WelcomeGuestListView(LoginRequiredMixin, ListView):
     context_object_name = 'welcome_guests'
     paginate_by = 10
     paginate_orphans = 4
-
+    ordering = ['-id']
 
 

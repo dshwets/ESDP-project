@@ -10,3 +10,4 @@ class HostelServiceListView(LoginRequiredMixin, ListView):
     context_object_name = 'hostel_services'
     paginate_by = 10
     paginate_orphans = 4
+    ordering = ['-id']
