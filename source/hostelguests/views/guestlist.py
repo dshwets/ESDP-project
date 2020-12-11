@@ -14,6 +14,7 @@ class GuestListView(LoginRequiredMixin, FilterView):
     ordering = '-id'
     paginate_by = 10
     paginate_orphans = 4
+    allow_empty = True
 
     def get_queryset(self):
         queryset = super().get_queryset()
