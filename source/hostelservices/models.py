@@ -54,7 +54,7 @@ class PurchasePrice(AbstractCreatedByModel):
         decimal_places=2,
         null=True,
         blank=True,
-        verbose_name=_('Цена продажи')
+        verbose_name=_('Цена покупки')
     )
     hostel_service = models.ForeignKey(
         'hostelservices.HostelService',
