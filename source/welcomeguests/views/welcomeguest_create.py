@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views.generic import CreateView
 
 from hostelguests.models import Guest
+from unwelcomeguests.models import UnwelcomeGuest
 from welcomeguests.forms import WelcomeGuestForm
 from welcomeguests.models import WelcomeGuest
 
@@ -17,6 +18,9 @@ class WelcomeGuestCreateView(PermissionRequiredMixin, CreateView):
 
     def form_valid(self, form):
         guest = get_object_or_404(Guest, pk=self.kwargs.get('pk'))
+        unwelcome = UnwelcomeGuest.objects.filter(guest=guest)
+        if unwelcome:
+            unwelcome[0].delete()
         welcomeguest = form.save(commit=False)
         welcomeguest.guest = guest
         welcomeguest.created_by_id = self.request.user.pk

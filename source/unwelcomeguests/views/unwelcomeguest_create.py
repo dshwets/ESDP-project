@@ -7,6 +7,7 @@ from django.views.generic import CreateView
 from hostelguests.models import Guest
 from unwelcomeguests.forms import UnWelcomeGuestForm
 from unwelcomeguests.models import UnwelcomeGuest
+from welcomeguests.models import WelcomeGuest
 
 
 class UnWelcomeGuestCreateView(PermissionRequiredMixin, CreateView):
@@ -17,6 +18,9 @@ class UnWelcomeGuestCreateView(PermissionRequiredMixin, CreateView):
 
     def form_valid(self, form):
         guest = get_object_or_404(Guest, pk=self.kwargs.get('pk'))
+        welcome = WelcomeGuest.objects.filter(guest=guest)
+        if welcome:
+            welcome[0].delete()
         unwelcomeguest = form.save(commit=False)
         unwelcomeguest.guest = guest
         unwelcomeguest.save()
