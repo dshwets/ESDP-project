@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+    {% trans 'Запись об услуге' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block dropdown_service %}
+{% endblock %}
+{% block content %}
+    <h3 class="mb-5 mt-5" align="center" id="journalservice-title">
+        <b>{% trans 'Запись об услуге' %}</b>
+    </h3>
+    <div class="card my-2">
+        <div class="card-body">
+            {% if journalservice.hostel_service %}
+                <h5 class="card-title" ><b>{% trans 'Наименование услуги' %}</b>: {{ journalservice.hostel_service.service_name }}</h5>
+            {% endif %}
+            <p><b>{% trans 'Гость' %}</b>: {{ journalservice.guest.last_name }}, {{ journalservice.guest.first_name }}
+                {% if journalservice.guest.middle_name %}{{ journalservice.guest.middle_name }}{% endif %}</p>
+            {% if journalservice.service_executor %}
+                <p><b>{% trans 'Поставщик' %}</b>:{{ journalservice.service_executor.last_name }}, {{ journalservice.service_executor.name }}</p>
+            {% endif %}
+            <p><b>{% trans 'Цена продажи' %}</b>:{{ journalservice.selling_price.selling_price }}</p>
+            {% if perms.journalservices.can_view_purchase_price %}
+                <p><b>{% trans 'Цена покупки' %}</b>:{{ journalservice.purchase_price.purchase_price }}</p>
+            {% endif %}
+            {% if perms.journalservices.can_delete_journalservice %}
+                <a href="{% url 'journalservices:journal_detail' journalservice.pk %}"
+                   class="mt-2 btn btn-info btn-sm" id="delete-button">
+                    {% trans 'Удалить' %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+</div>
+{% endblock %}
