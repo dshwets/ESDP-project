@@ -69,7 +69,17 @@
     </a>
          {% endif %}
      </p>
-             <hr>
+    <hr>
+      <p class="p-4">
+         {% if perms.journalservices.can_add_journalservice %}
+        <a href="{% url 'journalservices:journal_create' guest_pk=guest.pk%}">
+        <button type="button" class="btn btn-primary float-right">
+            {% trans 'Добавить услугу'%}
+        </button>
+        </a>
+         {% endif %}
+    </p>
+    <hr>
     <div class="mt-4 mb-4">
     <h4 align="center"><b>{% trans 'Заметки о госте ' %}</b></h4>
     </div>
