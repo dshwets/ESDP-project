@@ -21,5 +21,5 @@ def step_impl(context):
 @then('Opens serviceexecutor detail page with "{text}"')
 def step_impl(context, text):
     element = context.browser.find_element_by_xpath("/html/body/div[1]/h3/b")
-    text = "Исполнитель услуг"
+    text = "Поставщик"
     assert element.text == text

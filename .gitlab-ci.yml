@@ -1,0 +1,66 @@
+.add-ssh-private-key-script: &add-ssh-private-key
+  - mkdir -p ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - eval "$(ssh-agent -s)"
+  - ssh-add ~/.ssh/id_rsa
+  - ssh-keyscan -H $DEPLOY_SERVER >> ~/.ssh/known_hosts
+
+.delete_current_generated_images_script: &delete_current_generated_images
+  - docker images | grep $CI_COMMIT_SHA | awk '{print $3}' | xargs --no-run-if-empty docker rmi
+
+stages:
+  - test
+  - build_and_push
+  - deploy-staging
+
+services:
+  - docker:dind
+tests:
+  image: docker/compose:latest
+  stage: test
+  variables:
+    TAG: $CI_COMMIT_SHA
+  script:
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build db
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA up -d db
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build app_test
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA up app_test
+  after_script:
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA down
+    - *delete_current_generated_images
+
+build_and_push:
+  image: docker/compose:latest
+  stage: build_and_push
+  variables:
+    TAG: $CI_COMMIT_SHA
+  script:
+    - docker-compose build
+    - docker login -u $DOCKER_REGISTRY_LOGIN -p $DOCKER_REGISTRY_PASSWORD
+    - docker-compose push web
+  after_script:
+    - *delete_current_generated_images
+  only:
+    - development
+    - master
+
+deploy-staging:
+  only:
+    refs:
+      - development
+      - master
+  image: docker:git
+  stage: deploy-staging
+  variables:
+    TAG: $CI_COMMIT_SHA
+  before_script:
+    -  *add-ssh-private-key
+  script:
+    - scp docker-compose.yml $DEPLOY_USER@$DEPLOY_SERVER:./docker-compose.yml
+    - scp .env $DEPLOY_USER@$DEPLOY_SERVER:./.env
+    - ssh -T $DEPLOY_USER@$DEPLOY_SERVER  "echo '$DOCKER_REGISTRY_PASSWORD' | sudo docker login --username $DOCKER_REGISTRY_LOGIN --password-stdin && sudo  TAG=$TAG docker-compose pull"
+    - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo docker ps -aq |  xargs --no-run-if-empty sudo docker rm -f"
+    - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo TAG=$TAG docker-compose up -d"
+  after_script:
+    - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo docker image prune -a -f"

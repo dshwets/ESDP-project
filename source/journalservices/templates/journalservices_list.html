@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Журнал услуг' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+{% include 'partial/pagination.html' %}
+    {% load i18n %}
+<h3 class="mb-5 mt-4" align="center">
+   <b>{% trans 'Журнал услуг' %}</b>
+</h3>
+    <table class="table">
+  <thead>
+    <tr>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Услуга</th>
+        <th scope="col">Исполнитель</th>
+        <th scope="col">Цена закупочная</th>
+        <th scope="col">Цена продажная</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+  </thead>
+{% for journal in journals %}
+  <tbody>
+    <tr>
+        <th scope="row" id="id_journal_name">{{ journal.guest.first_name }}</th>
+        <td>{{ journal.guest.last_name }}</td>
+        <td>{{journal.hostel_service.service_name }}</td>
+        <td>{{journal.service_executor.name }} {{journal.service_executor.last_name }}</td>
+        <td>{{journal.selling_price.selling_price }}</td>
+        <td>{{journal.purchase_price.purchase_price }}</td>
+
+                <td><a href="#">
+                <button type="button" class="btn btn-danger ml-3"> {% trans 'Изменить'%}</button></a></td>
+
+
+                <td><a href="#">
+                <button type="button" class="btn btn-dark ml-3"> {% trans 'Удалить'%}</button></a></td>
+
+    </tr>
+  </tbody>
+
+{% endfor %}
+</table>
+{% endblock %}

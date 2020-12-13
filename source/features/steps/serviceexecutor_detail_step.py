@@ -13,7 +13,7 @@ def step_impl(context):
 
 @then('Displays serviceexecutor "{name}')
 def step_impl(context,name):
-    element = context.browser.find_element_by_xpath("*//div[1]/h5")
+    element = context.browser.find_element_by_xpath("//h5[@class='card-title']")
     name = "John Doe Will"
     print("Name dhjjhk:" + name)
     assert element.text == name

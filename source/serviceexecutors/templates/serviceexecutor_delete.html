@@ -2,13 +2,13 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans 'Удалить исполнителя ' %}{{ serviceexecutor.name }} {{ serviceexecutor.last_name }}
+    {% trans 'Удалить поставщика ' %}{{ serviceexecutor.name }} {{ serviceexecutor.last_name }}
 {% endblock %}
 
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        <h4 class="my-3">{% trans 'Вы уверены, что хотите удалить этого исполнителя?' %}</h4>
+        <h4 class="my-3">{% trans 'Вы уверены, что хотите удалить этого поставщика?' %}</h4>
         <p>{{ serviceexecutor.last_name }}, {{ serviceexecutor.name }} {% if serviceexecutor.middle_name %}{{ serviceexecutor.middle_name }}{% endif %}</p>
         <input class="btn btn-danger" type="submit" value="{% trans 'Да' %}">
         <a class="btn btn-primary" href="{% url 'serviceexecutors:serviceexecutor_view' serviceexecutor.pk %}">{% trans 'Нет' %}</a>

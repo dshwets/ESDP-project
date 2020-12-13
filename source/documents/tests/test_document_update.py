@@ -15,7 +15,7 @@ class DocumentUpdateTestCase(TestCase):
         self.user = UserFactory(username='some_admin')
         self.permission = Permission.objects.get(codename='can_change_document')
         self.url = reverse('documents:document_update', kwargs={'pk': self.document.pk})
-        self.serviceexecutor = ServiceExecutorFactory()
+        self.serviceexecutor = self.document.service_executor
 
     def tearDown(self) -> None:
         self.client.logout()

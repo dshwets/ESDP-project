@@ -10,3 +10,4 @@ class ServiceExecutorsGuestListView(LoginRequiredMixin, ListView):
     context_object_name = 'service_executors'
     paginate_by = 10
     paginate_orphans = 4
+    ordering = ['-id']
