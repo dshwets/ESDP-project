@@ -3,7 +3,7 @@
 {% block title %}{% trans 'Добавить заметку' %}{% endblock %}
 {% block content %}
     <h1>{% trans 'Добавить услугу' %}</h1>
-    {% trans 'Добавить' as button_text %}
+    {% trans 'Сохранить' as button_text %}
     {% include 'partial/form.html' with form_method='POST' button_text=button_text %}
 {% endblock %}
 
