@@ -38,7 +38,7 @@
         <td>{{journal.selling_price.selling_price }}</td>
         <td>{{journal.purchase_price.purchase_price }}</td>
 
-                <td><a href="#">
+                <td><a href="{% url 'journalservices:journal_update' journal.pk %}">
                 <button type="button" class="btn btn-danger ml-3"> {% trans 'Изменить'%}</button></a></td>
 
 
