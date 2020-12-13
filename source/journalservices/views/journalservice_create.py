@@ -7,7 +7,7 @@ from journalservices.forms import JournalServiceForm
 from journalservices.models import JournalService
 
 
-class JournalServiceView(PermissionRequiredMixin, CreateView):
+class JournalServiceCreateView(PermissionRequiredMixin, CreateView):
     model = JournalService
     form_class = JournalServiceForm
     template_name = ' journalservice_create.html'
