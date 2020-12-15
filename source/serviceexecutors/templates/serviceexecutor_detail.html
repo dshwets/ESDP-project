@@ -45,7 +45,7 @@
         {% include 'partial/pagination.html' %}
     {% endif %}
 
-    {% for document in documents %}
+    {% for document in object_list %}
         <div class="box">
             <p>{% trans 'Дата создания документа: ' %} {{ document.created_at }}</p>
             <div class="pre" style="word-wrap:break-word">

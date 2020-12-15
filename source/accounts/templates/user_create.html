@@ -2,9 +2,9 @@
 {% load i18n %}
 
 {% block title %}{% trans "Регистрация"%}{% endblock %}
-
+{% block registry_is_active %}active{% endblock %}
 {% block content %}
-    {% block registry_is_active %}active{% endblock %}
-    <h1>{% trans "Регистраяция" %}</h1>
+
+    <h1>{% trans "Регистрация" %}</h1>
     {% include 'partial/form.html' with form_method='post' button_text="Зарегистрироваться" %}
 {% endblock %}
