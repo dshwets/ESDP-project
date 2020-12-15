@@ -14,10 +14,14 @@ class DocumentExecutorCreateView(PermissionRequiredMixin, CreateView):
     model = Document
     permission_required = 'documents.can_add_document'
 
-
     def form_valid(self, form):
         document = form.save(commit=False)
-        guest = get_object_or_404(ServiceExecutor, pk=self.kwargs.get('pk'))
-        document.service_executor = guest
+        service_executor = get_object_or_404(ServiceExecutor, pk=self.kwargs.get('pk'))
+        document.service_executor = service_executor
         document.save()
-        return HttpResponseRedirect(reverse('serviceexecutors:serviceexecutor_view', kwargs={'pk': guest.pk}))
+        return HttpResponseRedirect(
+            reverse(
+                'serviceexecutors:serviceexecutor_view',
+                kwargs={'pk': service_executor.pk}
+            )
+        )
