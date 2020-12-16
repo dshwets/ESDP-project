@@ -1,3 +1,4 @@
 #Local development dependecies is here
 -r test.txt
 django-jsonfield==1.4.1
+django-debug-toolbar==3.2
