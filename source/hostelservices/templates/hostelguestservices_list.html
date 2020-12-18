@@ -13,10 +13,12 @@
     <h3 class="mb-5 mt-4" align="center">
        <b>{% trans 'Список услуг' %}</b>
     </h3>
-    <a href="{% url 'hostelservices:hostelservices_add' %}"
-       class="my-2 btn btn-success" id="create-button">
-        {% trans 'Добавить услугу' %}
-    </a>
+    {% if perms.hostelservices.can_add_hostelservice %}
+        <a href="{% url 'hostelservices:hostelservices_add' %}"
+           class="my-2 btn btn-success" id="create-button">
+            {% trans 'Добавить услугу' %}
+        </a>
+    {% endif %}
     {% for service  in hostel_services %}
         <div class="card my-2">
             <div class="card-body">
