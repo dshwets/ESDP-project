@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'journalservices',
     'django_countries',
     'betterforms',
+    'products',
 ]
 
 MIDDLEWARE = [
