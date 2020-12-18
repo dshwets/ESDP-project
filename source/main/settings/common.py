@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'django_countries',
     'betterforms',
     'products',
+    'sellinghistories',
 ]
 
 MIDDLEWARE = [
