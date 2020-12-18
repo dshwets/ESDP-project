@@ -1,10 +1,9 @@
-from .common import *
+from .test import *
 
 DEBUG = True
 
 INSTALLED_APPS += (
-    'behave_django',
-    'debug_toolbar'
+    'debug_toolbar',
 )
 
 MIDDLEWARE += (
