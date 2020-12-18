@@ -12,7 +12,7 @@ class Product(AbstractCreatedByModel):
     )
     qty = models.IntegerField(
         default=0,
-        verbose_name=_('Колличество'),
+        verbose_name=_('Количество'),
     )
     barcode = models.IntegerField(
         null=True,
