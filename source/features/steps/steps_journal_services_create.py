@@ -15,21 +15,21 @@ def step_impl(context):
         purchase_price=PurchasePriceFactory(),
         selling_price=SellingPriceFactory()
     )
-    context.browser.get(context.get_url(f"/guest/{journal.guest.pk}/detail/"))
+    context.behave_driver.get(context.get_url(f"/guest/{journal.guest.pk}/detail/"))
 
 @then('I click on Добавить услугу button')
 def step_impl(context):
-    context.browser.find_element_by_name("button-journal-add").click()
+    context.behave_driver.find_element_by_name("button-journal-add").click()
 
 @then('Changes hostel service, service executor')
 def step_impl(context):
-    select_fr = Select( context.browser.find_element_by_id("id_hostel_service"))
+    select_fr = Select( context.behave_driver.find_element_by_id("id_hostel_service"))
     select_fr.select_by_index(0)
-    select_2 = Select( context.browser.find_element_by_id("id_service_executor"))
+    select_2 = Select( context.behave_driver.find_element_by_id("id_service_executor"))
     select_2.select_by_index(0)
-    select_3 = Select( context.browser.find_element_by_id("id_service_executor"))
+    select_3 = Select( context.behave_driver.find_element_by_id("id_service_executor"))
     select_3.select_by_index(0)
-    select_4 = Select( context.browser.find_element_by_id("id_service_executor"))
+    select_4 = Select( context.behave_driver.find_element_by_id("id_service_executor"))
     select_4.select_by_index(0)
 
 

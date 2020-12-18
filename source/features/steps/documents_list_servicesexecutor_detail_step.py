@@ -14,7 +14,7 @@ def step_impl(context):
     )
     serviceexecutor_url = reverse('serviceexecutors:serviceexecutor_view', kwargs={'pk': serviceexecutor.pk})
     context.document = document
-    context.browser.get(context.get_url(serviceexecutor_url))
+    context.behave_driver.get(context.get_url(serviceexecutor_url))
 
 
 @then('Displays docements "{title}')

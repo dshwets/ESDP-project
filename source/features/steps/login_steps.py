@@ -9,22 +9,22 @@ def step_impl(context):
 
 @step('I open Homepage')
 def step_impl(context):
-    context.browser.get(context.get_url("/"))
+    context.behave_driver.get(context.get_url("/"))
 
 
 @step('I enter username "{user}" and password "{password}"')
 def step_impl(context, user,password):
-    context.browser.find_element_by_id("id_username").send_keys(user)
-    context.browser.find_element_by_id("id_password").send_keys(password)
+    context.behave_driver.find_element_by_id("id_username").send_keys(user)
+    context.behave_driver.find_element_by_id("id_password").send_keys(password)
 
 
 @step('I click on login button')
 def step_impl(context):
-    context.browser.find_element_by_xpath("/html/body/div[1]/form/input[2]").click()
+    context.behave_driver.find_element_by_xpath("/html/body/div[1]/form/input[2]").click()
 
 
 @then('User must have successfully login to the Guest list page with "{text}"')
 def step_impl(context, text):
-    element = context.browser.find_element_by_xpath("/html/body/div[1]/h3/b")
+    element = context.behave_driver.find_element_by_xpath("/html/body/div[1]/h3/b")
     text = "Список гостей"
     assert element.text == text
