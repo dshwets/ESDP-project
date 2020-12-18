@@ -10,14 +10,14 @@ def step_impl(context):
 
 @then('Open hostel service delete page')
 def step_impl(context):
-    context.browser.get(context.get_url('/hostelservices/{}/delete/'.format(context.hostelservice_pk)))
+    context.behave_driver.get(context.get_url('/hostelservices/{}/delete/'.format(context.hostelservice_pk)))
 
 
 @step('I press confirm delete hostel service button')
 def step_impl(context):
-    context.browser.find_element_by_id("confirm-delete-btn").click()
+    context.behave_driver.find_element_by_id("confirm-delete-btn").click()
 
 
 @step('Then I get to hostel services list page')
 def step_impl(context):
-    assert context.browser.current_url == (context.get_url('hostelservices:hostelservices_list'))
+    assert context.behave_driver.current_url == (context.get_url('hostelservices:hostelservices_list'))
