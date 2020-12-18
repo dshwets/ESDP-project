@@ -8,6 +8,11 @@ services:
     env_file:
       - .env.test
 
+  redis_db:
+    container_name: redis
+    image: redis:6.0.9
+    restart: always
+
   app_test:
     build:
       context: .
@@ -20,5 +25,6 @@ services:
       - "80:8000"
     depends_on:
       - db
+      - redis_db
 
 
