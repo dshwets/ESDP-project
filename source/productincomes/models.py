@@ -26,7 +26,7 @@ class ProductIncomes(AbstractCreatedByModel):
         verbose_name_plural = _('Приходы товара')
 
         permissions = [
-            ('can_add_product_incomes', _('Может приходовать товар')),
+            ('can_add_product_incomes', _('Может оприходовать товар')),
             ('can_change_product_incomes', _('Может изменять приход товара')),
             ('can_delete_product_incomes', _('Может удалять приход товара')),
             ('can_view_product_incomes', _('Может просматривать приход товара')),
