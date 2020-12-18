@@ -20,7 +20,7 @@ class SellingHistory(AbstractCreatedByModel):
     )
     product = models.ForeignKey(
         'products.Product',
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         verbose_name=_('Продукт'),
     )
     purchase_price = models.DecimalField(
