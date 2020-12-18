@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'betterforms',
     'products',
     'sellinghistories',
+    'productincomes',
 ]
 
 MIDDLEWARE = [
