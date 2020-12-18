@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from productincomes.models import ProductIncomes
+
+admin.site.register(ProductIncomes)
