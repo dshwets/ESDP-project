@@ -30,6 +30,7 @@ urlpatterns = [
                   path('', include('documents.urls')),
                   path('', include('hostelservices.urls')),
                   path('', include('journalservices.urls')),
+                  path('', include('products.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.APP_ENV == "dev":
