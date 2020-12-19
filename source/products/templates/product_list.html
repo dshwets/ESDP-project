@@ -36,11 +36,11 @@
 {% for product in products %}
     <tr>
       <th scope="row">{{ product.pk }}</th>
-        <td>{{ product.title }}</td>
-        <td>{{ product.qty }}</td>
-        <td>{{ product.selling_price }}</td>
+        <td id="{{ product.title }}">{{ product.title }}</td>
+        <td id="{{ product.title }}-{{ product.qty }}">{{ product.qty }}</td>
+        <td id="{{ product.title }}-{{ product.selling_price }}">{{ product.selling_price }}</td>
         {% if perms.product.can_change_product %}
-        <td>{{ product.purchase_price }}</td>
+        <td id="{{ product.title }}-{{ product.purchase_price }}">{{ product.purchase_price }}</td>
             <td><a href="#" class="mt-2 btn btn-info btn-sm" id="update-button">
                 {% trans 'Редактировать' %}</a></td>
         {% endif %}
