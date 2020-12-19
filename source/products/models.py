@@ -16,6 +16,7 @@ class Product(AbstractCreatedByModel):
     )
     barcode = models.IntegerField(
         null=True,
+        blank=True,
         verbose_name=_('Штрих код'),
     )
     selling_price = models.DecimalField(

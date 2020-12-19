@@ -15,7 +15,9 @@ def step_impl(context, name, last_name, middle_name):
 
 @then('I press submit button')
 def step_impl(context):
-    context.behave_driver.find_element_by_xpath("//input[@value='Добавить']").click()
+    btn = context.behave_driver.find_element_by_xpath("//input[@value='Добавить']")
+    context.behave_driver.execute_script("return arguments[0].scrollIntoView(true);", btn)
+    btn.click()
 
 
 @then('Opens serviceexecutor detail page with "{text}"')
