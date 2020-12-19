@@ -13,6 +13,4 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'products.can_add_product'
 
     def get_success_url(self):
-        # TODO
-        # return reverse('products:products_list', kwargs={'pk': self.object.pk})
-        return reverse('serviceexecutors:serviceexecutors_list')
+        return reverse('products:product_list')
