@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Список товаров' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+{% include 'partial/pagination.html' %}
+
+    {% load i18n %}
+<h3 class="mb-5 mt-4" align="center">
+   <b>{% trans 'Список товаров' %}</b>
+</h3>
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">{% trans 'Название' %}</th>
+      <th scope="col">{% trans 'Колличество' %}</th>
+      <th scope="col">{% trans 'Цена продажи' %}</th>
+        {% if perms.product.can_change_product %}
+            <th scope="col">{% trans 'Цена закупки' %}</th>
+            <th scope="col">{% trans 'Редактирование' %}</th>
+            {% endif %}
+        {% if perms.product.can_delete_product %}
+            <th scope="col">{% trans 'Удаление' %}</th>
+            {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+{% for product in products %}
+    <tr>
+      <th scope="row">{{ product.pk }}</th>
+        <td>{{ product.title }}</td>
+        <td>{{ product.qty }}</td>
+        <td>{{ product.selling_price }}</td>
+        {% if perms.product.can_change_product %}
+        <td>{{ product.purchase_price }}</td>
+            <td><a href="#" class="mt-2 btn btn-info btn-sm" id="update-button">
+                {% trans 'Редактировать' %}</a></td>
+        {% endif %}
+        {% if perms.product.can_delete_product %}
+            <td><a href="#" class="mt-2 btn btn-danger btn-sm" id="delete-button">
+                {% trans 'Удалить' %}</a></td>
+        {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    {% include 'partial/pagination.html' %}
+{% endblock %}
