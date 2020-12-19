@@ -38,9 +38,15 @@
       <th scope="row">{{ product.pk }}</th>
         <td id="{{ product.title }}">{{ product.title }}</td>
         <td id="{{ product.title }}-{{ product.qty }}">{{ product.qty }}</td>
-        <td id="{{ product.title }}-{{ product.selling_price }}">{{ product.selling_price }}</td>
+        <td id="{{ product.title }}-{{ product.selling_price }}">
+            {% if product.selling_price == None %}{% trans 'Нет данных' %}
+            {% else %}{{ product.selling_price }}
+            {% endif %}</td>
         {% if perms.product.can_change_product %}
-        <td id="{{ product.title }}-{{ product.purchase_price }}">{{ product.purchase_price }}</td>
+        <td id="{{ product.title }}-{{ product.purchase_price }}">
+            {% if product.purchase_price == None %}{% trans 'Нет данных' %}
+            {% else %}{{ product.purchase_price }}
+            {% endif %}</td>
             <td><a href="#" class="mt-2 btn btn-info btn-sm" id="update-button">
                 {% trans 'Редактировать' %}</a></td>
         {% endif %}
