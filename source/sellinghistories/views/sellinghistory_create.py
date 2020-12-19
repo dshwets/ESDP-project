@@ -2,13 +2,13 @@ from django.urls import reverse
 from django.views.generic import CreateView
 
 from products.models import Product
-from sellinghistories.forms import SellinghistoryForm
+from sellinghistories.forms import AddProductToCartForm
 from sellinghistories.models import SellingHistory
 
 
 class AddProductToCartView(CreateView):
     template_name = 'sellinghistory_create.html'
-    form_class = SellinghistoryForm
+    form_class = AddProductToCartForm
     model = SellingHistory
     permission_required = 'sellinghistory.can_add_sellinghistory'
 
@@ -21,3 +21,7 @@ class AddProductToCartView(CreateView):
 
     def get_success_url(self):
         return reverse('sellinghisoty:add_product_in_cart')
+
+
+# class CreateSellingHistory(CreateView):
+#     form_class =

@@ -8,10 +8,10 @@ from products.models import Product
 from sellinghistories.models import SellingHistory
 
 
-class SellinghistoryForm(forms.ModelForm):
+class AddProductToCartForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
-        super(SellinghistoryForm, self).__init__(*args, **kwargs)
+        super(AddProductToCartForm, self).__init__(*args, **kwargs)
 
     barcode = forms.IntegerField(label=_('Штрихкод'))
     qty = forms.IntegerField(label=_('Количество'), initial=1)
