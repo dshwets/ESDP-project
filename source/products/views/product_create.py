@@ -14,3 +14,8 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('products:product_list')
+
+    def get_form_kwargs(self):
+        kwargs = super(ProductCreateView, self).get_form_kwargs()
+        kwargs['created_by'] = self.request.user.pk
+        return kwargs
