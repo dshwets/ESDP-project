@@ -6,7 +6,7 @@ from products.models import Product
 
 class ProductListView(PermissionRequiredMixin, ListView):
     template_name = 'product_list.html'
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().filter(deleted=False)
     context_object_name = 'products'
     permission_required = 'products.can_view_product'
     paginate_by = 20
