@@ -33,6 +33,10 @@ class Product(AbstractCreatedByModel):
         blank=True,
         verbose_name=_('Цена закупки')
     )
+    deleted = models.BooleanField(
+        default=False,
+        verbose_name=_('Удален')
+    )
 
     class Meta:
         verbose_name = _('Продукт')
