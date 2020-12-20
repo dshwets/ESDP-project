@@ -38,5 +38,3 @@ class AddProductToCartForm(forms.ModelForm):
             'product_pk': Product.objects.get(barcode=self.cleaned_data['barcode']).pk,
             'qty': self.cleaned_data['qty']}
         red.lpush(f'сart:{self.user.pk}', json.dumps(cart_entry))
-        red.lrange('сart', 0, -1)
-
