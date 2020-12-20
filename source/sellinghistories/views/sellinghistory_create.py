@@ -24,6 +24,24 @@ class AddProductToCartView(CreateView):
             'user': self.request.user,
         })
         return kwargs
+    
+    def get_context_data(self, **kwargs):
+        context = super(AddProductToCartView, self).get_context_data(**kwargs)
+        red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
+        cart =  red.lrange(f'сart:{self.request.user.pk}', 0, -1)
+        list_of_products= []
+        cart_total = 0
+        if cart:
+            for cart_entry in cart:
+                cart_entry = json.loads(cart_entry)
+                product = Product.objects.get(pk=cart_entry['product_pk'])
+                cart_entry['product'] = product
+                cart_entry['total_by_item'] = product.selling_price * cart_entry['qty']
+                cart_total += cart_entry['total_by_item']
+                list_of_products.append(cart_entry)
+            context['cart'] = list_of_products
+            context['cart_total'] = cart_total
+        return context
 
     def get_success_url(self):
         return reverse('sellinghisoty:add_product_in_cart')
