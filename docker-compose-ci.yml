@@ -8,6 +8,11 @@ services:
     env_file:
       - .env.test
 
+  redis_db:
+    container_name: redis
+    image: redis:6.0.9
+    restart: always
+
   app_test:
     build:
       context: .
@@ -16,11 +21,10 @@ services:
     env_file:
       - .env.test
     container_name: apple_test
-    #TODO Изменить на UWSGI внутри докер файла
-    command: python manage.py test
     ports:
       - "80:8000"
     depends_on:
       - db
+      - redis_db
 
 

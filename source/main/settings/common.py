@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import environ
+import redis
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,6 +32,11 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [env('ALLOWED_HOSTS')]
 
+REDIS_POOL = redis.ConnectionPool(
+    host=env('REDIS_HOST'),
+    port=env('REDIS_PORT'),
+    db=env('REDIS_DB'),
+    decode_responses=True)
 
 # Application definition
 
@@ -55,6 +62,9 @@ INSTALLED_APPS = [
     'journalservices',
     'django_countries',
     'betterforms',
+    'products',
+    'sellinghistories',
+    'productincomes',
 ]
 
 MIDDLEWARE = [
@@ -148,7 +158,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '../../uploads')
 MEDIA_URL = '/media/'
-_ = lambda s: s
 
 LANGUAGES = (
       ('ru', _('Русский')),

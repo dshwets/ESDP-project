@@ -28,11 +28,21 @@
                 <p><b>{% trans 'Цена покупки' %}</b>:{{ journalservice.purchase_price.purchase_price }}</p>
             {% endif %}
             {% if perms.journalservices.can_delete_journalservice %}
-                <a href="{% url 'journalservices:journal_detail' journalservice.pk %}"
-                   class="mt-2 btn btn-info btn-sm" id="delete-button">
+                <a href="{% url 'journalservices:journal_delete' journalservice.pk %}"
+                   class="mt-2 btn btn-danger btn-sm mr-2" id="delete-button">
                     {% trans 'Удалить' %}
                 </a>
             {% endif %}
+            {% if perms.journalservices.can_change_journalservice %}
+                <a href="#"
+                   class="mt-2 btn btn-info btn-sm mr-2" id="update-button">
+                    {% trans 'Изменить' %}
+                </a>
+            {% endif %}
+            <a href="{% url 'journalservices:journal_list' %}"
+               class="mt-2 btn btn-secondary btn-sm" id="journal-list-button">
+                {% trans 'Журнал' %}
+            </a>
         </div>
     </div>
     <div>

@@ -19,14 +19,23 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')),
-    path('', include('hostelguests.urls')),
-    path('', include('aboutguests.urls')),
-    path('', include('welcomeguests.urls')),
-    path('', include('unwelcomeguests.urls')),
-    path('', include('serviceexecutors.urls')),
-    path('', include('documents.urls')),
-    path('', include('hostelservices.urls')),
-    path('', include('journalservices.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+                  path('admin/', admin.site.urls),
+                  path('accounts/', include('accounts.urls')),
+                  path('', include('hostelguests.urls')),
+                  path('', include('aboutguests.urls')),
+                  path('', include('welcomeguests.urls')),
+                  path('', include('unwelcomeguests.urls')),
+                  path('', include('serviceexecutors.urls')),
+                  path('', include('documents.urls')),
+                  path('', include('hostelservices.urls')),
+                  path('', include('journalservices.urls')),
+                  path('', include('products.urls'))
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.APP_ENV == "dev":
+    import debug_toolbar
+
+    urlpatterns.append(
+        path('__debug__/', include(debug_toolbar.urls)),
+    )

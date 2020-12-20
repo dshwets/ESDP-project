@@ -4,3 +4,4 @@ selenium==3.141.0
 behave-django==1.4.0
 factory-boy==3.1.0
 Faker==4.14.2
+behave-webdriver==0.3.0

@@ -33,7 +33,7 @@
     <tr>
         <th scope="row" id="id_journal_name">{{ journal.guest.first_name }}</th>
         <td>{{ journal.guest.last_name }}</td>
-        <td>{{journal.hostel_service.service_name }}</td>
+        <td><a href="{% url 'journalservices:journal_detail' journal.pk %}">{{journal.hostel_service.service_name }}</a></td>
         <td>{{journal.service_executor.name }} {{journal.service_executor.last_name }}</td>
         <td>{{journal.selling_price.selling_price }}</td>
         <td>{{journal.purchase_price.purchase_price }}</td>
@@ -42,7 +42,7 @@
                 <button type="button" class="btn btn-danger ml-3"> {% trans 'Изменить'%}</button></a></td>
 
 
-                <td><a href="#">
+                <td><a href="{% url 'journalservices:journal_delete' journal.pk %}">
                 <button type="button" class="btn btn-dark ml-3"> {% trans 'Удалить'%}</button></a></td>
 
     </tr>

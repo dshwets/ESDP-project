@@ -67,6 +67,14 @@
                                 <a class="dropdown-item" href="{% url 'hostelservices:hostelservices_add' %}">
                                 {% trans 'Добавить услугу' %}</a>
                             {% endif %}
+                            {% if perms.products.can_add_product %}
+                                <a class="dropdown-item" href="{% url 'products:product_create' %}">
+                                {% trans 'Создать товар' %}</a>
+                                {% endif %}
+                            {% if perms.products.can_view_product %}
+                                <a class="dropdown-item" href="{% url 'products:product_list' %}">
+                                {% trans 'Список товаров' %}</a>
+                                {% endif %}
                                 {% block dropdown_service %}{% endblock %}
                     </div>
                     </div>
