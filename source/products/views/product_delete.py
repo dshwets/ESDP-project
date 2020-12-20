@@ -9,7 +9,7 @@ from products.models import Product
 class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'product_delete.html'
     model = Product
-    permission_required = 'product.can_delete_product'
+    permission_required = 'products.can_delete_product'
 
     def get_success_url(self):
         return reverse('products:product_list')
