@@ -11,6 +11,7 @@ class ProductDeleteTestCase(TestCase):
         self.product = ProductFactory()
         self.user = UserFactory(username='some_admin')
         self.permission = Permission.objects.get(codename='can_delete_product')
+        self.permission_view = Permission.objects.get(codename='can_view_product')
         self.url = reverse('products:product_delete', kwargs={'pk': self.product.pk})
 
     def tearDown(self) -> None:
@@ -36,15 +37,18 @@ class ProductDeleteTestCase(TestCase):
 
     def test_product_delete_authorized_post_request_has_perm_product_not_found(self):
         self.user.user_permissions.add(self.permission)
+        self.user.user_permissions.add(self.permission)
         self.client.login(username='some_admin', password='pass')
         fake_id = self.product.id+25
         self.assert_response_status(reverse('products:product_delete', args=(fake_id,)), 'get', 404)
 
     def test_authorized_request_has_perm_delete_product(self):
         self.user.user_permissions.add(self.permission)
+        self.user.user_permissions.add(self.permission_view)
         self.client.login(username='some_admin', password='pass')
         redirect_url = reverse('products:product_list')
         response = self.client.post(self.url)
         self.assertRedirects(response=response, expected_url=redirect_url, status_code=302,
                              target_status_code=200, msg_prefix='', fetch_redirect_response=True)
-        self.assertFalse(Product.objects.filter(pk=self.product.pk).exists())
+        save_product = Product.objects.all().first()
+        self.assertTrue(save_product.deleted)
