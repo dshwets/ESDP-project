@@ -50,7 +50,7 @@ class CreateSellingHistory(View):
                         )
                     )
                 SellingHistory.objects.bulk_create(list_of_products)
-                red.ltrim(f'сart:{self.request.user.pk}', 0, -1)
+                red.delete(f'сart:{self.request.user.pk}')
                 #TODO
                 #нужно обновлять каждый товар
             return redirect('sellinghisoty:add_product_in_cart')
