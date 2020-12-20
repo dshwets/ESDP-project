@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import DeleteView
 
@@ -13,4 +14,8 @@ class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     def get_success_url(self):
         return reverse('products:product_list')
 
-    # TODO Надо написать логику чтобы пользователь не мог удалить товар с которым были уже операции
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.deleted = True
+        self.object.save()
+        return HttpResponseRedirect(reverse('products:product_list'))
