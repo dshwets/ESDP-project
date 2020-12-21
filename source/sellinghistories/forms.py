@@ -33,8 +33,20 @@ class AddProductToCartForm(forms.ModelForm):
         return barcode
 
     def save(self, commit=False):
+        updated = False
         red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
-        cart_entry = {
+        new_cart_entry = {
             'product_pk': Product.objects.get(barcode=self.cleaned_data['barcode']).pk,
-            'qty': self.cleaned_data['qty']}
-        red.lpush(f'сart:{self.user.pk}', json.dumps(cart_entry))
+            'qty': self.cleaned_data['qty']
+        }
+        redis_list = red.lrange(f'сart:{self.user.pk}', 0, -1)
+        for redis_list_entry in redis_list:
+            redis_list_entry_as_dict = json.loads(redis_list_entry)
+            if redis_list_entry_as_dict["product_pk"] == new_cart_entry["product_pk"]:
+                redis_list_entry_as_dict['qty'] += new_cart_entry['qty']
+                index = redis_list.index(redis_list_entry)
+                redis_list_entry = json.dumps(redis_list_entry_as_dict)
+                red.lset(f'сart:{self.user.pk}', index, redis_list_entry)
+                updated = True
+        if not updated:
+            red.lpush(f'сart:{self.user.pk}', json.dumps(new_cart_entry))
