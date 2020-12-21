@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
+    'bootstrap4',
+    'bootstrap_datepicker_plus',
     'auditlog',
     'common',
     'accounts',
@@ -168,3 +170,7 @@ DATE_INPUT_FORMATS = ['%d.%m.%Y']
 
 LOGIN_REDIRECT_URL = 'hostelguests:guest_list'
 LOGOUT_REDIRECT_URL = 'hostelguests:guest_list'
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+    }
