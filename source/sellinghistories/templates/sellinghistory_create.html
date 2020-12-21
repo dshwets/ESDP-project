@@ -6,8 +6,8 @@
     {% trans 'Добавить' as button_text %}
     {% include 'partial/form.html' with form_method='POST' button_text=button_text %}
     <h3>{% trans 'Корзина' %}:</h3>
-    <table class="table">
     {% if cart %}
+        <table class="table">
         <thead>
             <tr>
                 <th scope="col">{% trans 'Наименование' %}</th>
@@ -26,7 +26,7 @@
             </tr>
             {% endfor %}
             <tr>
-                <td><b>ИТОГО:</b></td>
+                <td><b>{% trans 'ИТОГО:' %}</b></td>
                 <td></td>
                 <td></td>
                 <td class="mt-2"><b>{{ cart_total }}</b></td>
