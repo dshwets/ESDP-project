@@ -36,28 +36,9 @@ class AddProductToCartView(CreateView):
                 cart_entry = json.loads(cart_entry)
                 product = Product.objects.get(pk=cart_entry['product_pk'])
                 cart_entry['product'] = product
-                list_of_products_product_value = []
-                for product_value in list_of_products:
-                    if product_value:
-                        list_of_products_product_value.append(product_value['product'])
-                if cart_entry['product'] not in list_of_products_product_value:
-                    cart_entry['total_by_item'] = product.selling_price * cart_entry['qty']
-                    list_of_products.append(cart_entry)
-                else:
-                    cart_entry['total_by_item'] = product.selling_price * cart_entry['qty']
-                    i = 0
-                    for data in list_of_products:
-                        if data['product'] == cart_entry['product']:
-                            break
-                        else:
-                            i += 1
-                    cart_entry_existed = list_of_products[i]
-                    cart_entry_existed['qty'] += cart_entry['qty']
-                    cart_entry_existed['total_by_item'] = product.selling_price * cart_entry_existed['qty']
-                    list_of_products[i] = cart_entry_existed
-            for product_entry in list_of_products:
-                cart_total += product_entry['total_by_item']
-
+                cart_entry['total_by_item'] = product.selling_price * cart_entry['qty']
+                cart_total += cart_entry['total_by_item']
+                list_of_products.append(cart_entry)
             context['cart'] = list_of_products
             context['cart_total'] = cart_total
         return context
