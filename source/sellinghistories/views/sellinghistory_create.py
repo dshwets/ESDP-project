@@ -28,7 +28,7 @@ class AddProductToCartView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(AddProductToCartView, self).get_context_data(**kwargs)
         red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
-        cart = red.lrange(f'сart:{self.request.user.pk}', 0, -1)
+        cart = red.lrange(f'cart:{self.request.user.pk}', 0, -1)
         list_of_products = []
         cart_total = 0
         if cart:
@@ -51,7 +51,7 @@ class CreateSellingHistory(View):
 
     def get(self, request, *args, **kwargs):
         red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
-        cart = red.lrange(f'сart:{self.request.user.pk}', 0, -1)
+        cart = red.lrange(f'cart:{self.request.user.pk}', 0, -1)
         list_of_products = []
         current_good_list = []
         if cart:
@@ -78,6 +78,6 @@ class CreateSellingHistory(View):
                     current_good_list[product_index] = product
             SellingHistory.objects.bulk_create(list_of_products)
             Product.objects.bulk_update(current_good_list, ['qty'])
-            red.delete(f'сart:{self.request.user.pk}')
+            red.delete(f'cart:{self.request.user.pk}')
 
         return redirect('sellinghisoty:add_product_in_cart')
