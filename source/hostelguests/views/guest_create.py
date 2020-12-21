@@ -1,5 +1,6 @@
 import base64
 
+from bootstrap_datepicker_plus import DatePickerInput
 from django.core.files.base import ContentFile
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect
@@ -16,6 +17,12 @@ class GuestCreateView(PermissionRequiredMixin, CreateView):
     form_class = GuestForm
     model = Guest
     permission_required = 'hostelguests.can_add_guest'
+
+    def get_form(self, form_class=None):
+        form = super().get_form()
+        form.fields['birth_date'].widget = DatePickerInput(format='%d.%m.%Y')
+        form.fields['expiry_passport_date'].widget = DatePickerInput(format='%d.%m.%Y')
+        return form
 
     def form_valid(self, form):
         if form.cleaned_data['hidden_base64'] != '':
