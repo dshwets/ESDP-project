@@ -17,6 +17,7 @@ def step_impl(context, barcode, qty):
     context.behave_driver.find_element_by_id("id_barcode").send_keys("123456")
     context.behave_driver.find_element_by_id("id_qty").send_keys("10")
 
+
 @then('I pess purchase goods button')
 def step_impl(context):
     purchase_cart_url = reverse('sellinghisoty:create_sellinghistory')
