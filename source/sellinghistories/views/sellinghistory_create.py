@@ -53,7 +53,8 @@ class CreateSellingHistory(PermissionRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
-        cart = red.lrange(f'cart:{self.request.user.pk}', 0, -1)
+        cart_name = f'cart:{self.request.user.pk}'
+        cart = red.lrange(cart_name, 0, -1)
         list_of_products = []
         current_good_list = []
         if cart:
@@ -80,6 +81,6 @@ class CreateSellingHistory(PermissionRequiredMixin, View):
                     current_good_list[product_index] = product
             SellingHistory.objects.bulk_create(list_of_products)
             Product.objects.bulk_update(current_good_list, ['qty'])
-            red.delete(f'cart:{self.request.user.pk}')
+            red.delete(cart_name)
 
         return redirect('sellinghisoty:add_product_in_cart')

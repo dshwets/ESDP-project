@@ -76,21 +76,22 @@ class GuestCreateTestCase(TestCase):
 
     def testauthorized_post_request_has_perm_add_product_in_cart(self):
         data = self.common_data()
+        cart_name = f'cart:{self.user.pk}'
         self.user.user_permissions.add(self.permission)
         self.client.login(username='some_admin', password='pass')
-        self.assertEqual(self.red.lrange(f'cart:{self.user.pk}', 0, -1), [])
+        self.assertEqual(self.red.lrange(cart_name, 0, -1), [])
         response = self.client.post(self.url, data)
-        self.assertEqual(self.red.llen(f'cart:{self.user.pk}'), 1)
+        self.assertEqual(self.red.llen(cart_name), 1)
         self.assertEqual(
-            json.loads(self.red.lrange(f'cart:{self.user.pk}', 0, -1)[0])['product_pk'],
+            json.loads(self.red.lrange(cart_name, 0, -1)[0])['product_pk'],
             self.product.pk
         )
         self.assertEqual(
-            json.loads(self.red.lrange(f'cart:{self.user.pk}', 0, -1)[0])['qty'],
+            json.loads(self.red.lrange(cart_name, 0, -1)[0])['qty'],
             self.product.qty
         )
         self.client.get(self.url_purchase)
-        self.assertEqual(self.red.lrange(f'cart:{self.user.pk}', 0, -1), [])
+        self.assertEqual(self.red.lrange(cart_name, 0, -1), [])
         self.assertEqual(Product.objects.get(pk=self.product.pk).qty, 0)
         self.assertTrue(SellingHistory.objects.all().exists())
         self.assertEqual(response.status_code, 302)
