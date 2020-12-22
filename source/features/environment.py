@@ -3,7 +3,7 @@ import os
 import re
 import time
 from behave_webdriver.driver import ChromeOptions
-
+from os.path import expanduser
 
 def save_screenshot(context, step):
     timestamp = time.strftime("%Y-%m-%dT%H:%M:%S")
@@ -18,17 +18,14 @@ def save_screenshot(context, step):
 
 
 def before_all(context):
-    userdata = context.config.userdata
-
-    headless = userdata.get('headless', 'True')
-
     chrome_options = ChromeOptions()
-    if headless == 'True':
-        chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     context.behave_driver = behave_webdriver.Chrome(
-        chrome_options=chrome_options)
+        chrome_options=chrome_options,
+        executable_path='./features/chromedriver/chromedriver'
+    )
 
 
 def after_all(context):
