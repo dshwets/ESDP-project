@@ -16,7 +16,6 @@ services:
   app_test:
     build:
       context: .
-      dockerfile: Dockerfile.acceptance_tests
       args:
         REQUIREMENTS_FILE: test
     env_file:
@@ -27,3 +26,5 @@ services:
     depends_on:
       - db
       - redis_db
+
+

@@ -35,5 +35,3 @@ services:
       - app_migration
     env_file:
       - .env
-      - volumes:
-          - uploads_file:/app/source/uploads
