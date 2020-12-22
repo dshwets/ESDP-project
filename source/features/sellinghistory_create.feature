@@ -6,6 +6,6 @@ Feature: Creating new product
     Then I enter username "admin" and password "admin"
     And I click on login button
     Then I Open sell items page
-    Then I enter product "{barcode}" and  qty "{qty}"
+    Then I enter product "123456" and  qty "10"
     And I press submit button
     Then I pess purchase goods button
