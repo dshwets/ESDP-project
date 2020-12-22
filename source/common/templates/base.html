@@ -70,11 +70,15 @@
                             {% if perms.products.can_add_product %}
                                 <a class="dropdown-item" href="{% url 'products:product_create' %}">
                                 {% trans 'Создать товар' %}</a>
-                                {% endif %}
+                            {% endif %}
                             {% if perms.products.can_view_product %}
                                 <a class="dropdown-item" href="{% url 'products:product_list' %}">
                                 {% trans 'Список товаров' %}</a>
-                                {% endif %}
+                            {% endif %}
+                            {% if perms.sellinghistories.can_add_sellinghistory %}
+                                <a class="dropdown-item" href="{% url 'sellinghisoty:add_product_in_cart' %}">
+                                {% trans 'Продажа товаров' %}</a>
+                            {% endif %}
                                 {% block dropdown_service %}{% endblock %}
                     </div>
                     </div>

@@ -21,6 +21,13 @@ services:
     env_file:
       - .env
 
+  redis_db:
+    container_name: redis
+    image: redis:6.0.9
+    restart: always
+    env_file:
+      - .env
+
   web:
     image: applehostel/main_app:${TAG}
     build: .

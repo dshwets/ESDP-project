@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Продажа товаров' %}{% endblock %}
+{% block content %}
+    <h1>{% trans 'Продажа товаров' %}</h1>
+    {% trans 'Добавить' as button_text %}
+    {% include 'partial/form.html' with form_method='POST' button_text=button_text %}
+    <h3>{% trans 'Корзина' %}:</h3>
+    {% if cart %}
+        <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{% trans 'Наименование' %}</th>
+                <th scope="col">{% trans 'Количество' %}</th>
+                <th scope="col">{% trans 'Цена за шт' %}</th>
+                <th scope="col">{% trans 'Цена по позиции' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cart_entry in cart %}
+            <tr>
+                <td>{{ cart_entry.product.title }}</td>
+                <td>{{ cart_entry.qty }}</td>
+                <td>{{ cart_entry.product.selling_price }}</td>
+                <td>{{ cart_entry.total_by_item }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td><b>{% trans 'ИТОГО:' %}</b></td>
+                <td></td>
+                <td></td>
+                <td class="mt-2"><b>{{ cart_total }}</b></td>
+            </tr>
+        </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">{% trans 'В корзине пока ничего нет :)'%}</p>
+
+    {% endif %}
+    <a href="{% url 'sellinghisoty:create_sellinghistory' %} " class="btn btn-success">{% trans 'Оформить продажу' %}</a>
+{% endblock %}
