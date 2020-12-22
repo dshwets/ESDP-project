@@ -10,10 +10,14 @@ def step_impl(context):
 
 
 @then('I enter product "{barcode}" and  qty "{qty}"')
-def step_impl(context):
-    ProductFactory(barcode = 123456, qty=100)
-    context.behave_driver.find_element_by_id("id_barcode").send_keys("123456")
-    context.behave_driver.find_element_by_id("id_qty").send_keys("10")
+def step_impl(context, barcode, qty):
+    ProductFactory(barcode=barcode, qty=qty)
+
+    def find_context_and_send_keys(id_element, value):
+        context.behave_driver.find_element_by_id({id_element}).send_keys(f"{value}")
+
+    find_context_and_send_keys(barcode, 123456)
+    find_context_and_send_keys(qty, 10)
 
 
 @then('I pess purchase goods button')
