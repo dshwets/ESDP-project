@@ -1,6 +1,7 @@
 import json
 
 import redis
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
@@ -12,11 +13,11 @@ from sellinghistories.forms import AddProductToCartForm
 from sellinghistories.models import SellingHistory
 
 
-class AddProductToCartView(CreateView):
+class AddProductToCartView(PermissionRequiredMixin, CreateView):
     template_name = 'sellinghistory_create.html'
     form_class = AddProductToCartForm
     model = SellingHistory
-    permission_required = 'sellinghistory.can_add_sellinghistory'
+    permission_required = 'sellinghistories.can_add_sellinghistory'
 
     def get_form_kwargs(self):
         kwargs = super(AddProductToCartView, self).get_form_kwargs()
@@ -47,7 +48,8 @@ class AddProductToCartView(CreateView):
         return reverse('sellinghisoty:add_product_in_cart')
 
 
-class CreateSellingHistory(View):
+class CreateSellingHistory(PermissionRequiredMixin, View):
+    permission_required = 'sellinghistories.can_add_sellinghistory'
 
     def get(self, request, *args, **kwargs):
         red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
