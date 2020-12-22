@@ -10,15 +10,17 @@
   - docker images | grep $CI_COMMIT_SHA | awk '{print $3}' | xargs --no-run-if-empty docker rmi
 
 stages:
-  - test
+  - unit_tests
+  - acceptance_tests
   - build_and_push
   - deploy-staging
 
 services:
   - docker:dind
-tests:
+  - selenium/standalone-chrome
+unit_tests:
   image: docker/compose:latest
-  stage: test
+  stage: unit_tests
   variables:
     TAG: $CI_COMMIT_SHA
   script:
@@ -27,6 +29,21 @@ tests:
     - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build app_test
     - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA run  -T app_test ./manage.py test
 
+  after_script:
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA down
+    - *delete_current_generated_images
+
+acceptance_tests:
+  image: docker/compose:latest
+  stage: acceptance_tests
+
+  variables:
+    TAG: $CI_COMMIT_SHA
+  script:
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build db
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA up -d db
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build app_test
+    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA run  -T app_test ./manage.py behave
   after_script:
     - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA down
     - *delete_current_generated_images
