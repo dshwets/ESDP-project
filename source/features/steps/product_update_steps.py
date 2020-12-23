@@ -1,6 +1,7 @@
 from behave import then
 from behave_webdriver import driver
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from products.models import Product
@@ -22,11 +23,8 @@ def step_impl(context):
     context.behave_driver.find_element_by_id("id_purchase_price").send_keys(Keys.PAGE_DOWN)
 
 
-@then('I press confirm "save" button')
+@then('I confirm button')
 def step_impl(context):
-    btn = context.behave_driver.find_element_by_xpath("//input[@value='Сохранить']")
-    actions = ActionChains(driver)
-    actions.move_to_element(btn)
-    actions.perform()
-    # context.behave_driver.execute_script("return arguments[0].scrollIntoView(true);", btn)
+    btn = context.behave_driver.find_element_by_id("submit")
+    context.behave_driver.execute_script("return arguments[0].scrollIntoView(true);", btn)
     btn.click()

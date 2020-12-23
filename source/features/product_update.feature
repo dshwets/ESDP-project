@@ -8,4 +8,4 @@ Feature: Update product
     Then Opens hostel product list page
     And I press update button on the product
     And Changes title and qty product
-    And I press confirm save button
+    And I confirm button
