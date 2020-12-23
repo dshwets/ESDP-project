@@ -47,7 +47,7 @@
             {% if product.purchase_price == None %}{% trans 'Нет данных' %}
             {% else %}{{ product.purchase_price }}
             {% endif %}</td>
-            <td><a href="#" class="mt-2 btn btn-info btn-sm" id="update-button">
+            <td><a href="{% url 'products:product_update' product.pk %}" class="mt-2 btn btn-info btn-sm" id="update-button">
                 {% trans 'Редактировать' %}</a></td>
         {% endif %}
         {% if perms.product.can_delete_product %}

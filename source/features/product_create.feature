@@ -7,4 +7,4 @@ Feature: Creating new product
     And I click on login button
     Then Opens create product page
     Then I enter title "test" and last qty "10"
-    And I press submit button
+    And I confirm button
