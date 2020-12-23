@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load i18n %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
 {% block styles %}
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
-    {% load bootstrap4 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript jquery='full' %}
 {% endblock %}
 {% block title %}{% trans 'Добавление гостя' %}{% endblock %}
 
