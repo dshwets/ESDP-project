@@ -45,7 +45,7 @@ class AddProductToCartView(PermissionRequiredMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse('sellinghisoty:add_product_in_cart')
+        return reverse('sellinghistory:add_product_in_cart')
 
 
 class CreateSellingHistory(PermissionRequiredMixin, View):
@@ -83,4 +83,4 @@ class CreateSellingHistory(PermissionRequiredMixin, View):
             Product.objects.bulk_update(current_good_list, ['qty'])
             red.delete(cart_name)
 
-        return redirect('sellinghisoty:add_product_in_cart')
+        return redirect('sellinghistory:add_product_in_cart')

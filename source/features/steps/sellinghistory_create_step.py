@@ -5,7 +5,7 @@ from products.factories import ProductFactory
 
 @then('I Open sell items page')
 def step_impl(context):
-    sell_items_url = reverse('sellinghisoty:add_product_in_cart')
+    sell_items_url = reverse('sellinghistory:add_product_in_cart')
     context.behave_driver.get(context.get_url(sell_items_url))
 
 
@@ -22,5 +22,5 @@ def step_impl(context, barcode, qty):
 
 @then('I pess purchase goods button')
 def step_impl(context):
-    purchase_cart_url = reverse('sellinghisoty:create_sellinghistory')
+    purchase_cart_url = reverse('sellinghistory:create_sellinghistory')
     context.behave_driver.get(context.get_url(purchase_cart_url))

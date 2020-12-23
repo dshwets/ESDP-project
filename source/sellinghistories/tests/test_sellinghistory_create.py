@@ -13,13 +13,13 @@ from products.factories import ProductFactory
 from sellinghistories.models import SellingHistory
 
 
-class GuestCreateTestCase(TestCase):
+class SellingHistoryTestCase(TestCase):
     def setUp(self) -> None:
         self.product = ProductFactory(barcode=123456, qty=100)
         self.user = UserFactory(username='some_admin')
         self.permission = Permission.objects.get(codename='can_add_sellinghistory')
-        self.url = reverse('sellinghisoty:add_product_in_cart')
-        self.url_purchase = reverse('sellinghisoty:create_sellinghistory')
+        self.url = reverse('sellinghistory:add_product_in_cart')
+        self.url_purchase = reverse('sellinghistory:create_sellinghistory')
         self.red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
         self.red.flushall()
 

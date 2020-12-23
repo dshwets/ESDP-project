@@ -1,9 +1,9 @@
 from django.urls import path
 
 from sellinghistories.views.sellinghistory_create import AddProductToCartView, CreateSellingHistory
-from sellinghistories.views.sellinghistory_delete import DeletePRoductFromCart
+from sellinghistories.views.delete_product_from_cart import DeletePRoductFromCart
 
-app_name = 'sellinghisoty'
+app_name = 'sellinghistory'
 
 urlpatterns = [
     path('sellinghistory/add/', AddProductToCartView.as_view(), name='add_product_in_cart'),
