@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'История продаж' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+{% include 'partial/pagination.html' %}
+    {% load i18n %}
+<h3 class="mb-5 mt-4" align="center">
+   <b>{% trans 'История продаж' %}</b>
+</h3>
+    <table class="table">
+  <thead>
+    <tr>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Продукт</th>
+        <th scope="col">Цена продажи</th>
+        <th scope="col">Количество</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+  </thead>
+{% for s_his in sel_his %}
+  <tbody>
+    <tr>
+        <th scope="row" id="id_sel_his_guest_name">{{ s_his.guest.first_name }}</th>
+        <td>{{ s_his.guest.last_name }}</td>
+        <td><a href="#">{{s_his.product.title}}</a></td>
+        <td>{{s_his.selling_price }}</td>
+        <td>{{s_his.qty }}</td>
+
+                <td><a href="#">
+                <button type="button" class="btn btn-danger ml-3"> {% trans 'Изменить'%}</button></a></td>
+
+
+                <td><a href="#">
+                <button type="button" class="btn btn-dark ml-3"> {% trans 'Удалить'%}</button></a></td>
+
+    </tr>
+  </tbody>
+
+{% endfor %}
+</table>
+{% endblock %}
