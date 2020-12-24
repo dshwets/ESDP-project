@@ -8,14 +8,14 @@ import redis
 from products.factories import ProductFactory
 
 
-class GuestCreateTestCase(TestCase):
+class DeleteItemFromCartTestCase(TestCase):
     def setUp(self) -> None:
         self.product = ProductFactory(barcode=123456, qty=100)
         self.user = UserFactory(username='some_admin')
         self.permission = Permission.objects.get(codename='can_delete_sellinghistory')
         self.permission_add_to_cart = Permission.objects.get(codename='can_add_sellinghistory')
-        self.url = reverse('sellinghisoty:remove_product_from_cart', args=[0])
-        self.url_add = reverse('sellinghisoty:add_product_in_cart')
+        self.url = reverse('sellinghistory:remove_product_from_cart', args=[0])
+        self.url_add = reverse('sellinghistory:add_product_in_cart')
         self.red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
         self.red.flushall()
 
@@ -65,5 +65,5 @@ class GuestCreateTestCase(TestCase):
         self.assertEqual(self.red.lrange(cart_name, 0, -1), [])
         self.client.post(self.url_add, data)
         self.assertEqual(self.red.llen(cart_name), 1)
-        self.client.get(reverse('sellinghisoty:remove_product_from_cart', kwargs={'pk': 0}))
+        self.client.get(reverse('sellinghistory:remove_product_from_cart', kwargs={'pk': 0}))
         self.assertEqual(self.red.llen(cart_name), 0)

@@ -15,6 +15,6 @@ class DeletePRoductFromCart(PermissionRequiredMixin, View):
         cart_entry = cart[self.kwargs['pk']]
         red.lrem(cart_name, 0, cart_entry)
 
-        return redirect('sellinghisoty:add_product_in_cart')
+        return redirect('sellinghistory:add_product_in_cart')
 
 

@@ -25,7 +25,7 @@
                 <td>{{ cart_entry.product.selling_price }}</td>
                 <td>{{ cart_entry.total_by_item }}</td>
                 <td>
-                    <a href="{% url 'sellinghisoty:remove_product_from_cart' forloop.counter0 %}">
+                    <a href="{% url 'sellinghistory:remove_product_from_cart' forloop.counter0 %}">
                         {% trans 'Удалить' %}
                     </a>
                 </td>
@@ -44,5 +44,5 @@
     <p class="text-center">{% trans 'В корзине пока ничего нет :)'%}</p>
 
     {% endif %}
-    <a href="{% url 'sellinghisoty:create_sellinghistory' %} " class="btn btn-success">{% trans 'Оформить продажу' %}</a>
+    <a href="{% url 'sellinghistory:create_sellinghistory' %} " class="btn btn-success">{% trans 'Оформить продажу' %}</a>
 {% endblock %}

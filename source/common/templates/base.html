@@ -76,7 +76,7 @@
                                 {% trans 'Список товаров' %}</a>
                             {% endif %}
                             {% if perms.sellinghistories.can_add_sellinghistory %}
-                                <a class="dropdown-item" href="{% url 'sellinghisoty:add_product_in_cart' %}">
+                                <a class="dropdown-item" href="{% url 'sellinghistory:add_product_in_cart' %}">
                                 {% trans 'Продажа товаров' %}</a>
                             {% endif %}
                                 {% block dropdown_service %}{% endblock %}
