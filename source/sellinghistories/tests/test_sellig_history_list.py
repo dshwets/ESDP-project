@@ -10,10 +10,7 @@ from sellinghistories.factories import SellingHistoryFactory
 
 class SellingHistoryListViewTestCase(TestCase):
     def setUp(self) -> None:
-        self.sel_his = SellingHistoryFactory(
-            guest=GuestFactory(),
-            product=ProductFactory()
-        )
+        self.sel_his = SellingHistoryFactory()
         self.user = UserFactory(username='some_admin')
         self.permission_add = Permission.objects.get(codename='can_view_sellinghistory')
         self.url = reverse('sellinghistory:list_sellinghistory')
