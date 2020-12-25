@@ -57,4 +57,6 @@ class ProductIncomes(models.Model):
 
     def __str__(self):
         return f'{self.incomes.services_executor} {self.product}'
+
+
 auditlog.register(ProductIncomes)
