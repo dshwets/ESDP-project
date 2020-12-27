@@ -34,6 +34,7 @@ class ServiceExecutorCreateTestCase(TestCase):
             'name': 'test_name',
             'last_name': 'test_surname',
             'middle_name': 'test_middlename',
+            'payment': 'cash',
             'hostel_service': self.hostel_service.pk,
         }
         self.client.login(username='some_admin', password='pass')
@@ -54,6 +55,7 @@ class ServiceExecutorCreateTestCase(TestCase):
             'name': 'test_name',
             'last_name': 'test_surname',
             'middle_name': 'test_middlename',
+            'payment': 'cash',
             'hostel_service': self.hostel_service.pk,
         }
         url = reverse('serviceexecutors:serviceexecutor_create')
@@ -70,6 +72,7 @@ class ServiceExecutorCreateTestCase(TestCase):
             'name': '',
             'last_name': 'test_surname',
             'middle_name': 'test_middlename',
+            'payment': 'cash',
             'hostel_service': self.hostel_service.pk,
         }
         self.user.user_permissions.add(self.permission_add)
@@ -84,6 +87,7 @@ class ServiceExecutorCreateTestCase(TestCase):
             'name': 'test_name',
             'last_name': '',
             'middle_name': 'test_middlename',
+            'payment': 'cash',
             'hostel_service': self.hostel_service.pk,
         }
         self.user.user_permissions.add(self.permission_add)
@@ -97,6 +101,7 @@ class ServiceExecutorCreateTestCase(TestCase):
         data = {
             'name': 'test_name',
             'last_name': 'test_surname',
+            'payment': 'cash',
             'middle_name': 'test_middlename',
         }
         self.user.user_permissions.add(self.permission_add)

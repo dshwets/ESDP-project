@@ -4,6 +4,12 @@ from django.utils.translation import gettext_lazy as _
 from common.models import AbstractDatetimeModel
 
 
+STATUS_PAYMENT = [
+    ('cash', 'Наличный'),
+    ('non-cash', 'Безналичный')
+]
+
+
 class ServiceExecutor(AbstractDatetimeModel):
     name = models.CharField(
         max_length=255,
@@ -18,6 +24,18 @@ class ServiceExecutor(AbstractDatetimeModel):
         verbose_name=_('Отчество'),
         blank=True,
         default='',
+    )
+    phone = models.CharField(
+        max_length=15,
+        null=True,
+        blank=True,
+        verbose_name=_('Номер телефона'),
+    )
+    payment = models.CharField(
+        max_length=20,
+        choices=STATUS_PAYMENT,
+        default='cash',
+        verbose_name='Тип оплаты'
     )
     hostel_service = models.ForeignKey(
         'hostelservices.HostelService',
