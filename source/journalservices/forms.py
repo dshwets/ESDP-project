@@ -27,3 +27,8 @@ class JournalServiceForm(forms.ModelForm):
     def clean_guest(self):
         guest = self.guest
         return guest
+
+class JournalServiceUpdateForm(forms.ModelForm):
+    class Meta:
+        model = JournalService
+        exclude = ['guest']

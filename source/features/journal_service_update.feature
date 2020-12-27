@@ -7,4 +7,3 @@ Feature: Update JournalService
     And I click on login button
     Then Opens journal service update page
     And editing data
-    And I press confirm add button
