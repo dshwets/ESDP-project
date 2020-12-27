@@ -22,6 +22,7 @@ class ServiceExecutorUpdateTestCase(TestCase):
             'name': 'TestName',
             'last_name': 'TestLastName',
             'middle_name': 'TestMiddleName',
+            'payment': 'cash',
         }
         return data
 
@@ -66,6 +67,7 @@ class ServiceExecutorUpdateTestCase(TestCase):
             'name': '',
             'last_name': self.serviceexecutor.last_name,
             'middle_name': self.serviceexecutor.middle_name,
+            'payment': 'cash',
         }
         self.user.user_permissions.add(self.permission)
         self.client.login(username='some_admin', password='pass')
@@ -78,6 +80,7 @@ class ServiceExecutorUpdateTestCase(TestCase):
             'name': self.serviceexecutor.name,
             'last_name': '',
             'middle_name': self.serviceexecutor.middle_name,
+            'payment': 'cash',
         }
         self.user.user_permissions.add(self.permission)
         self.client.login(username='some_admin', password='pass')
