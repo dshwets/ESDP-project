@@ -34,8 +34,8 @@
                 </a>
             {% endif %}
             {% if perms.journalservices.can_change_journalservice %}
-                <a href="#"
-                   class="mt-2 btn btn-info btn-sm mr-2" id="update-button">
+                <a href="{% url 'journalservices:journal_update' journalservice.pk %}"
+                   class="mt-2 btn btn-danger btn-sm" id="update-button">
                     {% trans 'Изменить' %}
                 </a>
             {% endif %}
