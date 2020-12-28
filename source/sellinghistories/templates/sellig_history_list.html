@@ -40,7 +40,7 @@
                 <button type="button" class="btn btn-danger ml-3"> {% trans 'Изменить'%}</button></a></td>
 
 
-                <td><a href="#">
+                <td><a href="{% url 'sellinghistory:sellinghistory_delete' pk=s_his.pk %}">
                 <button type="button" class="btn btn-dark ml-3"> {% trans 'Удалить'%}</button></a></td>
 
     </tr>
