@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+    {% trans 'Удалить запись из журнала продаж ' %}{{ product.title }}
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <h4 class="my-3">{% trans 'Вы уверены, что хотите удалить эту запись из истории?' %}</h4>
+        <p>{% trans 'Наименование товара' %}: {{  sellinghistory.product.title }}</p>
+        <p>{% trans 'Количество' %}:{{ sellinghistory.qty }}</p>
+        <input class="btn btn-danger" type="submit" value="{% trans 'Да' %}">
+        <a class="btn btn-primary" href="{% url 'sellinghistory:list_sellinghistory' %}">{% trans 'Нет' %}</a>
+    </form>
+{% endblock %}
