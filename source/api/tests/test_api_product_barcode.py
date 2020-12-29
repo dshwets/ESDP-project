@@ -7,7 +7,7 @@ from django.urls import reverse
 from products.factories import ProductFactory
 
 
-class HostelServiceDetailViewTestCase(TestCase):
+class ProductBarcodeDetailViewTestCase(TestCase):
 
     def setUp(self):
         self.permission = Permission.objects.get(codename='can_view_product')
