@@ -39,14 +39,24 @@ acceptance_tests:
 
   variables:
     TAG: $CI_COMMIT_SHA
+  before_script:
+    - apk update && apk add bash
   script:
     - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build db
     - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA up -d db
     - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build app_test
+    - mkdir -p $PWD/screenshots/$TAG
     - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA run  -T app_test ./manage.py behave
   after_script:
+    - container_id=$(docker ps -aqf "ancestor=applehostel/main_app:$TAG")
+    - docker cp $container_id:code/screenshots ./screenshots/$TAG
     - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA down
     - *delete_current_generated_images
+  artifacts:
+    when: on_failure
+    paths:
+      - screenshots/
+    expire_in: 2 days
 
 build_and_push:
   image: docker/compose:latest
