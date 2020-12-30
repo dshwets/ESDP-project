@@ -79,6 +79,10 @@
                                 <a class="dropdown-item" href="{% url 'sellinghistory:add_product_in_cart' %}">
                                 {% trans 'Продажа товаров' %}</a>
                             {% endif %}
+                            {% if perms.productincomes.can_add_incomes %}
+                                <a class="dropdown-item" href="{% url 'product_incom:product_incom_create' %}">
+                                {% trans 'Приход товаров' %}</a>
+                            {% endif %}
                                 {% block dropdown_service %}{% endblock %}
                     </div>
                     </div>
