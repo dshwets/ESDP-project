@@ -7,7 +7,21 @@
   - ssh-keyscan -H $DEPLOY_SERVER >> ~/.ssh/known_hosts
 
 .delete_current_generated_images_script: &delete_current_generated_images
+  - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA down
   - docker images | grep $CI_COMMIT_SHA | awk '{print $3}' | xargs --no-run-if-empty docker rmi
+
+.prepare_containers_for_tests_script: &prepare_containers_for_tests
+  - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build db
+  - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA up -d db
+  - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build app_test
+
+.run_tests_script: &run_tests
+  - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA run -T app_test ./manage.py $TEST_COMMAND
+
+.copy_screenshots_from_container_script: &copy_screenshots_from_container
+  - mkdir -p $PWD/screenshots
+  - container_id=$(docker ps -aqf "ancestor=applehostel/main_app:$TAG")
+  - docker cp $container_id:code/screenshots ./screenshots/$TAG || true
 
 stages:
   - unit_tests
@@ -17,40 +31,32 @@ stages:
 
 services:
   - docker:dind
-  - selenium/standalone-chrome
+
 unit_tests:
   image: docker/compose:latest
   stage: unit_tests
   variables:
     TAG: $CI_COMMIT_SHA
+    TEST_COMMAND: test
+  before_script:
+    - *prepare_containers_for_tests
   script:
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build db
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA up -d db
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build app_test
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA run  -T app_test ./manage.py test
-
+    - *run_tests
   after_script:
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA down
     - *delete_current_generated_images
 
 acceptance_tests:
   image: docker/compose:latest
   stage: acceptance_tests
-
   variables:
     TAG: $CI_COMMIT_SHA
+    TEST_COMMAND: behave
   before_script:
-    - apk update && apk add bash
+    - *prepare_containers_for_tests
   script:
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build db
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA up -d db
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA build app_test
-    - mkdir -p $PWD/screenshots/$TAG
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA run  -T app_test ./manage.py behave
+    - *run_tests
   after_script:
-    - container_id=$(docker ps -aqf "ancestor=applehostel/main_app:$TAG")
-    - docker cp $container_id:code/screenshots ./screenshots/$TAG
-    - docker-compose -f docker-compose-ci.yml -p $CI_COMMIT_SHA down
+    - *copy_screenshots_from_container
     - *delete_current_generated_images
   artifacts:
     when: on_failure
@@ -87,8 +93,7 @@ deploy-staging:
   script:
     - scp docker-compose.yml $DEPLOY_USER@$DEPLOY_SERVER:./docker-compose.yml
     - scp .env $DEPLOY_USER@$DEPLOY_SERVER:./.env
-    - ssh -T $DEPLOY_USER@$DEPLOY_SERVER  "echo '$DOCKER_REGISTRY_PASSWORD' | sudo docker login --username $DOCKER_REGISTRY_LOGIN --password-stdin && sudo  TAG=$TAG docker-compose pull"
-    - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo docker ps -aq |  xargs --no-run-if-empty sudo docker rm -f"
+    - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "echo '$DOCKER_REGISTRY_PASSWORD' | sudo docker login --username $DOCKER_REGISTRY_LOGIN --password-stdin && sudo  TAG=$TAG docker-compose pull"
+    - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo docker ps -aq | xargs --no-run-if-empty sudo docker rm -f"
     - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo TAG=$TAG docker-compose up -d"
-  after_script:
     - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo docker image prune -a -f"
