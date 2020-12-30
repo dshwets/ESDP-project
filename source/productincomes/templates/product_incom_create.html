@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Приход товаров' %}{% endblock %}
+{% block content %}
+    <form id="form-barcode">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="input-barcode">{% trans 'Введите штрихкод' %}</label>
+                <input class="form-control" type="text" placeholder="{% trans 'Введите штрихкод' %}">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">{% trans 'Подтвердить' %}</button>
+    </form>
+    <form id="form-incoming">
+        <div class="form-group col-md-4">
+            <label for="serviceexecutor">{% trans 'Поставщик' %}</label>
+            <select id="serviceexecutor" class="form-control">
+                {% for serviceexecutor  in serviceexecutors %}
+                    <option> {{ serviceexecutor.last_name }} {{ serviceexecutor.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="product">{% trans 'Наименование продукта' %}</label>
+                <input type="text" class="form-control" id="product-id">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="product-barcode">{% trans 'Штрихкод' %}</label>
+                <input type="text" class="form-control" id="product-barcode">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="product-qty">{% trans 'Количество' %}</label>
+                <input type="text" class="form-control" id="product-qty">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="product-purchase-price">{% trans 'Цена' %}</label>
+                <input type="number" required name="product-purchase-price" min="0" value="0" step=".01"
+                       class="form-control" id="product-purchase-price">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">{% trans 'Оформить' %}</button>
+    </form>
+{% endblock %}
