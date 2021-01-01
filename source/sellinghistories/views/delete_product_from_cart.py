@@ -5,7 +5,7 @@ from django.views.generic.base import View
 from django.conf import settings
 
 
-class DeletePRoductFromCart(PermissionRequiredMixin, View):
+class DeleteProductFromCart(PermissionRequiredMixin, View):
     permission_required = 'sellinghistories.can_add_sellinghistory'
 
     def get(self, request, *args, **kwargs):
