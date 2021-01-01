@@ -12,7 +12,7 @@ class DeleteItemFromCartTestCase(TestCase):
     def setUp(self) -> None:
         self.product = ProductFactory(barcode=123456, qty=100)
         self.user = UserFactory(username='some_admin')
-        self.permission = Permission.objects.get(codename='can_delete_sellinghistory')
+        self.permission = Permission.objects.get(codename='can_add_sellinghistory')
         self.permission_add_to_cart = Permission.objects.get(codename='can_add_sellinghistory')
         self.url = reverse('sellinghistory:remove_product_from_cart', args=[0])
         self.url_add = reverse('sellinghistory:add_product_in_cart')
