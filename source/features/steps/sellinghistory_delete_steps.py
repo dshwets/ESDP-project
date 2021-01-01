@@ -1,5 +1,7 @@
 from behave import then
-from selenium.common.exceptions import NoSuchElementException
+
+from features.steps.beahve_helpers import check_element_not_exists
+
 
 @then('I open Sellinghistory delete page')
 def step_impl(context):
@@ -9,8 +11,4 @@ def step_impl(context):
 @then('Displays empty Selling History list page')
 def step_impl(context):
     assert context.behave_driver.find_element_by_xpath('//table') is not None
-    try:
-        context.behave_driver.find_element_by_xpath('//table/tbody')
-        raise Exception('Element was founded')
-    except NoSuchElementException:
-        pass
+    check_element_not_exists(context, '//tabke/tbody')
