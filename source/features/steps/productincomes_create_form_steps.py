@@ -1,5 +1,4 @@
 from behave import then
-from django.urls import reverse
 
 from products.factories import ProductFactory
 from products.models import Product
