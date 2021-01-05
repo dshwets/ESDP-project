@@ -69,6 +69,8 @@ INSTALLED_APPS = [
     'productincomes',
     'rest_framework',
     'api',
+    'employees',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
