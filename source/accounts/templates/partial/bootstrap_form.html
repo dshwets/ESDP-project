@@ -1,4 +1,7 @@
 {% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
 {{ form.media }}
 <form action="{{ action_url }}" method="{{ form_method }}" enctype="{{ enctype }}">
 {% csrf_token %}
