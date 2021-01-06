@@ -71,6 +71,15 @@ class Employee(AbstractCreatedByModel):
         verbose_name=_('Примечание'),
     )
 
+    class Meta:
+        verbose_name = _('Сотрудник')
+        verbose_name_plural = _('Сотрудники')
 
+        permissions = [
+            ('can_add_employee', _('Может добавлять сотрудника')),
+            ('can_change_employee', _('Может изменять сотрудника')),
+            ('can_delete_employee', _('Может удалять сотрудника')),
+            ('can_view_employee', _('Может просматривать сотрудника')),
+        ]
 
 auditlog.register(Employee)

@@ -33,6 +33,7 @@ urlpatterns = [
                   path('', include('products.urls')),
                   path('', include('sellinghistories.urls')),
                   path('', include('productincomes.urls')),
+                  path('', include('employees.urls')),
                   path('api-auth/', include('rest_framework.urls')),
                   path('', include('api.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
