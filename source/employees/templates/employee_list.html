@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Список товаров' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+{% include 'partial/pagination.html' %}
+
+    {% load i18n %}
+<h3 class="mb-5 mt-4" align="center">
+   <b>{% trans 'Список товаров' %}</b>
+</h3>
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">{% trans 'Название' %}</th>
+      <th scope="col">{% trans 'Колличество' %}</th>
+      <th scope="col">{% trans 'Цена продажи' %}</th>
+            <th scope="col">{% trans 'Цена закупки' %}</th>
+            <th scope="col">{% trans 'Редактирование' %}</th>
+            <th scope="col">{% trans 'Удаление' %}</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for employee in employees %}
+    <tr>
+      <th scope="row">{{ employee.pk }}</th>
+        <td >{{ employee.title }}</td>
+        <td >{{ employee.qty }}</td>
+        <td >
+                    {{ employee.selling_price }}
+            </td>
+        <td id="{{ product.title }}-{{ product.purchase_price }}">
+            <td><a href="#" class="mt-2 btn btn-info btn-sm" id="update-button">
+                {% trans 'Редактировать' %}</a></td>
+            <td><a href="#"
+                   class="mt-2 btn btn-danger btn-sm" id="delete-button">
+                {% trans 'Удалить' %}</a></td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    {% include 'partial/pagination.html' %}
+{% endblock %}
