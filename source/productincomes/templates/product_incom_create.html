@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}{% trans 'Приход товаров' %}{% endblock %}
+{% block content %}
+    <script type=text/javascript>
+        var url_barcode = "{% url 'api:barcode_product' 123 %}" </script>
+    {% csrf_token %}
+    <form id="form-barcode">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="input-barcode">{% trans 'Введите штрихкод' %}</label>
+                <input class="form-control" id="barcode-find-value" type="text"
+                       placeholder="{% trans 'Введите штрихкод' %}">
+            </div>
+        </div>
+        <button type="submit" id="barcode-find" class="btn btn-primary">{% trans 'Подтвердить' %}</button>
+    </form>
+    <form id="form-incoming">
+        <div class="form-group col-md-4">
+            <label for="serviceexecutor">{% trans 'Поставщик' %}</label>
+            <select id="serviceexecutor" class="form-control">
+                {% for serviceexecutor  in serviceexecutors %}
+                    <option> {{ serviceexecutor.last_name }} {{ serviceexecutor.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-row">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">{% trans 'Наименование продукта' %}</th>
+                    <th scope="col">{% trans 'Штрихкод' %}</th>
+                    <th scope="col">{% trans 'Количество' %}</th>
+                    <th scope="col">{% trans 'Цена' %}</th>
+                </tr>
+                </thead>
+                <tbody id="form-product">
+
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-primary">{% trans 'Оформить' %}</button>
+    </form>
+    <script src="{% static 'js/incoming_product.js' %}"></script>
+{% endblock %}
