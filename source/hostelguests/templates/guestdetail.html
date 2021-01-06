@@ -30,6 +30,8 @@
     </div>
     <div class="ml-5 mr-5 w-75 p-3" style="word-wrap:break-word;">
         <p class="card-text" ><b>{% trans 'ФИО: ' %}</b>{{ guest.last_name }} {{ guest.first_name }} {{ middle_name }}</p>
+        <p class="card-text"><b>{% trans 'Номер телефона: ' %}</b>{% if not guest.phone %}{% trans 'не указан' %}{% else %}{{ guest.phone }}{% endif %}</p>
+        <p class="card-text"><b>{% trans 'Email: ' %}</b>{% if not guest.email %}{% trans 'не указан' %}{% else %}{{ guest.email }}{% endif %}</p>
         <p class="card-text"><b>{% trans 'Дата рождения: ' %}</b> {{ guest.birth_date }}</p>
         <p class="card-text"><b>{% trans 'Страна рождения: ' %}</b>{{ guest.birth_country.name }}</p>
         <p class="card-text"><b>{% trans 'Id паспорта: ' %}</b>{{ guest.passport_id }}</p>

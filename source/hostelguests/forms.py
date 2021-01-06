@@ -29,6 +29,8 @@ class GuestForm(forms.ModelForm):
             'last_name',
             'middle_name',
             'photo',
+            'phone',
+            'email',
             'birth_date',
             'birth_country',
             'passport_id',
@@ -37,4 +39,7 @@ class GuestForm(forms.ModelForm):
         ]
         labels = {
             'birth_country': _('Страна рождения'),
+        }
+        widgets = {
+            'phone': forms.TextInput(attrs={'placeholder': '+996000112233'})
         }

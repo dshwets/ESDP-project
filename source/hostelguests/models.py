@@ -3,6 +3,7 @@ from django.db import models
 from common.models import AbstractCreatedByModel
 from django_countries.fields import CountryField
 from django.utils.translation import gettext_lazy as _
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Guest(AbstractCreatedByModel):
@@ -46,6 +47,16 @@ class Guest(AbstractCreatedByModel):
         verbose_name=_('Орган выдавший документ'),
         default="",
         blank=True,
+    )
+    phone = PhoneNumberField(
+        blank=True,
+        default="",
+        verbose_name=_('Контактный номер телефона'),
+    )
+    email = models.EmailField(
+        blank=True,
+        null=True,
+        verbose_name=_('Email'),
     )
 
     class Meta:
