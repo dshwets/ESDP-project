@@ -19,11 +19,10 @@
     <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">id</th>
-      <th scope="col">{% trans 'Название' %}</th>
-      <th scope="col">{% trans 'Колличество' %}</th>
-      <th scope="col">{% trans 'Цена продажи' %}</th>
-            <th scope="col">{% trans 'Цена закупки' %}</th>
+      <th scope="col">{% trans 'Имя' %}</th>
+      <th scope="col">{% trans 'Фамилия' %}</th>
+      <th scope="col">{% trans 'Отчество' %}</th>
+      <th scope="col">{% trans 'Номер Телефона' %}</th>
             <th scope="col">{% trans 'Редактирование' %}</th>
             <th scope="col">{% trans 'Удаление' %}</th>
     </tr>
@@ -31,13 +30,12 @@
   <tbody>
 {% for employee in employees %}
     <tr>
-      <th scope="row">{{ employee.pk }}</th>
-        <td >{{ employee.title }}</td>
-        <td >{{ employee.qty }}</td>
+      <th scope="row">{{ employee.first_name }}</th>
+        <td >{{ employee.last_name }}</td>
+        <td >{{ employee.middle_name }}</td>
         <td >
-                    {{ employee.selling_price }}
+                    {{ employee.phone_number }}
             </td>
-        <td id="{{ product.title }}-{{ product.purchase_price }}">
             <td><a href="#" class="mt-2 btn btn-info btn-sm" id="update-button">
                 {% trans 'Редактировать' %}</a></td>
             <td><a href="#"
