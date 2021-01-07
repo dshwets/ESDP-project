@@ -4,7 +4,9 @@
 {% block title %}{% trans 'Приход товаров' %}{% endblock %}
 {% block content %}
     <script type=text/javascript>
-        var url_barcode = "{% url 'api:barcode_product' 123 %}" </script>
+        var url_barcode = "{% url 'api:barcode_product' 123 %}"
+        var url_incoming_product = "{% url 'api:product_incoming_create' %}"
+    </script>
     {% csrf_token %}
     <form id="form-barcode">
         <div class="form-row">
@@ -16,10 +18,10 @@
         </div>
         <button type="submit" id="barcode-find" class="btn btn-primary">{% trans 'Подтвердить' %}</button>
     </form>
-    <form id="form-incoming">
+    <form id="form-incoming" action="#" method="post">
         <div class="form-group col-md-4">
             <label for="serviceexecutor">{% trans 'Поставщик' %}</label>
-            <select id="serviceexecutor" class="form-control">
+            <select id="serviceexecutor" name="serviceexecutor" class="form-control">
                 {% for serviceexecutor  in serviceexecutors %}
                     <option> {{ serviceexecutor.last_name }} {{ serviceexecutor.name }}</option>
                 {% endfor %}
@@ -40,7 +42,7 @@
                 </tbody>
             </table>
         </div>
-        <button type="submit" class="btn btn-primary">{% trans 'Оформить' %}</button>
+        <button type="submit" id="final-form-submit" class="btn btn-primary">{% trans 'Оформить' %}</button>
     </form>
     <script src="{% static 'js/incoming_product.js' %}"></script>
 {% endblock %}
