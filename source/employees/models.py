@@ -60,7 +60,7 @@ class Employee(AbstractCreatedByModel):
         blank=True,
     )
     medical_record = models.BooleanField(
-        default=True,
+        default=False,
     )
     address = models.TextField(
         default='',
