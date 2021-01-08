@@ -1,10 +1,8 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django.conf import settings
-import redis
-import json
 
 from products.models import Product
+from sellinghistories.carthelper import Cart
 from sellinghistories.models import SellingHistory
 
 
@@ -33,23 +31,9 @@ class AddProductToCartForm(forms.ModelForm):
         return barcode
 
     def save(self, commit=False):
-        updated = False
-        cart_name = f'cart:{self.user.pk}'
-        red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
         new_cart_entry = {
             'product_pk': Product.objects.get(barcode=self.cleaned_data['barcode']).pk,
             'qty': self.cleaned_data['qty']
         }
-        redis_list = red.lrange(cart_name, 0, -1)
-        red.expire(cart_name, 3600)
-        for redis_list_entry in redis_list:
-            redis_list_entry_as_dict = json.loads(redis_list_entry)
-            if redis_list_entry_as_dict["product_pk"] == new_cart_entry["product_pk"]:
-                redis_list_entry_as_dict['qty'] += new_cart_entry['qty']
-                index = redis_list.index(redis_list_entry)
-                redis_list_entry = json.dumps(redis_list_entry_as_dict)
-                red.lset(cart_name, index, redis_list_entry)
-                updated = True
-        if not updated:
-            red.lpush(cart_name, json.dumps(new_cart_entry), )
-
+        cart = Cart(self.user.pk)
+        cart.add_product(new_cart_entry)
