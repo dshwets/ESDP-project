@@ -9,6 +9,7 @@ from django.views.generic import CreateView
 from django.conf import settings
 
 from products.models import Product
+from sellinghistories.carthelper import Cart
 from sellinghistories.forms import AddProductToCartForm
 from sellinghistories.models import SellingHistory
 
@@ -28,20 +29,9 @@ class AddProductToCartView(PermissionRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(AddProductToCartView, self).get_context_data(**kwargs)
-        red = redis.StrictRedis(connection_pool=settings.REDIS_POOL)
-        cart = red.lrange(f'cart:{self.request.user.pk}', 0, -1)
-        list_of_products = []
-        cart_total = 0
-        if cart:
-            for cart_entry in cart:
-                cart_entry = json.loads(cart_entry)
-                product = Product.objects.get(pk=cart_entry['product_pk'])
-                cart_entry['product'] = product
-                cart_entry['total_by_item'] = product.selling_price * cart_entry['qty']
-                cart_total += cart_entry['total_by_item']
-                list_of_products.append(cart_entry)
-            context['cart'] = list_of_products
-            context['cart_total'] = cart_total
+        cart = Cart(self.request.user.pk)
+        context['cart'] = cart.get_cart_context_data()['cart']
+        context['cart_total'] = cart.get_cart_context_data()['cart_total']
         return context
 
     def get_success_url(self):
