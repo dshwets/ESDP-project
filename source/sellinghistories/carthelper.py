@@ -33,19 +33,18 @@ class Cart:
 
     def get_cart_context_data(self):
         cart = self._get_redis_cart()
-        list_of_products = []
-        cart_total = 0
-        context = {}
+        context = {
+            'cart': [],
+            'cart_total': 0
+        }
         if cart:
             for cart_entry in cart:
                 cart_entry = json.loads(cart_entry)
                 product = Product.objects.get(pk=cart_entry['product_pk'])
                 cart_entry['product'] = product
                 cart_entry['total_by_item'] = product.selling_price * cart_entry['qty']
-                cart_total += cart_entry['total_by_item']
-                list_of_products.append(cart_entry)
-            context['cart'] = list_of_products
-            context['cart_total'] = cart_total
+                context['cart_total'] += cart_entry['total_by_item']
+                context['cart'].append(cart_entry)
         return context
 
     def save_to_sellinghistory(self, request):
