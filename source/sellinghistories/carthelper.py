@@ -70,3 +70,6 @@ class Cart:
             SellingHistory.objects.bulk_create(list_of_products)
             Product.objects.bulk_update(current_good_list, ['qty'])
             self.red.delete(self.cart_name)
+
+    def delete_from_cart(self, cart_entry):
+        self.red.lrem(self.cart_name, 0, self._get_redis_cart()[cart_entry])
