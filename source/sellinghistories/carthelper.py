@@ -4,6 +4,7 @@ import redis
 from django.contrib.auth import settings
 
 from products.models import Product
+from sellinghistories.models import SellingHistory
 
 
 class Cart:
@@ -46,3 +47,27 @@ class Cart:
             context['cart'] = list_of_products
             context['cart_total'] = cart_total
         return context
+
+    def save_to_sellinghistory(self, request):
+        cart = self._get_redis_cart()
+        list_of_products = []
+        current_good_list = []
+        if cart:
+            for cart_entry in cart:
+                cart_entry = json.loads(cart_entry)
+                product = Product.objects.get(pk=cart_entry['product_pk'])
+                list_of_products.append(
+                    SellingHistory(
+                        qty=cart_entry['qty'],
+                        guest=None,
+                        product=product,
+                        purchase_price=product.purchase_price,
+                        selling_price=product.selling_price,
+                        created_by=request.user
+                    )
+                )
+                product.qty -= cart_entry['qty']
+                current_good_list.append(product)
+            SellingHistory.objects.bulk_create(list_of_products)
+            Product.objects.bulk_update(current_good_list, ['qty'])
+            self.red.delete(self.cart_name)
