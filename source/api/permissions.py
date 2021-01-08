@@ -1,13 +1,13 @@
 from rest_framework import permissions
-from rest_framework import exceptions
 
 
-def permission_required(permission_name, raise_exception=False):
-    class PermissionRequired(permissions.BasePermission):
-        def has_permission(self, request, view):
-            if not request.user.has_perm(permission_name):
-                if raise_exception:
-                    raise exceptions.PermissionDenied("Don't have permission")
-                return False
+class BasePermissionRequired(permissions.BasePermission):
+    def has_permission(self, request, view, permission_name=None):
+        if request.user.has_perm(permission_name):
             return True
-    return PermissionRequired
+        else:
+            return False
+
+class WatchProduct(BasePermissionRequired):
+    def has_permission(self, request, view, permission_name='products.can_view_product'):
+        return super(WatchProduct, self).has_permission(request, view, permission_name)
