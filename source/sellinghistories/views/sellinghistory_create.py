@@ -1,14 +1,9 @@
-import json
-
-import redis
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import CreateView
-from django.conf import settings
 
-from products.models import Product
 from sellinghistories.carthelper import Cart
 from sellinghistories.forms import AddProductToCartForm
 from sellinghistories.models import SellingHistory

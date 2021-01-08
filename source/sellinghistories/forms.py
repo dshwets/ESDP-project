@@ -1,8 +1,5 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django.conf import settings
-import redis
-import json
 
 from products.models import Product
 from sellinghistories.carthelper import Cart
