@@ -29,7 +29,7 @@ class ProductDetailView(APIView):
 
 
 class ProductIncomeView(APIView):
-
+    permission_classes = (permission_required("products.can_view_product", raise_exception=True),)
     def post(self, request):
         print(request.data)
         # article = request.data.get('article')
