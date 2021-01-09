@@ -35,7 +35,7 @@ class ServiceExecutor(AbstractDatetimeModel):
         max_length=20,
         choices=STATUS_PAYMENT,
         default='cash',
-        verbose_name='Тип оплаты'
+        verbose_name=_('Тип оплаты'),
     )
     hostel_service = models.ForeignKey(
         'hostelservices.HostelService',
