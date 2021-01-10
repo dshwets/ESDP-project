@@ -178,3 +178,9 @@ LOGOUT_REDIRECT_URL = 'hostelguests:guest_list'
 BOOTSTRAP4 = {
     'include_jquery': True,
     }
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}

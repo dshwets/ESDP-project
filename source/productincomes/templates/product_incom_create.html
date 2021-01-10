@@ -4,7 +4,10 @@
 {% block title %}{% trans 'Приход товаров' %}{% endblock %}
 {% block content %}
     <script type=text/javascript>
-        var url_barcode = "{% url 'api:barcode_product' 123 %}" </script>
+        let url_barcode = "{% url 'api:barcode_product' 123 %}"
+        let url_incoming_product = "{% url 'api:product_incoming_create' %}"
+        let urlRedirect = "{% url 'product_incom:list_product_incom' %}"
+    </script>
     {% csrf_token %}
     <form id="form-barcode">
         <div class="form-row">
@@ -16,17 +19,17 @@
         </div>
         <button type="submit" id="barcode-find" class="btn btn-primary">{% trans 'Подтвердить' %}</button>
     </form>
-    <form id="form-incoming">
+    <form id="form-incoming" action="#" method="post">
         <div class="form-group col-md-4">
             <label for="serviceexecutor">{% trans 'Поставщик' %}</label>
-            <select id="serviceexecutor" class="form-control">
+            <select id="serviceexecutor" name="serviceexecutor" class="form-control">
                 {% for serviceexecutor  in serviceexecutors %}
                     <option> {{ serviceexecutor.last_name }} {{ serviceexecutor.name }}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="form-row">
-            <table class="table table-striped">
+            <table class="table table-striped" id="main-product-form">
                 <thead>
                 <tr>
                     <th scope="col">{% trans 'Наименование продукта' %}</th>
@@ -40,7 +43,8 @@
                 </tbody>
             </table>
         </div>
-        <button type="submit" class="btn btn-primary">{% trans 'Оформить' %}</button>
+        <button type="submit" id="final-form-submit" class="btn btn-primary">{% trans 'Оформить' %}</button>
     </form>
+    <script src="{% static 'js/serializer_json.js' %}"></script>
     <script src="{% static 'js/incoming_product.js' %}"></script>
 {% endblock %}
