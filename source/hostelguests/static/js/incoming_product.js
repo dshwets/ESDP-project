@@ -41,7 +41,7 @@ async function makeRequestBarcode(event) {
         table += `<td><input required type="number" name="qty-${counter}" class="form-control w-auto"
             id="product-${counter}-qty"></td>`;
         table += `<td><input required type="number" name="purchase-price-${counter}" required name="product-purchase-price" 
-            min="0" value="0" step=".10" class="form-control w-auto" id="product-${counter}-purchase-price value= ${response.purchase_price}"></td>`;
+            min="0" step=".10" class="form-control w-auto" id="product-${counter}-purchase-price" value= ${response.purchase_price}></td>`;
         formProduct.insertAdjacentHTML('afterend', table);
     } catch (e) {
         alert("Проверьте штрихкод");

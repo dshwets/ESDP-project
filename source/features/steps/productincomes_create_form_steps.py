@@ -2,12 +2,13 @@ from behave import then
 
 from products.factories import ProductFactory
 from products.models import Product
+from serviceexecutors.factories import ServiceExecutorFactory
 
 
 @then('Opens productincomes create page')
 def step_impl(context):
+    service_executor = ServiceExecutorFactory()
     context.behave_driver.get(context.get_url(f"/product_incom/create/"))
-
 
 @then('i input product barcode')
 def step_impl(context):
