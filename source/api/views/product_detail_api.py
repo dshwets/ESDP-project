@@ -34,7 +34,8 @@ class ProductDetailView(APIView):
 
 class ProductIncomeView(APIView):
     permission_classes = [
-        AddIncomes,]
+        AddIncomes,
+    ]
 
     def post(self, request):
         data = request.data
@@ -66,4 +67,4 @@ class ProductIncomeView(APIView):
                 product.purchase_price = purchase_price
                 product.save()
             return Response({'success': incomes.pk}, status=status.HTTP_200_OK)
-        return Response({"error": "error form"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": "Заполните все поля"}, status=status.HTTP_400_BAD_REQUEST)
