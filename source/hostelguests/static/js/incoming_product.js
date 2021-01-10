@@ -1,9 +1,28 @@
 const barcodeBtn = document.getElementById('barcode-find');
 const formProduct = document.getElementById('form-product');
-const finalFormBtn = document.getElementById('final-form-submit')
-var finalForm = document.getElementById('form-incoming');
-var counter = 0
+const mainProductForm = document.getElementById('form-incoming')
 
+let counter = 0
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function csrfSafeMethod(method) {
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
 
 async function makeRequestBarcode(event) {
     event.preventDefault();
@@ -14,10 +33,10 @@ async function makeRequestBarcode(event) {
             return response.json();
         });
         var table;
-        counter +=1
+        counter += 1
         table = `<td><input required type="text" name="title-${counter}" class="form-control w-auto" 
                                 id="product-${counter}-title" value= ${response.title}></td>`;
-        table += `<td><input required disabled type="text" name="barcode-${counter}" class="form-control w-auto" 
+        table += `<td><input required readonly type="text" name="barcode-${counter}" class="form-control w-auto" 
             id="product-${counter}-barcode" value= ${response.barcode}></td>`;
         table += `<td><input required type="number" name="qty-${counter}" class="form-control w-auto"
             id="product-${counter}-qty"></td>`;
@@ -29,77 +48,34 @@ async function makeRequestBarcode(event) {
     }
 }
 
-function makeRequestFinalForm (event) {
-        event.preventDefault();
+async function makeRequest(url, method = 'GET', data = undefined) {
+    let opts = {method, headers: {}};
 
-        console.log($(this).serializeArray());
+    if (!csrfSafeMethod(method))
+        opts.headers['X-CSRFToken'] = getCookie('csrftoken');
 
-        // $.ajax({
-        //     // type: finalForm.attr('method'),
-        //     // url: finalForm.attr('action'),
-        //     data: finalForm.serializeArray(),
-        //     success: function (data) {
-        //         console.log('Submission was successful.');
-        //         console.log(data);
-        //     },
-        //     error: function (data) {
-        //         console.log('An error occurred.');
-        //         console.log(data);
-        //     },
-        // });
-    };
+    if (data) {
+        opts.headers['Content-Type'] = 'application/json';
+        opts.body = JSON.stringify(data);
+    }
 
-//
-$('form').submit(function(event) {
-    event.preventDefault();
-    var data = $(this).serializeArray();
-    console.log(data)
-    jQuery.ajax({
-        url:     url_incoming_product,
-        type:     "POST",
-        dataType: "html",
-        data: data,  // Сеарилизуем объект
-        success: function(response) { //Данные отправлены успешно
-            result = jQuery.parseJSON(response);
-        },
-        error: function(response) { // Данные не отправлены
-        }
-    });
-//     $.ajax({
-//             type: 'Post',
-//             url: url_incoming_product,
-//             data: data,
-//             success: function (data) {
-//                 console.log('Submission was successful.');
-//                 console.log(data);
-//             },
-//             error: function (data) {
-//                 console.log('An error occurred.');
-//                 console.log(data);
-//             },
-//         });
-//     return false;
-});
+    let response = await fetch(url, opts);
 
-    // function makeRequestFinalForm (event) {
-    //     event.preventDefault();
-    //     console.log(finalForm.serializeArray());
-
-        // $.ajax({
-        //     // type: finalForm.attr('method'),
-        //     // url: finalForm.attr('action'),
-        //     data: finalForm.serializeArray(),
-        //     success: function (data) {
-        //         console.log('Submission was successful.');
-        //         console.log(data);
-        //     },
-        //     error: function (data) {
-        //         console.log('An error occurred.');
-        //         console.log(data);
-        //     },
-        // });
-    // };
+    if (response.ok) {
+        return await response.json();
+    } else {
+        let error = new Error(response.statusText);
+        error.response = response;
+        throw error;
+    }
+}
 
 
-// finalFormBtn.addEventListener('click',makeRequestFinalForm)
 barcodeBtn.addEventListener('click', makeRequestBarcode)
+mainProductForm.addEventListener('submit',async function(event){
+     event.preventDefault();
+    let data = $(this).serializeJSON();
+    let response = await makeRequest(url_incoming_product, "POST", data);
+    window.open(urlRedirect);
+    // console.log(response) todo надо сделать редирект на детальный просмотр incomes
+});
