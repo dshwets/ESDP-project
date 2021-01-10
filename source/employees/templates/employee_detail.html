@@ -24,8 +24,12 @@
         <p class="card-text"><b>{% trans 'Номер телефона: ' %}</b> {{ employee.phone_number }}</p>
         <p class="card-text"><b>{% trans 'Номер родственника: ' %}</b>{{ employee.relative_phone_number }}</p>
         <p class="card-text"><b>{% trans 'Id паспорта: ' %}</b>{{ employee.passport_id }}</p>
+    {% if employee.labor_contract %}
         <p class="card-text"><b>{% trans 'Трудовой договор: ' %}</b> <a href=" {{ employee.labor_contract.url }}">{{ employee.labor_contract}}</a></p>
+        {% endif %}
+    {% if employee.passport %}
         <p class="card-text"><b>{% trans 'Паспорт: ' %}</b> <a href=" {{ employee.passport.url }}">{{ employee.passport}}</a></p>
+           {% endif %}
         <p class="card-text"><b>{% trans 'Достижения: ' %}</b>{{ employee.achievement }}</p>
         <p class="card-text"><b>{% trans 'Сумма депозита: ' %}</b>{{ employee.deposit_amount }}</p>
         <p class="card-text"><b>{% trans 'Адрес: ' %}</b>{{ employee.address }}</p>
