@@ -69,6 +69,7 @@ class Employee(AbstractCreatedByModel):
     note = models.TextField(
         default='',
         verbose_name=_('Примечание'),
+        blank=True,
     )
 
     class Meta:
