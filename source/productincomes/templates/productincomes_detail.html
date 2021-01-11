@@ -11,8 +11,8 @@
 {% block content %}
     {% if perms.productincomes.can_view_incomes %}
         <div class="ml-5 mr-5 w-75 p-3" style="word-wrap:break-word;">
-        <p class="card-text"><b>{% trans 'Поставщик: ' %}</b>{{ incomes.services_executor.last_name }}
-            {{ incomes.services_executor.first_name }} {{ incomes.services_executor.middle_name }}</p>
+        <p class="card-text" id="service-executor"><b>{% trans 'Поставщик: ' %}</b>{{ incomes.services_executor.last_name }}
+            {{ incomes.services_executor.name }} {{ incomes.services_executor.middle_name }}</p>
         <p class="card-text"><b>{% trans 'Дата и время поставки: ' %}</b> {{ incomes.created_at }}</p>
         <p class="card-text"><b>{% trans 'Кто принял: ' %}</b>{{ incomes.created_by }}</p>
 
@@ -29,11 +29,11 @@
             <tbody>
             {% for product in products %}
                 <tr>
-                    <td>{{ product.product.title }} </td>
-                    <td>{{ product.product.barcode }} </td>
-                    <td>{{ product.qty }} </td>
-                    <td>{{ product.product.purchase_price }} </td>
-                    <td>{{ product.total }}</td>
+                    <td id="product-title">{{ product.product.title }} </td>
+                    <td id="product-barcode">{{ product.product.barcode }} </td>
+                    <td id="product-qty">{{ product.qty }} </td>
+                    <td id="product-price">{{ product.product.purchase_price }} </td>
+                    <td id="total">{{ product.total }}</td>
                 </tr>
             {% endfor %}
             <tr>
