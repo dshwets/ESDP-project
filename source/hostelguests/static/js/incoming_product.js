@@ -72,9 +72,13 @@ async function makeRequest(url, method = 'GET', data = undefined) {
 
 
 barcodeBtn.addEventListener('click', makeRequestBarcode)
-mainProductForm.addEventListener('submit',async function(event){
-     event.preventDefault();
-    let data = $(this).serializeJSON();
-    let response = await makeRequest(url_incoming_product, "POST", data);
-    window.location.href =urlRedirect.replace('123', response.success);
+mainProductForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    try {
+        let data = $(this).serializeJSON();
+        let response = await makeRequest(url_incoming_product, "POST", data);
+        window.location.href = urlRedirect.replace('123', response.success);
+    } catch (e) {
+        alert("Заполните все поля");
+    }
 });
