@@ -75,8 +75,6 @@ barcodeBtn.addEventListener('click', makeRequestBarcode)
 mainProductForm.addEventListener('submit',async function(event){
      event.preventDefault();
     let data = $(this).serializeJSON();
-    console.log(data)
     let response = await makeRequest(url_incoming_product, "POST", data);
-    window.open(urlRedirect);
-    // console.log(response) todo надо сделать редирект на детальный просмотр incomes
+    window.location.href =urlRedirect.replace('123', response.success);
 });
