@@ -9,7 +9,6 @@ from serviceexecutors.models import ServiceExecutor
 
 @then('Opens product incomes view page')
 def step_impl(context):
-    # serviceexecutor = ServiceExecutor.objects.create(name="John", last_name="Doe", middle_name="Will")
     serviceexecutor = ServiceExecutorFactory()
     incomes = IncomesFactory(services_executor=serviceexecutor)
     productincomes = ProductIncomesFactory(incomes=incomes)
