@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}{% trans 'Детальный просмотр' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block navs %}
+{% endblock %}
+{% block content %}
+    {% if perms.productincomes.can_view_incomes %}
+        <div class="ml-5 mr-5 w-75 p-3" style="word-wrap:break-word;">
+        <p class="card-text" id="service-executor"><b>{% trans 'Поставщик: ' %}</b>{{ incomes.services_executor.last_name }}
+            {{ incomes.services_executor.name }} {{ incomes.services_executor.middle_name }}</p>
+        <p class="card-text"><b>{% trans 'Дата и время поставки: ' %}</b> {{ incomes.created_at }}</p>
+        <p class="card-text"><b>{% trans 'Кто принял: ' %}</b>{{ incomes.created_by }}</p>
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">{% trans 'Название' %}</th>
+                <th scope="col">{% trans 'Штрихкод' %}</th>
+                <th scope="col">{% trans 'Количество' %}</th>
+                <th scope="col">{% trans 'Цена' %}</th>
+                <th scope="col">{% trans 'Сумма' %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td id="product-title">{{ product.product.title }} </td>
+                    <td id="product-barcode">{{ product.product.barcode }} </td>
+                    <td id="product-qty">{{ product.qty }} </td>
+                    <td id="product-price">{{ product.product.purchase_price }} </td>
+                    <td id="total">{{ product.total }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Итого:' %} </td>
+                <td>{{ incomes.total }}</td>
+            </tr>
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

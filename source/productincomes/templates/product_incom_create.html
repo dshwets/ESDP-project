@@ -6,7 +6,7 @@
     <script type=text/javascript>
         let url_barcode = "{% url 'api:barcode_product' 123 %}"
         let url_incoming_product = "{% url 'api:product_incoming_create' %}"
-        let urlRedirect = "{% url 'product_incom:list_product_incom' %}"
+        let urlRedirect = "{% url 'product_incom:product_incom_detail' 123 %}"
     </script>
     {% csrf_token %}
     <form id="form-barcode">

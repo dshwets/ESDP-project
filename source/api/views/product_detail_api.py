@@ -42,6 +42,8 @@ class ProductIncomeView(APIView):
         if data['serviceexecutor']:
             initials = data['serviceexecutor'].split(' ')
             service_executor = ServiceExecutor.objects.get(last_name=initials[0])
+            if int(len(data)) < 2:
+                return Response({"error": "Заполните все поля"}, status=status.HTTP_400_BAD_REQUEST)
             incomes = Incomes.objects.create(services_executor=service_executor,
                                              created_by=request.user)
             range_product = int((len(data)-1)/4)

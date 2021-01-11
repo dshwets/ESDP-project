@@ -12,6 +12,14 @@ class Incomes(AbstractCreatedByModel):
         verbose_name=_('Поставщик'),
     )
 
+    @property
+    def total(self):
+        total = 0
+        products = ProductIncomes.objects.filter(incomes_id=self.pk)
+        for i in products:
+            total += i.total
+        return total
+
     class Meta:
         verbose_name = _('Приход')
         verbose_name_plural = _('Приходы')
@@ -43,6 +51,10 @@ class ProductIncomes(models.Model):
         default=0,
         verbose_name=_('Количество'),
     )
+
+    @property
+    def total(self):
+        return self.qty * self.product.purchase_price
 
     class Meta:
         verbose_name = _('Приход товара')
