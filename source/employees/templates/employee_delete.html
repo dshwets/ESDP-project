@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Удалить сотрудника' %}
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <h3 class="my-5">{% trans 'Вы уверены, что хотите удалить сотрудника ' %}{{ employee.last_name }}, {{ employee.first_namei }}?</h3>
+        <input class="btn btn-danger" type="submit" id="confirm-delete-btn" value="{% trans 'Да' %}">
+        <a class="btn btn-primary" href="{% url 'employees:employee_detail' employee.pk %}">{% trans 'Нет' %}</a>
+    </form>
+{% endblock %}

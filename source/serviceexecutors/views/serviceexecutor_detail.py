@@ -14,7 +14,7 @@ class ServiceExecutorDetailView(PermissionRequiredMixin, DetailView, MultipleObj
     paginate_orphans = 0
 
     def get_context_data(self, **kwargs):
-        object_list = Document.objects.filter(service_executor=self.get_object())
+        object_list = Document.objects.filter(service_executor=self.get_object()).order_by('-pk')
         context = super(ServiceExecutorDetailView, self).get_context_data(object_list=object_list, **kwargs)
         return context
 
