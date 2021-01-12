@@ -27,14 +27,15 @@ function csrfSafeMethod(method) {
 async function makeRequestBarcode(event) {
     event.preventDefault();
     try {
-        var barcode = document.getElementById('barcode-find-value').value;
-        var url = url_barcode.replace('123', barcode);
+        counter += 1
+        let barcode = document.getElementById('barcode-find-value').value;
+        let url = url_barcode.replace('123', barcode);
         let response = await fetch(url).then(response => {
             return response.json();
         });
-        var table;
-        counter += 1
-        table = `<td><input required type="text" name="title-${counter}" class="form-control w-auto" 
+        let table;
+        table = `<td hidden id="counter">${counter}</td>`
+        table += `<td><input required type="text" name="title-${counter}" class="form-control w-auto" 
                                 id="product-${counter}-title" value= ${response.title}></td>`;
         table += `<td><input required readonly type="text" name="barcode-${counter}" class="form-control w-auto" 
             id="product-${counter}-barcode" value= ${response.barcode}></td>`;
@@ -42,8 +43,18 @@ async function makeRequestBarcode(event) {
             id="product-${counter}-qty"></td>`;
         table += `<td><input required type="number" name="purchase-price-${counter}" required name="product-purchase-price" 
             min="0" step=".10" class="form-control w-auto" id="product-${counter}-purchase-price" value= ${response.purchase_price}></td>`;
+        table += `<td><input required disabled type="text" name="total" class="form-control w-auto" 
+            id="total-${counter}" value="" ></td>`;
+        table += `<td><button type="button" id="del-${counter}" class="btn btn-outline-danger">Удалить</button></td>`;
         formProduct.insertAdjacentHTML('afterend', table);
-    } catch (e) {
+        document.getElementById(`product-${counter}-purchase-price`).onblur = total;
+        document.getElementById(`product-${counter}-qty`).onblur = total;
+        let delBtn = document.getElementById(`del-${counter}`)
+        delBtn.addEventListener('click',function (){
+            delBtn.parentElement.parentNode.remove();
+        })
+    }
+    catch (e) {
         alert("Проверьте штрихкод");
     }
 }
@@ -69,6 +80,14 @@ async function makeRequest(url, method = 'GET', data = undefined) {
         throw error;
     }
 }
+
+function total() {
+    console.log(counter)
+    let qty = document.getElementById(`product-${counter}-qty`).value;
+    let price = document.getElementById(`product-${counter}-purchase-price`).value;
+    document.getElementById(`total-${counter}`).value = qty*price;
+    }
+
 
 
 barcodeBtn.addEventListener('click', makeRequestBarcode)
