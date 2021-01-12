@@ -19,3 +19,4 @@ django-bootstrap4==2.3.1
 djangorestframework==3.12.2
 phonenumbers==8.12.15
 django-phonenumber-field==5.0.0
+uWSGI==2.0.19.1
