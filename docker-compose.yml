@@ -33,8 +33,6 @@ services:
     restart: always
     container_name: apple_app
     command: uwsgi --http :8000 --module main.wsgi
-    ports:
-      - "80:8000"
     depends_on:
       - db
       - app_migration
