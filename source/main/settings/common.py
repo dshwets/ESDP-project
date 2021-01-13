@@ -25,17 +25,17 @@ APP_ENV = env('APP_ENV', default='production')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', default='39lx4#6l8wki=p!l=%%z5%@ycg63xz68t=vi-+^*&pk$v35fin')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = env('DEBUG', default=True)
 
-ALLOWED_HOSTS = [env('ALLOWED_HOSTS')]
+ALLOWED_HOSTS = [env('ALLOWED_HOSTS', default='*')]
 
 REDIS_POOL = redis.ConnectionPool(
-    host=env('REDIS_HOST'),
-    port=env('REDIS_PORT'),
-    db=env('REDIS_DB'),
+    host=env('REDIS_HOST', default='127.0.0.1'),
+    port=env('REDIS_PORT', default='6379'),
+    db=env('REDIS_DB', default='0'),
     decode_responses=True)
 
 # Application definition
@@ -112,11 +112,11 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DB_NAME'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
+        'NAME': env('DB_NAME', default='apple_db'),
+        'HOST': env('DB_HOST', default='localhost'),
+        'PORT': env('DB_PORT', default='5432'),
+        'USER': env('DB_USER', default='root'),
+        'PASSWORD': env('DB_PASSWORD', default='root'),
     }
 }
 
