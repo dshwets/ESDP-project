@@ -55,6 +55,8 @@ services:
       - /home/deployciuser/configs/ssl-params.conf:/etc/nginx/conf.d/configs/ssl-params.conf
       - /etc/ssl/certs/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt
       - /etc/ssl/private/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key
+      - /home/deployciuser/uploads:/uploads
+      - /home/deployciuser/static:/static
     depends_on:
       - db
       - app_migration
