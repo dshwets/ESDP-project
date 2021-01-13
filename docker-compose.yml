@@ -44,8 +44,14 @@ services:
     restart: always
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - /home/deployciuser/configs/dhparam.pem:/etc/nginx/conf.d/configs/dhparam.pem
+      - /home/deployciuser/configs/self-signed.conf:/etc/nginx/conf.d/configs/self-signed.conf
+      - /home/deployciuser/configs/ssl-params.conf:/etc/nginx/conf.d/configs/ssl-params.conf
+      - /etc/ssl/certs/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt
+      - /etc/ssl/private/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key
     depends_on:
       - db
       - app_migration
