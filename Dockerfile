@@ -5,4 +5,5 @@ WORKDIR /code
 COPY requirements /code
 RUN pip install -r /code/$REQUIREMENTS_FILE.txt
 COPY source /code
+RUN python /code/manage.py collectstatic --noinput
 EXPOSE 8000
