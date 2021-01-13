@@ -33,6 +33,9 @@ services:
     restart: always
     container_name: apple_app
     command: uwsgi --http :8000 --module main.wsgi
+    volumes:
+    -  /home/deployciuser/uploads:/uploads
+    -  /home/deployciuser/static:/code/main/settings/static
     depends_on:
       - db
       - app_migration
