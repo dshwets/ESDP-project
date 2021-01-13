@@ -28,14 +28,14 @@ async function makeRequestBarcode(event) {
     event.preventDefault();
     try {
         counter += 1
+
         let barcode = document.getElementById('barcode-find-value').value;
         let url = url_barcode.replace('123', barcode);
         let response = await fetch(url).then(response => {
             return response.json();
         });
         let table;
-        table = `<td hidden id="counter">${counter}</td>`
-        table += `<td><input required type="text" name="title-${counter}" class="form-control w-auto" 
+        table = `<td><input required type="text" name="title-${counter}" class="form-control w-auto" 
                                 id="product-${counter}-title" value= ${response.title}></td>`;
         table += `<td><input required readonly type="text" name="barcode-${counter}" class="form-control w-auto" 
             id="product-${counter}-barcode" value= ${response.barcode}></td>`;
@@ -47,8 +47,9 @@ async function makeRequestBarcode(event) {
             id="total-${counter}" value="" ></td>`;
         table += `<td><button type="button" id="del-${counter}" class="btn btn-outline-danger">Удалить</button></td>`;
         formProduct.insertAdjacentHTML('afterend', table);
-        document.getElementById(`product-${counter}-purchase-price`).onblur = total;
-        document.getElementById(`product-${counter}-qty`).onblur = total;
+        const counterThis = counter
+        document.getElementById(`product-${counter}-purchase-price`).onblur = ()=> total(counterThis);
+        document.getElementById(`product-${counter}-qty`).onblur = ()=> total(counterThis);
         let delBtn = document.getElementById(`del-${counter}`)
         delBtn.addEventListener('click',function (){
             delBtn.parentElement.parentNode.remove();
@@ -81,11 +82,10 @@ async function makeRequest(url, method = 'GET', data = undefined) {
     }
 }
 
-function total() {
-    console.log(counter)
-    let qty = document.getElementById(`product-${counter}-qty`).value;
-    let price = document.getElementById(`product-${counter}-purchase-price`).value;
-    document.getElementById(`total-${counter}`).value = qty*price;
+function total(con) {
+    let qty = document.getElementById(`product-${con}-qty`).value;
+    let price = document.getElementById(`product-${con}-purchase-price`).value;
+    document.getElementById(`total-${con}`).value = qty*price;
     }
 
 
