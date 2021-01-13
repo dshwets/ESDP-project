@@ -24,45 +24,45 @@
   - docker cp $container_id:code/screenshots ./screenshots/$TAG || true
 
 stages:
-#  - unit_tests
-#  - acceptance_tests
+  - unit_tests
+  - acceptance_tests
   - build_and_push
   - deploy-staging
 
 services:
   - docker:dind
 
-#unit_tests:
-#  image: docker/compose:latest
-#  stage: unit_tests
-#  variables:
-#    TAG: $CI_COMMIT_SHA
-#    TEST_COMMAND: test
-#  before_script:
-#    - *prepare_containers_for_tests
-#  script:
-#    - *run_tests
-#  after_script:
-#    - *delete_current_generated_images
-#
-#acceptance_tests:
-#  image: docker/compose:latest
-#  stage: acceptance_tests
-#  variables:
-#    TAG: $CI_COMMIT_SHA
-#    TEST_COMMAND: behave
-#  before_script:
-#    - *prepare_containers_for_tests
-#  script:
-#    - *run_tests
-#  after_script:
-#    - *copy_screenshots_from_container
-#    - *delete_current_generated_images
-#  artifacts:
-#    when: on_failure
-#    paths:
-#      - screenshots/
-#    expire_in: 2 days
+unit_tests:
+  image: docker/compose:latest
+  stage: unit_tests
+  variables:
+    TAG: $CI_COMMIT_SHA
+    TEST_COMMAND: test
+  before_script:
+    - *prepare_containers_for_tests
+  script:
+    - *run_tests
+  after_script:
+    - *delete_current_generated_images
+
+acceptance_tests:
+  image: docker/compose:latest
+  stage: acceptance_tests
+  variables:
+    TAG: $CI_COMMIT_SHA
+    TEST_COMMAND: behave
+  before_script:
+    - *prepare_containers_for_tests
+  script:
+    - *run_tests
+  after_script:
+    - *copy_screenshots_from_container
+    - *delete_current_generated_images
+  artifacts:
+    when: on_failure
+    paths:
+      - screenshots/
+    expire_in: 2 days
 
 build_and_push:
   image: docker/compose:latest
@@ -78,14 +78,12 @@ build_and_push:
   only:
     - development
     - master
-    - feature/146_repair_webcam_and_static
 
 deploy-staging:
   only:
     refs:
       - development
       - master
-      - feature/146_repair_webcam_and_static
   image: docker:git
   stage: deploy-staging
   variables:
