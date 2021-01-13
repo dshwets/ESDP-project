@@ -86,10 +86,21 @@ async function makeRequest(url, method = 'GET', data = undefined) {
 function total(con) {
     let qty = document.getElementById(`product-${con}-qty`).value;
     let price = document.getElementById(`product-${con}-purchase-price`).value;
-    let totalProduct= document.getElementById(`total-${con}`).value = qty*price;
-    allTotalValue.value = Number(allTotalValue.value) + totalProduct
-}
+    document.getElementById(`total-${con}`).value = qty*price;
+    allTotalValue.value = allTotalFunc()
+};
 
+function allTotalFunc(){
+    let total = 0
+    let i = counter;
+    while (i > 0) {
+        let qty = document.getElementById(`product-${i}-qty`).value;
+        let price = document.getElementById(`product-${i}-purchase-price`).value;
+        total += qty*price;
+        i--;
+    }
+    return total
+}
 
 
 barcodeBtn.addEventListener('click', makeRequestBarcode)
