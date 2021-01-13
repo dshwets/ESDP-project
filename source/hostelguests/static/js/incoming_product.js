@@ -1,7 +1,8 @@
 const barcodeBtn = document.getElementById('barcode-find');
 const formProduct = document.getElementById('form-product');
 const mainProductForm = document.getElementById('form-incoming')
-
+const allTotal = document.getElementById('tr-all-total')
+const allTotalValue = document.getElementById('all-total')
 let counter = 0
 
 
@@ -46,7 +47,7 @@ async function makeRequestBarcode(event) {
         table += `<td><input required disabled type="text" name="total" class="form-control w-auto" 
             id="total-${counter}" value="" ></td>`;
         table += `<td><button type="button" id="del-${counter}" class="btn btn-outline-danger">Удалить</button></td>`;
-        formProduct.insertAdjacentHTML('afterend', table);
+        allTotal.insertAdjacentHTML('beforebegin', table);
         const counterThis = counter
         document.getElementById(`product-${counter}-purchase-price`).onblur = ()=> total(counterThis);
         document.getElementById(`product-${counter}-qty`).onblur = ()=> total(counterThis);
@@ -85,8 +86,9 @@ async function makeRequest(url, method = 'GET', data = undefined) {
 function total(con) {
     let qty = document.getElementById(`product-${con}-qty`).value;
     let price = document.getElementById(`product-${con}-purchase-price`).value;
-    document.getElementById(`total-${con}`).value = qty*price;
-    }
+    let totalProduct= document.getElementById(`total-${con}`).value = qty*price;
+    allTotalValue.value = Number(allTotalValue.value) + totalProduct
+}
 
 
 
