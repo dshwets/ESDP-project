@@ -8,5 +8,3 @@ Feature: Creating new product and new product incomes
     Then Opens productincomes create page
     And i input product barcode
     And I fill out the form with data
-#    Then I enter title "test" and last qty "10"
-#    And I confirm button
