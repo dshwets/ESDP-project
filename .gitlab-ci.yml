@@ -78,12 +78,14 @@ build_and_push:
   only:
     - development
     - master
+    - feature/150
 
 deploy-staging:
   only:
     refs:
       - development
       - master
+      - feature/150
   image: docker:git
   stage: deploy-staging
   variables:
