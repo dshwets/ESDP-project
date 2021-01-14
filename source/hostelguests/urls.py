@@ -1,3 +1,4 @@
+from hostelguests.views.guest_birthday import GuestBirthdayListView
 from hostelguests.views.guest_create import GuestCreateView
 from django.urls import path, include
 
@@ -12,6 +13,7 @@ app_name = 'hostelguests'
 
 urlpatterns = [
                   path('', GuestListView.as_view(), name='guest_list'),
+                  path('guest/birthday/', GuestBirthdayListView.as_view(), name='guest_birthday_list'),
                   path('guest/',
                        include(
                            [
