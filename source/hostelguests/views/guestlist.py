@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django_filters.views import FilterView
@@ -26,3 +28,9 @@ class GuestListView(LoginRequiredMixin, FilterView):
         except IndexError:
             return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super(GuestListView, self).get_context_data(**kwargs)
+        now = datetime.datetime.now()
+        birthday = Guest.objects.filter(birth_date__day=now.day, birth_date__month=now.month)
+        context['birthday_len'] = len(birthday)
+        return context
