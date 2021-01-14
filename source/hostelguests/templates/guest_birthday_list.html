@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans 'Cписок именинников' %}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+<form class="form-inline my-2 my-lg-0"  method="get">
+    {{ filter.form}}
+    <button class="btn btn-info my-2 my-sm-0" type="submit">{% trans 'Поиск'%}</button>
+</form>
+<div class="dropdown mt-2">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {% trans 'Сортировка' %}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{% url 'hostelguests:guest_list' %}">{% trans 'По дате создания' %}</a>
+    <a class="dropdown-item" href="{% url 'hostelguests:guest_list' %}?ordering:by_name">{% trans 'По ФИО' %}</a>
+  </div>
+</div>
+<h3 class="mb-5 mt-4" align="center">
+   <b>{% trans 'Список именинников' %}</b>
+</h3>
+{% for guest in guests %}
+    <div class="card my-2">
+        <div class="card-body">
+            {% if perms.hostelguests.can_change_guest %}
+                <h5 class="card-title">{% trans 'ФИО' %}:<a href="{% url 'hostelguests:detail_view' guest.pk %}"> {{ guest.first_name }} {{ guest.last_name }} {{ guest.middle_name }}</a></h5>
+            {% else %}
+                <h5 class="card-title">{% trans 'ФИО' %}: {{ guest.first_name }} {{ guest.last_name }} {{ guest.middle_name }}</h5>
+            {% endif %}
+            <p class="card-text">{% trans 'Дата рождения' %}: {{ guest.birth_date }}</p>
+            {% if perms.hostelguests.can_change_guest %}
+            <a href="{% url 'hostelguests:guest_update' guest.pk %}" class="float-left btn btn-secondary">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+                    <path fill-rule="evenodd"
+                          d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+                </svg>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+{% include 'partial/pagination.html' %}
+{% endblock %}

@@ -1,15 +1,13 @@
-import datetime
-
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
 from django_filters.views import FilterView
 
 from hostelguests.filters.filter import GuestSearch
 from hostelguests.models import Guest
+import datetime
 
 
-class GuestListView(LoginRequiredMixin, FilterView):
-    template_name = 'guests.html'
+class GuestBirthdayListView(LoginRequiredMixin, FilterView):
+    template_name = 'guest_birthday_list.html'
     model = Guest
     filterset_class = GuestSearch
     context_object_name = 'guests'
@@ -20,6 +18,8 @@ class GuestListView(LoginRequiredMixin, FilterView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        now = datetime.datetime.now()
+        queryset = Guest.objects.filter(birth_date__day=now.day, birth_date__month=now.month)
         request_path = str(self.request).split('?')
         try:
             if 'ordering' in request_path[1]:
@@ -27,10 +27,3 @@ class GuestListView(LoginRequiredMixin, FilterView):
             return queryset
         except IndexError:
             return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(GuestListView, self).get_context_data(**kwargs)
-        now = datetime.datetime.now()
-        birthday = Guest.objects.filter(birth_date__day=now.day, birth_date__month=now.month)
-        context['birthday_len'] = len(birthday)
-        return context
