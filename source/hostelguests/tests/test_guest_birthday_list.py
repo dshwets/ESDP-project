@@ -13,7 +13,7 @@ from hostelguests.models import Guest
 class GuestBirthdayListTestCase(TestCase):
     def setUp(self):
         yesterday = datetime.date.today() - datetime.timedelta(days=1)
-        self.guest = GuestFactory(birth_date=datetime.date.today())
+        self.guest1 = GuestFactory(birth_date=datetime.date.today())
         self.guest = GuestFactory(birth_date=yesterday)
         self.user = UserFactory(username='some_admin')
         self.url = reverse('hostelguests:guest_birthday_list')
