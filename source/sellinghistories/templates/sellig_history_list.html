@@ -36,7 +36,7 @@
         <td>{{s_his.selling_price }}</td>
         <td>{{s_his.qty }}</td>
 
-                <td><a href="#">
+                <td><a href="{% url 'sellinghistory:sellinghistory_update' pk=s_his.pk %}">
                 <button type="button" class="btn btn-danger ml-3"> {% trans 'Изменить'%}</button></a></td>
 
 

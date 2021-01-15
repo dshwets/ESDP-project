@@ -13,4 +13,4 @@ class SellingHistoryUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'serviceexecutors.can_change_sellinghistory'
 
     def get_success_url(self):
-        return reverse('', kwargs={'pk': self.object.pk})
+        return reverse('sellinghistory:list_sellinghistory')
