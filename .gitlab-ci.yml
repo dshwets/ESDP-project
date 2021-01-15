@@ -76,7 +76,6 @@ build_and_push:
   after_script:
     - *delete_current_generated_images
   only:
-    - feature/146_repair_webcam_and_static
     - development
     - master
 
@@ -85,7 +84,6 @@ deploy-staging:
     refs:
       - development
       - master
-      - feature/146_repair_webcam_and_static
   image: docker:git
   stage: deploy-staging
   variables:
