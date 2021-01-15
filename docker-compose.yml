@@ -1,5 +1,8 @@
 version: "3.3"
 
+volumes:
+  static_data:
+
 services:
   db:
     container_name: apple_db
@@ -35,7 +38,7 @@ services:
     command: uwsgi --http :8000 --module main.wsgi
     volumes:
     -  /home/deployciuser/uploads:/uploads
-    -  /home/deployciuser/static:/code/main/settings/static
+    -  static_data:/code/main/settings/static
     depends_on:
       - db
       - app_migration
@@ -56,7 +59,7 @@ services:
       - /etc/ssl/certs/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt
       - /etc/ssl/private/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key
       - /home/deployciuser/uploads:/uploads
-      - /home/deployciuser/static:/static
+      - static_data:/static
     depends_on:
       - db
       - app_migration

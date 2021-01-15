@@ -95,7 +95,6 @@ deploy-staging:
   script:
     - scp docker-compose.yml $DEPLOY_USER@$DEPLOY_SERVER:./docker-compose.yml
     - scp nginx.conf $DEPLOY_USER@$DEPLOY_SERVER:./nginx.conf
-#    - scp code/main/settings/static $DEPLOY_USER@$DEPLOY_SERVER:./static
     - scp .env $DEPLOY_USER@$DEPLOY_SERVER:./.env
     - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "echo '$DOCKER_REGISTRY_PASSWORD' | sudo docker login --username $DOCKER_REGISTRY_LOGIN --password-stdin && sudo  TAG=$TAG docker-compose pull"
     - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo docker ps -aq | xargs --no-run-if-empty sudo docker rm -f"
