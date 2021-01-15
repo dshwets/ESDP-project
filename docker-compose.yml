@@ -64,30 +64,25 @@ services:
       - db
       - app_migration
       - web
+
   celery_worker:
     image: applehostel/main_app:${TAG}
     build: .
     restart: always
     container_name: celery_worker
     command: celery -A main worker -l info
-#    volumes:
-#      - /home/deployciuser/uploads:/uploads
-#      - static_data:/code/main/settings/static
     depends_on:
       - db
       - app_migration
     env_file:
       - .env
-      -
+
   celery_beats:
     image: applehostel/main_app:${TAG}
     build: .
     restart: always
-    container_name: celery_worker
+    container_name: celery_beats
     command: celery -A main beat -l info
-    #    volumes:
-    #      - /home/deployciuser/uploads:/uploads
-    #      - static_data:/code/main/settings/static
     depends_on:
       - db
       - app_migration
