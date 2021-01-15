@@ -4,7 +4,7 @@ const mainProductForm = document.getElementById('form-incoming')
 const allTotal = document.getElementById('tr-all-total')
 const allTotalValue = document.getElementById('all-total')
 let counter = 0
-
+let barcodeList = [];
 
 function getCookie(name) {
     let cookieValue = null;
@@ -28,25 +28,28 @@ function csrfSafeMethod(method) {
 async function makeRequestBarcode(event) {
     event.preventDefault();
     try {
-        counter += 1
-
         let barcode = document.getElementById('barcode-find-value').value;
         let url = url_barcode.replace('123', barcode);
         let response = await fetch(url).then(response => {
             return response.json();
         });
+        let check = checkBarcode(response)
+        if (check === false){
+            return alert("Проверьте штрихкод он уже есть в списке");
+        }
+        counter += 1
         let table;
-        table = `<td><input required type="text" name="title-${counter}" class="form-control w-auto" 
+        table = `<td class="col-sm-6"><input required type="text" name="title-${counter}" class="form-control w-auto" 
                                 id="product-${counter}-title" value= ${response.title}></td>`;
-        table += `<td><input required readonly type="text" name="barcode-${counter}" class="form-control w-auto" 
+        table += `<td class="col-sm-6"><input required readonly type="text" name="barcode-${counter}" class="form-control w-auto" 
             id="product-${counter}-barcode" value= ${response.barcode}></td>`;
-        table += `<td><input required type="number" name="qty-${counter}" class="form-control w-auto"
+        table += `<td class="col-sm-6"><input required type="number" name="qty-${counter}" class="form-control w-auto"
             id="product-${counter}-qty"></td>`;
-        table += `<td><input required type="number" name="purchase-price-${counter}" required name="product-purchase-price" 
+        table += `<td class="col-sm-6"><input required type="number" name="purchase-price-${counter}" required name="product-purchase-price" 
             min="0" step=".10" class="form-control w-auto" id="product-${counter}-purchase-price" value= ${response.purchase_price}></td>`;
-        table += `<td><input required disabled type="text" name="total" class="form-control w-auto" 
+        table += `<td class="col-sm-6"><input required disabled type="text" name="total" class="form-control w-auto" 
             id="total-${counter}" value="" ></td>`;
-        table += `<td><button type="button" id="del-${counter}" class="btn btn-outline-danger">Удалить</button></td>`;
+        table += `<td class="col-sm-6"><button type="button" id="del-${counter}" class="btn btn-outline-danger">Удалить</button></td>`;
         allTotal.insertAdjacentHTML('beforebegin', table);
         const counterThis = counter
         document.getElementById(`product-${counter}-purchase-price`).onblur = ()=> total(counterThis);
@@ -88,7 +91,7 @@ function total(con) {
     let price = document.getElementById(`product-${con}-purchase-price`).value;
     document.getElementById(`total-${con}`).value = qty*price;
     allTotalValue.value = allTotalFunc()
-};
+}
 
 function allTotalFunc(){
     let total = 0
@@ -102,6 +105,13 @@ function allTotalFunc(){
     return total
 }
 
+function checkBarcode(response){
+    if (false===barcodeList.includes(response.barcode)){
+        barcodeList.push(response.barcode)
+        return true
+    }
+    return false
+}
 
 barcodeBtn.addEventListener('click', makeRequestBarcode)
 mainProductForm.addEventListener('submit', async function (event) {
