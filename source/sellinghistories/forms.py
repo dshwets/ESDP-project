@@ -37,3 +37,8 @@ class AddProductToCartForm(forms.ModelForm):
         }
         cart = Cart(self.user.pk)
         cart.add_product(new_cart_entry)
+
+    class SellingHistoryForm(forms.ModelForm):
+        class Meta:
+            model = SellingHistory
+            fields = ['qty', 'selling_price']
