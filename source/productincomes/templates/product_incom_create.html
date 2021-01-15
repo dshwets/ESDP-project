@@ -29,15 +29,17 @@
             </select>
         </div>
         <div class="form-row">
+              <div class="col-12 col-sm-12 col-lg-12">
+                    <div class="table-responsive">
             <table class="table table-striped" id="main-product-form">
                 <thead>
                 <tr>
-                    <th scope="col">{% trans 'Наименование продукта' %}</th>
-                    <th scope="col">{% trans 'Штрихкод' %}</th>
-                    <th scope="col">{% trans 'Количество' %}</th>
-                    <th scope="col">{% trans 'Цена' %}</th>
-                    <th scope="col">{% trans 'Сумма' %}</th>
-                    <th scope="col">{% trans '' %}</th>
+                    <th scope="col" class="col-sm-6">{% trans 'Наименование продукта' %}</th>
+                    <th scope="col" class="col-sm-6">{% trans 'Штрихкод' %}</th>
+                    <th scope="col" class="col-sm-6">{% trans 'Количество' %}</th>
+                    <th scope="col" class="col-sm-6">{% trans 'Цена' %}</th>
+                    <th scope="col" class="col-sm-6">{% trans 'Сумма' %}</th>
+                    <th scope="col" class="col-sm-6">{% trans '' %}</th>
                 </tr>
                 </thead>
                 <tbody id="form-product">
@@ -53,6 +55,8 @@
             </table>
         </div>
         <button type="submit" id="final-form-submit" class="btn btn-primary">{% trans 'Оформить' %}</button>
+              </div>
+        </div>
     </form>
     <script src="{% static 'js/serializer_json.js' %}"></script>
     <script src="{% static 'js/incoming_product.js' %}"></script>

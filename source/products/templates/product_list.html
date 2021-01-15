@@ -21,6 +21,7 @@
     <tr>
       <th scope="col">id</th>
       <th scope="col">{% trans 'Название' %}</th>
+      <th scope="col">{% trans 'Штрихкод' %}</th>
       <th scope="col">{% trans 'Колличество' %}</th>
       <th scope="col">{% trans 'Цена продажи' %}</th>
         {% if perms.product.can_change_product %}
@@ -37,6 +38,7 @@
     <tr>
       <th scope="row">{{ product.pk }}</th>
         <td id="{{ product.title }}">{{ product.title }}</td>
+        <td id="{{ product.title }}-barcode">{{ product.barcode }}</td>
         <td id="{{ product.title }}-{{ product.qty }}">{{ product.qty }}</td>
         <td id="{{ product.title }}-{{ product.selling_price }}">
             {% if product.selling_price == None %}{% trans 'Нет данных' %}
