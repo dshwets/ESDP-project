@@ -20,6 +20,6 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'send_email_every_9_am': {
         'task': 'hostelguests.tasks.send_emails',
-        'schedule': crontab()
+        'schedule': crontab(minute=0, hour=9)
     }
 }
