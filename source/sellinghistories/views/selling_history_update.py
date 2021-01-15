@@ -6,7 +6,7 @@ from sellinghistories.forms import SellingHistoryForm
 from sellinghistories.models import SellingHistory
 
 
-class ServiceExecutorUpdateView(PermissionRequiredMixin, UpdateView):
+class SellingHistoryUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'selling_history_update.html'
     form_class = SellingHistoryForm
     model = SellingHistory
