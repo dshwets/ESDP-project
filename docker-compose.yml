@@ -64,3 +64,27 @@ services:
       - db
       - app_migration
       - web
+
+  celery_worker:
+    image: applehostel/main_app:${TAG}
+    build: .
+    restart: always
+    container_name: celery_worker
+    command: celery -A main worker -l info
+    depends_on:
+      - db
+      - app_migration
+    env_file:
+      - .env
+
+  celery_beats:
+    image: applehostel/main_app:${TAG}
+    build: .
+    restart: always
+    container_name: celery_beats
+    command: celery -A main beat -l info
+    depends_on:
+      - db
+      - app_migration
+    env_file:
+      - .env

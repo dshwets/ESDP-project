@@ -105,7 +105,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -121,7 +120,6 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'accounts.User'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -141,7 +139,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -155,20 +152,18 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
-
 MEDIA_ROOT = os.path.join(BASE_DIR, '../../uploads')
 MEDIA_URL = '/media/'
 
 LANGUAGES = (
-      ('ru', _('Русский')),
-      ('en', _('Английский')),
+    ('ru', _('Русский')),
+    ('en', _('Английский')),
 )
 
 DATE_INPUT_FORMATS = ['%d.%m.%Y']
@@ -178,10 +173,27 @@ LOGOUT_REDIRECT_URL = 'hostelguests:guest_list'
 
 BOOTSTRAP4 = {
     'include_jquery': True,
-    }
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
     ),
 }
+
+# smtp
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='applehostel2020@gmail.com')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+EMAIL_PORT = 587
+
+# Celery settings
+CELERY_BROKER_URL = 'redis://' + env('REDIS_HOST', default='0.0.0.0') + ':' + env('REDIS_PORT', default='6379') + '/' \
+    + env('REDIS_DB', default='0')
+
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
