@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'api',
     'employees',
     'phonenumber_field',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
