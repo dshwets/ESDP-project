@@ -10,7 +10,7 @@ class SellingHistoryUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'selling_history_update.html'
     form_class = SellingHistoryForm
     model = SellingHistory
-    permission_required = 'serviceexecutors.can_change_sellinghistory'
+    permission_required = 'sellinghistories.can_change_sellinghistory'
 
     def form_valid(self, form):
         sellinghistory = form.save(commit=False)
