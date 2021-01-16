@@ -78,12 +78,14 @@ build_and_push:
   only:
     - development
     - master
+    - feature/157_add_notification_celery
 
 deploy-staging:
   only:
     refs:
       - development
       - master
+      - feature/157_add_notification_celery
   image: docker:git
   stage: deploy-staging
   variables:
