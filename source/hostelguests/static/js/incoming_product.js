@@ -3,7 +3,7 @@ const formProduct = document.getElementById('form-product');
 const mainProductForm = document.getElementById('form-incoming')
 const allTotal = document.getElementById('tr-all-total')
 const allTotalValue = document.getElementById('all-total')
-// let counter = 0
+let counter = 0
 let barcodeList = [];
 
 function getCookie(name) {
