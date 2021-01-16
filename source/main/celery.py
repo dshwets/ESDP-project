@@ -16,10 +16,3 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
-
-app.conf.beat_schedule = {
-    'send_email_every_9_am': {
-        'task': 'hostelguests.tasks.send_emails',
-        'schedule': crontab(minute=0, hour=9)
-    }
-}

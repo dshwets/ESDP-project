@@ -82,7 +82,8 @@ services:
     build: .
     restart: always
     container_name: celery_beats
-    command: celery -A main beat -l info
+    command: celery -A main beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+
     depends_on:
       - db
       - app_migration

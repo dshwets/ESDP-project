@@ -96,5 +96,6 @@ deploy-staging:
     - scp .env $DEPLOY_USER@$DEPLOY_SERVER:./.env
     - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "echo '$DOCKER_REGISTRY_PASSWORD' | sudo docker login --username $DOCKER_REGISTRY_LOGIN --password-stdin && sudo  TAG=$TAG docker-compose pull"
     - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo docker ps -aq | xargs --no-run-if-empty sudo docker rm -f"
+    - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo docker volume ls -q | xargs --no-run-if-empty sudo docker volume rm -f"
     - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo TAG=$TAG docker-compose up -d"
     - ssh -T $DEPLOY_USER@$DEPLOY_SERVER "sudo docker image prune -a -f"
