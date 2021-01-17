@@ -9,7 +9,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class GuestBirthdayManager(models.Manager):
-    def get_queryset(self):
+    def get_birthdays_guest(self):
         return super().get_queryset().filter(birth_date__day=datetime.now().day, birth_date__month=datetime.now().month)
 
 
@@ -66,8 +66,7 @@ class Guest(AbstractCreatedByModel):
         verbose_name=_('Email'),
     )
 
-    objects = models.Manager()
-    birthdays_guest = GuestBirthdayManager()
+    objects = GuestBirthdayManager()
 
     class Meta:
         verbose_name = _('Гость')
