@@ -31,12 +31,12 @@ class AddProductToCartForm(forms.ModelForm):
         return barcode
 
     def save(self, commit=False):
-        new_cart_entry = {
-            'product_pk': Product.objects.get(barcode=self.cleaned_data['barcode']).pk,
-            'qty': self.cleaned_data['qty']
-        }
-        cart = Cart(self.user.pk)
-        cart.add_product(new_cart_entry)
+        Cart(self.user.pk).add_product(
+            {
+                'product_pk': Product.objects.get(barcode=self.cleaned_data['barcode']).pk,
+                'qty': self.cleaned_data['qty']
+            }
+        )
 
 
 class SellingHistoryForm(forms.ModelForm):
