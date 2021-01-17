@@ -45,7 +45,6 @@ services:
 #  after_script:
 #    - *delete_current_generated_images
 
-
 #acceptance_tests:
 #  image: docker/compose:latest
 #  stage: acceptance_tests
@@ -79,12 +78,14 @@ build_and_push:
   only:
     - development
     - master
+    - feature/158_bugfix_and_refactoring
 
 deploy-staging:
   only:
     refs:
       - development
       - master
+      - feature/158_bugfix_and_refactoring
   image: docker:git
   stage: deploy-staging
   variables:
