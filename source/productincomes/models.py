@@ -17,7 +17,7 @@ class Incomes(AbstractCreatedByModel):
     @property
     def total(self):
         total_output_field = models.DecimalField(max_digits=10, decimal_places=2)
-        total = ProductIncomes.objects.filter(incomes_id=2).aggregate(total=Sum(F('qty') * F('product__purchase_price'),
+        total = ProductIncomes.objects.filter(incomes_id=self.pk).aggregate(total=Sum(F('qty') * F('product__purchase_price'),
                                                                                 output_field=total_output_field))[
             'total']
         return total
@@ -53,6 +53,10 @@ class ProductIncomes(models.Model):
         default=0,
         verbose_name=_('Количество'),
     )
+
+    @property
+    def total(self):
+        return self.qty * self.product.purchase_price
 
     class Meta:
         verbose_name = _('Приход товара')
