@@ -37,7 +37,7 @@ services:
     container_name: apple_app
     command: uwsgi --http :8000 --module main.wsgi
     volumes:
-    -  /home/deployciuser/uploads:/uploads
+    -  ./uploads:/uploads
     -  static_data:/code/main/settings/static
     depends_on:
       - db
@@ -53,12 +53,12 @@ services:
       - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - /home/deployciuser/configs/dhparam.pem:/etc/nginx/conf.d/configs/dhparam.pem
-      - /home/deployciuser/configs/self-signed.conf:/etc/nginx/conf.d/configs/self-signed.conf
-      - /home/deployciuser/configs/ssl-params.conf:/etc/nginx/conf.d/configs/ssl-params.conf
+      - ./configs/dhparam.pem:/etc/nginx/conf.d/configs/dhparam.pem
+      - ./configs/self-signed.conf:/etc/nginx/conf.d/configs/self-signed.conf
+      - ./configs/ssl-params.conf:/etc/nginx/conf.d/configs/ssl-params.conf
       - /etc/ssl/certs/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt
       - /etc/ssl/private/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key
-      - /home/deployciuser/uploads:/uploads
+      - ./uploads:/uploads
       - static_data:/static
     depends_on:
       - db
@@ -83,7 +83,6 @@ services:
     restart: always
     container_name: celery_beats
     command: celery -A main beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
-
     depends_on:
       - db
       - app_migration
