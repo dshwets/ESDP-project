@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.datetime_safe import datetime
 from django_filters.views import FilterView
 
 from hostelguests.filters.filter import GuestSearch
@@ -17,8 +16,7 @@ class GuestBirthdayListView(LoginRequiredMixin, FilterView):
     allow_empty = True
 
     def get_queryset(self):
-        now = datetime.now()
-        queryset = Guest.objects.filter(birth_date__day=now.day, birth_date__month=now.month)
+        queryset = Guest.birthdays_guest.all()
         request_path = str(self.request).split('?')
         try:
             if 'ordering' in request_path[1]:

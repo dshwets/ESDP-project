@@ -1,5 +1,4 @@
 from django.core.mail import send_mail
-from django.utils.datetime_safe import datetime
 
 from hostelguests.models import Guest
 
@@ -17,6 +16,5 @@ def send_happybirthday_email(name: str, emails: list):
 
 
 def get_birthday_people():
-    now = datetime.now()
-    birthdays_people = Guest.objects.filter(birth_date__day=now.day, birth_date__month=now.month)
+    birthdays_people = Guest.birthdays_guest.all()
     return birthdays_people
