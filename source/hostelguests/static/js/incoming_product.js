@@ -33,7 +33,7 @@ async function makeRequestBarcode(event) {
         let response = await fetch(url).then(response => {
             return response.json();
         });
-        let check = checkBarcode(response)
+        let check = checkBarcodeAndPushIfNotIncludeInBarcodeList(response)
         if (check === false){
             return alert("Проверьте штрихкод он уже есть в списке");
         }
@@ -105,8 +105,8 @@ function allTotalFunc(){
     return total
 }
 
-function checkBarcode(response){
-    if (false===barcodeList.includes(response.barcode)){
+function checkBarcodeAndPushIfNotIncludeInBarcodeList(response){
+    if (!barcodeList.includes(response.barcode)){
         barcodeList.push(response.barcode)
         return true
     }
