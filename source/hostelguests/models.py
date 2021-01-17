@@ -1,9 +1,16 @@
 from auditlog.registry import auditlog
 from django.db import models
+from django.utils.datetime_safe import datetime
+
 from common.models import AbstractCreatedByModel
 from django_countries.fields import CountryField
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
+
+
+class GuestBirthdayManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(birth_date__day=datetime.now().day, birth_date__month=datetime.now().month)
 
 
 class Guest(AbstractCreatedByModel):
@@ -58,6 +65,9 @@ class Guest(AbstractCreatedByModel):
         null=True,
         verbose_name=_('Email'),
     )
+
+    objects = models.Manager()
+    birthdays_guest = GuestBirthdayManager()
 
     class Meta:
         verbose_name = _('Гость')
