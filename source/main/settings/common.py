@@ -183,18 +183,16 @@ REST_FRAMEWORK = {
 }
 
 # smtp
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = env('EMAIL_USER_TLS', default=True)
+EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='applehostel2020@gmail.com')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
-EMAIL_PORT = 587
+EMAIL_PORT = env('EMAIL_PORT', default=587)
 
 # Celery settings
-CELERY_BROKER_URL = 'redis://' + env('REDIS_HOST', default='0.0.0.0') + ':' + env('REDIS_PORT', default='6379') + '/' \
-    + env('REDIS_DB', default='0')
-
-CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
-CELERY_RESULT_BACKEND = CELERY_BROKER_URL
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://0.0.0.0:6379/15')
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': env('CELERY_BROKER_TRANSPORT_OPTIONS', default=3600)}
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', default=CELERY_BROKER_URL)
+CELERY_ACCEPT_CONTENT = [env('CELERY_ACCEPT_CONTENT', default='application/json')]
+CELERY_TASK_SERIALIZER = env('CELERY_TASK_SERIALIZER', default='json')
+CELERY_RESULT_SERIALIZER = env('CELERY_RESULT_SERIALIZER', default='json')
