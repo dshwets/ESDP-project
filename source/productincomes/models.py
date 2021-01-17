@@ -1,5 +1,7 @@
 from auditlog.registry import auditlog
 from django.db import models
+from django.db.models import Sum
+
 from common.models import AbstractCreatedByModel
 from django.utils.translation import gettext_lazy as _
 
@@ -14,10 +16,7 @@ class Incomes(AbstractCreatedByModel):
 
     @property
     def total(self):
-        total = 0
-        products = ProductIncomes.objects.filter(incomes_id=self.pk)
-        for i in products:
-            total += i.total
+        total = ProductIncomes.objects.filter(incomes_id=self.pk).aggregate(Sum('total'))
         return total
 
     class Meta:
