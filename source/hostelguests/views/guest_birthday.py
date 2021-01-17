@@ -16,7 +16,7 @@ class GuestBirthdayListView(LoginRequiredMixin, FilterView):
     allow_empty = True
 
     def get_queryset(self):
-        queryset = Guest.birthdays_guest.all()
+        queryset = Guest.objects.get_birthdays_guest()
         request_path = str(self.request).split('?')
         try:
             if 'ordering' in request_path[1]:

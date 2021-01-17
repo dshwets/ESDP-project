@@ -16,5 +16,5 @@ def send_happybirthday_email(name: str, emails: list):
 
 
 def get_birthday_people():
-    birthdays_people = Guest.birthdays_guest.all()
+    birthdays_people = Guest.objects.get_birthdays_guest()
     return birthdays_people
