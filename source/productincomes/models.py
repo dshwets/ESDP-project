@@ -1,6 +1,6 @@
 from auditlog.registry import auditlog
 from django.db import models
-from django.db.models import Sum
+from django.db.models import Sum, F, ExpressionWrapper as Exp
 
 from common.models import AbstractCreatedByModel
 from django.utils.translation import gettext_lazy as _
@@ -16,7 +16,7 @@ class Incomes(AbstractCreatedByModel):
 
     @property
     def total(self):
-        total = ProductIncomes.objects.filter(incomes_id=self.pk).aggregate(Sum('total'))
+        total = ProductIncomes.get_with_total().filter(incomes_id=self.pk).aggregate(Sum('total'))
         return total
 
     class Meta:
@@ -40,7 +40,7 @@ class ProductIncomes(models.Model):
         on_delete=models.CASCADE,
         related_name='product_incomes',
         verbose_name=_('Приход товара'),
-        )
+    )
     product = models.ForeignKey(
         'products.Product',
         on_delete=models.CASCADE,
@@ -51,9 +51,12 @@ class ProductIncomes(models.Model):
         verbose_name=_('Количество'),
     )
 
-    @property
-    def total(self):
-        return self.qty * self.product.purchase_price
+    @classmethod
+    def get_with_total(cls):
+        total_output_field = models.DecimalField(max_digits=10, decimal_places=2)
+        total_expr = Exp(F('qty') * F('product__purchase_price'), output_field=total_output_field)
+        return cls.objects.annotate(total=total_expr)
+
 
     class Meta:
         verbose_name = _('Приход товара')
