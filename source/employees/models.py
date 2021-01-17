@@ -56,7 +56,7 @@ class Employee(AbstractCreatedByModel):
     )
     deposit_amount = models.IntegerField(
         verbose_name=_('Сумма депозита'),
-        default="",
+        default=0,
         blank=True,
     )
     medical_record = models.BooleanField(
